@@ -1,0 +1,378 @@
+---
+// src/pages/actividades/mi-plato-favorito.astro
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import comiendoImg from '../../assets/comiendo.png';
+---
+
+<Layout title="¡Mi plato favorito! - Zorro Culpeo">
+  <main class="detalle-actividad-page">
+    
+    <!-- Hero Section Detalle -->
+    <section class="hero-detalle">
+      <div class="hero-content">
+        <span class="season-badge">Estación de Otoño</span>
+        <h1 class="main-title">
+          ¿Cómo funciona la actividad<br>"¡Mi plato favorito!"?
+        </h1>
+        <p class="hero-description">
+          El objetivo es que el párvulo reconozca los cambios estacionales en la alimentación diaria y exprese sus preferencias individuales. Fomente el desarrollo del lenguaje pidiéndole que describa los ingredientes de sus platos, sopas o frutas calentitas favoritas y por qué son ideales para los días más frescos de otoño.
+        </p>
+        <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
+      </div>
+      
+      <div class="hero-image-container">
+        <!-- Cargada la nueva ilustración del zorro comiendo -->
+        <Image src={comiendoImg} alt="Zorro Culpeo Comiendo" class="hero-character" />
+      </div>
+    </section>
+
+    <!-- Área de Descarga y Paneles Informativos -->
+    <section class="workspace-section">
+      
+      <!-- Panel Izquierdo: Descarga de Ficha -->
+      <div class="download-panel">
+        <div class="preview-card-box">
+          <div class="placeholder-preview">
+            <!-- Espacio para la miniatura del plato -->
+            <svg class="plate-vector" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="35" rx="35" ry="15" fill="#fcfcfc" stroke="#b5b5b5" stroke-width="1.5"/>
+              <ellipse cx="50" cy="35" rx="25" ry="9" fill="#f5f5f5" stroke="#cbd5e1" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+        <button class="btn-download">Descargar</button>
+      </div>
+
+      <!-- Icono central del signo más (+) -->
+      <div class="separator-icon">
+        <div class="plus-circle">
+          <span>+</span>
+        </div>
+      </div>
+
+      <!-- Panel Derecho: Datos y Otras Actividades -->
+      <div class="info-panels-container">
+        
+        <!-- Bloque de Datos (Actualizados según la imagen) -->
+        <div class="data-card">
+          <div class="card-header-banner bg-orange">Datos:</div>
+          <div class="card-body-list">
+            <div class="data-item">
+              <span class="icon">👤</span>
+              <p><strong>Nivel:</strong> Medio Mayor (3 a 4 años)</p>
+            </div>
+            <div class="data-item">
+              <span class="icon">📄</span>
+              <p><strong>Fichas Incluidas:</strong> 3 Láminas de Aprendizaje</p>
+            </div>
+            <div class="data-item">
+              <span class="icon">⏱️</span>
+              <p><strong>Momento:</strong> En la Mesa (Aula u Hogar)</p>
+            </div>
+            <div class="data-item">
+              <span class="icon">🏫</span>
+              <p><strong>Área:</strong> Identidad, Autonomía y Desarrollo del Lenguaje</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque Otras Actividades (Nombres actualizados según la imagen) -->
+        <div class="data-card">
+          <div class="card-header-banner bg-orange">Otras Actividades:</div>
+          <div class="card-body-list links-list">
+            <a href="#" class="activity-link">
+              <span class="link-label">Actividad 3 :</span> ¡Encuentra al intruso!
+            </a>
+            <a href="#" class="activity-link">
+              <span class="link-label">Actividad 5 :</span> Conteo de tesoros!
+            </a>
+            <a href="#" class="activity-link">
+              <span class="link-label">Actividad 6 :</span> Ayuda a nuestros amigos!
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .detalle-actividad-page {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 5% 100px 5%;
+  }
+
+  /* Hero Layout */
+  .hero-detalle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 420px;
+    position: relative;
+    margin-bottom: 60px;
+    gap: 40px;
+  }
+  
+  .hero-content { 
+    max-width: 650px; 
+    text-align: left;
+    z-index: 2;
+  }
+  
+  .season-badge { 
+    font-size: 1.15rem; 
+    color: #b5b5b5; 
+    font-style: italic;
+    display: block; 
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  
+  .main-title { 
+    font-size: 2.8rem; 
+    font-weight: 700; 
+    color: #f07f3e; 
+    line-height: 1.2; 
+    margin: 0 0 25px 0; 
+  }
+  
+  .hero-description { 
+    color: #333; 
+    font-size: 1.05rem; 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+    font-weight: 400;
+  }
+
+  .btn-back { 
+    background: #f07f3e; 
+    color: white; 
+    padding: 10px 25px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 0.9rem;
+    display: inline-block; 
+    box-shadow: 0 4px 0px #cf6517;
+    transition: transform 0.1s ease;
+  }
+
+  .btn-back:hover {
+    transform: scale(1.03);
+  }
+
+  .hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+  }
+  
+  .hero-character { 
+    width: 440px; 
+    height: auto; 
+    object-fit: contain;
+  }
+
+  /* Sección Inferior Workspace */
+  .workspace-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 50px;
+    gap: 20px;
+  }
+
+  /* Panel de descarga */
+  .download-panel {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview-card-box {
+    background: #ffffff;
+    width: 100%;
+    height: 340px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border: 1px solid #eeeeee;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .placeholder-preview {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .plate-vector {
+    width: 60%;
+    height: auto;
+    opacity: 0.8;
+  }
+
+  .btn-download {
+    border: none;
+    background-color: #f07f3e;
+    color: white;
+    width: 180px;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #cf6517;
+    transition: transform 0.1s ease;
+  }
+
+  .btn-download:hover {
+    transform: scale(1.05);
+  }
+
+  /* Separador central (+) */
+  .separator-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .plus-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #f07f3e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(240, 127, 62, 0.2);
+  }
+
+  .plus-circle span {
+    color: #f07f3e;
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-top: -4px;
+  }
+
+  /* Paneles de datos derechos */
+  .info-panels-container {
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .data-card {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border: 1px solid #f6f6f6;
+    overflow: hidden;
+  }
+
+  .card-header-banner {
+    color: white;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .bg-orange {
+    background: #f07f3e;
+  }
+
+  .card-body-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .data-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .data-item .icon {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .data-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+  }
+
+  .data-item strong {
+    color: #f07f3e;
+    font-weight: 700;
+  }
+
+  /* Lista de Enlaces Actividades */
+  .links-list {
+    gap: 12px;
+  }
+
+  .activity-link {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 500;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s ease;
+  }
+
+  .activity-link:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .activity-link:hover {
+    color: #f07f3e;
+  }
+
+  .link-label {
+    color: #f07f3e;
+    font-weight: 600;
+  }
+
+  /* Responsive simple */
+  @media (max-width: 992px) {
+    .hero-detalle {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 100%;
+    }
+    .hero-image-container {
+      justify-content: center;
+    }
+    .workspace-section {
+      flex-direction: column;
+      gap: 40px;
+    }
+    .download-panel, .info-panels-container {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+</style>

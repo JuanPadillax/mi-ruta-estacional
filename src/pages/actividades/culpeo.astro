@@ -33,7 +33,7 @@ import estrellaImg from '../../assets/estrella.png';
         <div class="category-banner">Reconocimiento y Bienvenida</div>
         <div class="cards-grid">
           
-          <!-- Tarjeta 1 -->
+          <!-- Tarjeta 1 (Hacia Crea tu compañero) -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -44,10 +44,10 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Ficha para recortar y armar tu propio Zorrito Culpeo. Promueve el sentido de pertenencia, la identidad y la motricidad fina.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <a href="/actividades/crea-tu-companero" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
-          <!-- Tarjeta 2 -->
+          <!-- Tarjeta 2 (¡Modificada para ir a Mi plato favorito!) -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -58,7 +58,8 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Actividad lúdica centrada en reconocer los cambios estacionales en la alimentación diaria y expresar preferencias individuales.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <!-- Cambiado a enlace <a> apuntando a la nueva página -->
+            <a href="/actividades/mi-plato-favorito" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
           <!-- Tarjeta 3 (Con Estrella Especial) -->
@@ -364,6 +365,12 @@ import estrellaImg from '../../assets/estrella.png';
     cursor: pointer;
     margin-top: 25px; 
     transition: transform 0.1s ease;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
   .btn-view:hover { transform: scale(1.05); }
 
@@ -376,7 +383,7 @@ import estrellaImg from '../../assets/estrella.png';
     box-shadow: 0 4px 0px #dca51a;
   }
 
-  /* Tamaño de la Estrella */
+  /* Ajustes para el contenedor de la estrella */
   .star-badge {
     position: absolute;
     top: -40px;     
