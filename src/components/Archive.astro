@@ -1,0 +1,165 @@
+---
+// src/components/Archive.astro
+import { Image } from 'astro:assets';
+
+// Imágenes de las tarjetas de personajes
+import culpeoImg from '../assets/culpeo.png';
+import chungungoImg from '../assets/chungungo.png';
+import vizcachaImg from '../assets/Vizcacha.png';
+import coipoImg from '../assets/coipo.png';
+
+// Imágenes de los modales completos (agrega aquí las tuyas cuando estén listas)
+import modalCulpeo from '../assets/modal-culpeo.png';
+import modalChungungo from '../assets/modal-chungungo.png';
+import modalVizcacha from '../assets/modal-vizcacha.png';
+import modalCoipo from '../assets/modal-coipo.png'; // Tu imagen adjunta
+---
+
+<section class="archive-section">
+  <div class="section-header">
+    <span class="subtitle">Archivo Digital</span>
+    <h2 class="title">Tomos del año</h2>
+    <p class="description">
+      Explora el material pedagógico mediante las guías y estéticas<br>
+      distribuidas bajo la caracterización de nuestra fauna nativa.
+    </p>
+  </div>
+
+  <div class="animals-grid">
+    <div class="animal-card" data-id="culpeo">
+      <button class="icon-plus border-orange text-orange">+</button>
+      <Image src={culpeoImg} alt="Zorro Culpeo" class="animal-img" />
+      <h3 class="animal-name text-orange">Zorro Culpeo</h3>
+      <span class="animal-role">Tomo Otoño</span>
+      <button class="btn-animal bg-orange">Actividades</button>
+    </div>
+
+    <div class="animal-card" data-id="chungungo">
+      <button class="icon-plus border-blue text-blue">+</button>
+      <Image src={chungungoImg} alt="Chungungo" class="animal-img" />
+      <h3 class="animal-name text-blue">Chungungo</h3>
+      <span class="animal-role">Tomo Invierno</span>
+      <button class="btn-animal bg-blue">Actividades</button>
+    </div>
+
+    <div class="animal-card" data-id="vizcacha">
+      <button class="icon-plus border-green text-green">+</button>
+      <Image src={vizcachaImg} alt="Vizcacha de la Sierra" class="animal-img" />
+      <h3 class="animal-name text-green">Vizcacha</h3>
+      <span class="animal-role">Tomo Primavera</span>
+      <button class="btn-animal bg-green">Actividades</button>
+    </div>
+
+    <div class="animal-card" data-id="coipo">
+      <button class="icon-plus border-yellow text-yellow">+</button>
+      <Image src={coipoImg} alt="Coipo" class="animal-img" />
+      <h3 class="animal-name text-yellow">Coipo</h3>
+      <span class="animal-role">Tomo Verano</span>
+      <button class="btn-animal bg-yellow">Actividades</button>
+    </div>
+  </div>
+</section>
+
+<div id="animalModal" class="modal-overlay">
+  <div class="modal-wrapper">
+    <button id="closeModal" class="close-btn">&times;</button>
+    <img id="modalFullImg" src="" alt="Detalle del personaje" class="modal-graphic" />
+  </div>
+</div>
+
+<script is:inline define:vars={{ modalCulpeo, modalChungungo, modalVizcacha, modalCoipo }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('animalModal');
+    const modalFullImg = document.getElementById('modalFullImg');
+    const closeBtn = document.getElementById('closeModal');
+
+    // Mapeamos los IDs de las tarjetas con las rutas optimizadas por Astro
+    const modalImages = {
+      culpeo: modalCulpeo.src,
+      chungungo: modalChungungo.src,
+      vizcacha: modalVizcacha.src,
+      coipo: modalCoipo.src
+    };
+
+    document.querySelector('.animals-grid').addEventListener('click', (e) => {
+      const btn = e.target.closest('.icon-plus');
+      if (btn) {
+        const card = btn.closest('.animal-card');
+        const animalId = card.getAttribute('data-id');
+        
+        if (animalId && modalImages[animalId]) {
+          modalFullImg.src = modalImages[animalId];
+          modal.style.display = 'flex';
+        }
+      }
+    });
+
+    closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+  });
+</script>
+
+<style>
+  /* Fondo oscuro del modal */
+  .modal-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.6); display: none; justify-content: center; 
+    align-items: center; z-index: 1000; 
+  }
+  
+  /* Contenedor de la ilustración */
+  .modal-wrapper {
+    position: relative;
+    max-width: 850px; 
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* La imagen cargada hereda todo el diseño que hiciste en Illustrator/Figma */
+  .modal-graphic { 
+    width: 100%; 
+    height: auto; 
+    object-fit: contain;
+  }
+  
+  /* Botón de cerrar flotante redondo */
+  .close-btn { 
+    position: absolute; 
+    top: 25px; 
+    right: 25px; 
+    border: none; 
+    background: rgba(255, 255, 255, 0.9); 
+    font-size: 2rem; 
+    cursor: pointer; 
+    color: #333; 
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    z-index: 1010;
+  }
+  .close-btn:hover { transform: scale(1.1); }
+  
+  /* Estilos Archive Grid */
+  .archive-section { padding: 80px 5% 120px; max-width: 1200px; margin: 0 auto; text-align: center; }
+  .section-header { margin-bottom: 60px; }
+  .subtitle { color: var(--color-text-light); font-size: 0.85rem; font-style: italic; }
+  .title { color: var(--color-primary-blue); font-size: 2.2rem; margin: 10px 0 15px 0; font-weight: 800; }
+  .description { max-width: 600px; margin: 0 auto; color: var(--color-text-dark); font-weight: 600; line-height: 1.5; }
+  .animals-grid { display: flex; flex-direction: row; justify-content: center; gap: 40px; flex-wrap: nowrap; }
+  .animal-card { display: flex; flex-direction: column; align-items: center; position: relative; width: 240px; flex-shrink: 0; padding: 20px; background: #fff; border-radius: 20px; }
+  .icon-plus { position: absolute; top: 15px; left: 15px; width: 32px; height: 32px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem; background: white; z-index: 2; cursor: pointer; }
+  .border-orange { border-color: var(--color-primary-orange); } .border-blue { border-color: var(--color-primary-blue); } .border-green { border-color: var(--color-primary-green); } .border-yellow { border-color: var(--color-primary-yellow); }
+  .animal-img { width: 100%; max-width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px; }
+  .animal-name { font-size: 1.3rem; font-weight: 800; margin: 0 0 5px 0; }
+  .animal-role { color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 20px; font-weight: 600; }
+  .btn-animal { width: 100%; max-width: 160px; color: white; padding: 10px 0; font-size: 1rem; font-weight: 700; border-radius: 25px; border: none; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+  .text-orange { color: var(--color-primary-orange); } .text-blue { color: var(--color-primary-blue); } .text-green { color: var(--color-primary-green); } .text-yellow { color: var(--color-primary-yellow); }
+  .bg-orange { background-color: var(--color-primary-orange); } .bg-blue { background-color: var(--color-primary-blue); } .bg-green { background-color: var(--color-primary-green); } .bg-yellow { background-color: var(--color-primary-yellow); }
+</style>

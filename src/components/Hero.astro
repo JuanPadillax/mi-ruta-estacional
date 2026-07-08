@@ -1,0 +1,126 @@
+---
+// src/components/Hero.astro
+import { Image } from 'astro:assets';
+import ninoImg from '../assets/niño.png'; 
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="subtitle">Sistema Modular de Aprendizaje</span>
+    <h1 class="title">Una ruta diseñada para<br>aprender jugando.</h1>
+    <p class="description">
+      Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio digital diseñado para potenciar el desarrollo integral mediante dinámicas y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico de nuestra fauna nativa.
+    </p>
+    <div class="button-container">
+      <button class="btn btn-primary">Ir a la App</button>
+      <button class="btn btn-secondary">Explorar</button>
+    </div>
+  </div>
+
+  <div class="hero-image-wrapper">
+    <Image 
+      src={ninoImg} 
+      alt="Niño aprendiendo con libro" 
+      class="hero-img"
+    />
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 5%;
+    max-width: 1250px;
+    margin: 0 auto;
+    gap: 30px;
+    position: relative;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 580px; /* Un poco más de ancho para que el texto caiga de forma natural sin saltos forzados */
+    z-index: 2;
+  }
+
+  .subtitle {
+    display: block;
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    color: var(--color-primary-blue);
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: -4px;
+  }
+
+  .description {
+    color: var(--color-text-dark);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 35px;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 15px;
+  }
+
+  .btn {
+    padding: 10px 35px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.9; }
+
+  .btn-primary {
+    background-color: var(--color-primary-blue);
+    color: white;
+    box-shadow: 0 4px 10px rgba(92, 125, 185, 0.3);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary-blue);
+    border: 2px solid var(--color-primary-blue);
+  }
+
+  .hero-image-wrapper {
+    flex: 1.2;
+    display: flex;
+    justify-content: center; /* Vuelve a estar centrado */
+    align-items: center;
+    position: relative;
+    max-width: 650px;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    transform: scale(1.25);
+    transform-origin: center; /* Crece desde el centro para mantener la posición */
+  }
+
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; text-align: center; overflow: hidden; }
+    .hero-content { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
+    .title { font-size: 2.5rem; }
+    .hero-image-wrapper { max-width: 500px; margin-top: 40px; }
+    .hero-img { transform: scale(1); }
+  }
+</style>

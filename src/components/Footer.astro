@@ -1,0 +1,65 @@
+---
+// src/components/Footer.astro
+---
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="copyright">
+      © 2024 Mi Ruta Estacional. Todos los derechos reservados.
+    </div>
+    <div class="footer-links">
+      <a href="#">Términos y condiciones</a>
+      <span class="separator">|</span>
+      <a href="#">Políticas de Privacidad</a>
+      <span class="separator">|</span>
+      <a href="#">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid #EAEAEA;
+    padding: 25px 5%;
+    background-color: white;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .footer-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary-blue);
+  }
+
+  .separator {
+    color: #D1D1D1;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+  }
+</style>

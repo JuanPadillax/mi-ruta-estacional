@@ -1,0 +1,168 @@
+---
+// src/components/Activities.astro
+import { Image } from 'astro:assets';
+import ninosImg from '../assets/niños.png';
+---
+
+<section class="activities-container">
+  <div class="content-side">
+    <span class="subtitle">Estructura del sistema modular</span>
+    <h2 class="title">Actividades de aprendizaje</h2>
+    <p class="description">Organización de las fichas estacionales según su tipología<br>de juego y desarrollo cognitivo.</p>
+
+    <div class="activity-list">
+      <div class="list-item">
+        <div class="item-circle border-orange"></div>
+        <div class="item-card bg-orange">
+          <h4>Concentración y dominio</h4>
+          <p>Retos cognitivos individuales basados en la atención, la lógica y la resolución autónoma de problemas estructurados.</p>
+        </div>
+      </div>
+      <div class="list-item">
+        <div class="item-circle border-green"></div>
+        <div class="item-card bg-green">
+          <h4>Actividades en dupla</h4>
+          <p>Experiencias de socialización activa que fomentan el desarrollo lingüístico, la colaboración directa y la co-creación entre pares.</p>
+        </div>
+      </div>
+      <div class="list-item">
+        <div class="item-circle border-blue"></div>
+        <div class="item-card bg-blue">
+          <h4>Expresión de personalidad</h4>
+          <p>Espacios flexibles orientados al autoconocimiento, la identificación de emociones y la proyección de gustos individuales.</p>
+        </div>
+      </div>
+      <div class="list-item">
+        <div class="item-circle border-yellow"></div>
+        <div class="item-card bg-yellow">
+          <h4>Misiones de exploración</h4>
+          <p>Desafíos prácticos al aire libre para ejecutar en el hogar, recolectar elementos orgánicos y conectar el aula con el entorno familiar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="visual-side">
+    <Image src={ninosImg} alt="Niños mostrando cuadernillo" class="activities-img" />
+  </div>
+</section>
+
+<style>
+  .activities-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 20px;
+    min-height: 85vh; 
+  }
+  
+  .content-side { 
+    flex: 0 0 35%; 
+    max-width: 420px; /* Reducido aún más para compactar los elementos */
+  }
+  
+  .subtitle { 
+    color: var(--color-text-light, #9B9B9B); 
+    font-size: 0.8rem; /* Más pequeño */
+    font-style: italic; 
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .title { 
+    color: var(--color-primary-blue, #5C7DB9); 
+    font-size: 2rem; /* Título reducido */
+    font-weight: 800; 
+    margin: 0 0 10px 0; 
+    line-height: 1.1;
+  }
+  
+  .description { 
+    font-weight: 500; 
+    color: var(--color-text-dark, #4A4A4A); 
+    margin-bottom: 20px; 
+    line-height: 1.4; 
+    font-size: 0.85rem; /* Descripción reducida */
+  }
+
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Tarjetas más juntas */
+  }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Menor separación entre círculo y tarjeta */
+  }
+
+  .item-circle {
+    width: 42px; /* Círculo más pequeño */
+    height: 42px;
+    border-radius: 50%;
+    border: 2px dashed;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .item-circle::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px; right: 3px; bottom: 3px;
+    border-radius: 50%;
+    border: 1px solid inherit;
+    opacity: 0.6;
+  }
+
+  .item-card {
+    border-radius: 12px;
+    padding: 10px 15px; /* Tarjeta aún más compacta */
+    color: white;
+    flex: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  .item-card h4 { font-size: 0.85rem; font-weight: 800; margin: 0 0 2px 0; }
+  .item-card p { font-size: 0.7rem; margin: 0; line-height: 1.3; font-weight: 500; }
+
+  .border-orange { border-color: var(--color-primary-orange, #E68B45); }
+  .border-green { border-color: var(--color-primary-green, #8DB26E); }
+  .border-blue { border-color: var(--color-primary-blue, #5C7DB9); }
+  .border-yellow { border-color: var(--color-primary-yellow, #DBB443); }
+
+  .bg-orange { background-color: var(--color-primary-orange, #E68B45); }
+  .bg-green { background-color: var(--color-primary-green, #8DB26E); }
+  .bg-blue { background-color: var(--color-primary-blue, #5C7DB9); }
+  .bg-yellow { background-color: var(--color-primary-yellow, #DBB443); }
+
+  .visual-side { 
+    flex: 1; 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center;
+  }
+  
+  .activities-img {
+    width: 100%;
+    max-width: 1000px; 
+    height: auto;
+    object-fit: contain;
+    transform: scale(1.15); /* Mantiene la imagen grande */
+    transform-origin: right center;
+  }
+
+  @media (max-width: 992px) {
+    .activities-container { 
+      flex-direction: column; 
+      padding: 40px 5%;
+      min-height: auto;
+    }
+    .content-side { margin-bottom: 40px; max-width: 100%; flex: 1; }
+    .visual-side { justify-content: center; }
+    .activities-img { transform: scale(1); max-width: 700px; transform-origin: center; }
+  }
+</style>

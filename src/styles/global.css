@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary-blue: #5C7DB9;
+  --color-primary-orange: #E68B45;
+  --color-primary-green: #8DB26E;
+  --color-primary-yellow: #DBB443;
+  --color-text-dark: #4A4A4A;
+  --color-text-light: #9B9B9B;
+  --font-family-base: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sugerida por el estilo del diseño */
+}

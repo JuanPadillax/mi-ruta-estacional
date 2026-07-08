@@ -1,0 +1,101 @@
+---
+// src/components/Header.astro
+---
+
+<header class="header">
+  <div class="logo-container">
+    <div class="logo-placeholder">
+      <div class="logo-icon">
+        <span class="leaf leaf-orange"></span>
+        <span class="leaf leaf-green"></span>
+        <span class="leaf leaf-blue"></span>
+        <span class="leaf leaf-yellow"></span>
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">MI RUTA</span>
+        <span class="logo-subtitle">ESTACIONAL</span>
+      </div>
+    </div>
+  </div>
+  <div class="user-action">
+    <button class="user-icon" aria-label="Perfil de usuario">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: transparent;
+  }
+
+  .logo-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .leaf {
+    border-radius: 50% 50% 0 50%;
+    width: 12px;
+    height: 12px;
+  }
+  .leaf-orange { background-color: var(--color-primary-orange); transform: rotate(0deg); }
+  .leaf-green { background-color: var(--color-primary-green); transform: rotate(90deg); }
+  .leaf-blue { background-color: var(--color-primary-blue); transform: rotate(-90deg); }
+  .leaf-yellow { background-color: var(--color-primary-yellow); transform: rotate(180deg); }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-title {
+    font-weight: 900;
+    color: var(--color-primary-blue);
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-subtitle {
+    font-weight: 700;
+    color: var(--color-primary-orange);
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+
+  .user-icon {
+    background-color: var(--color-primary-blue);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .user-icon:hover { transform: scale(1.05); }
+  .user-icon svg { width: 18px; height: 18px; }
+</style>
