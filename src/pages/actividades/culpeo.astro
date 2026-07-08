@@ -11,13 +11,11 @@ import estrellaImg from '../../assets/estrella.png';
 <Layout title="Estación de Otoño - Zorro Culpeo">
   <main class="culpeo-page">
     
-    <!-- Hero Section -->
+    <!-- Hero Section con el diseño original absoluto e intocable de escritorio -->
     <section class="hero-section">
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
-        <h1 class="main-title">
-          Explorar e identificar con el<br>Zorro Culpeo
-        </h1>
+        <h1 class="main-title">Explorar e identificar con el<br>Zorro Culpeo</h1>
         <p class="hero-description">
           Bienvenido al espacio digital del Tomo 1. Aquí encontrarás el material imprimible, las pautas de aula y las misiones de exploración diseñadas para conectar las experiences lúdicas del patio y el hogar con el acompañamiento de nuestra fauna nativa.
         </p>
@@ -29,8 +27,8 @@ import estrellaImg from '../../assets/estrella.png';
       </div>
     </section>
 
-    <!-- Sección del Grid de Actividades -->
-    <section id="actividades-grid" class="categories-wrapper">
+    <!-- SECCIÓN 1: Reconocimiento y Bienvenida -->
+    <section class="categories-wrapper">
       <div class="category-block">
         <div class="category-banner">Reconocimiento y Bienvenida</div>
         <div class="cards-grid">
@@ -63,7 +61,7 @@ import estrellaImg from '../../assets/estrella.png';
             <button class="btn-view bg-orange-btn">Ver</button>
           </div>
 
-          <!-- Tarjeta 3 (Con el componente Image para la estrella) -->
+          <!-- Tarjeta 3 (Con Estrella Especial) -->
           <div class="activity-card-container">
             <div class="star-badge">
               <Image src={estrellaImg} alt="Misión Especial" class="star-graphic" />
@@ -83,6 +81,114 @@ import estrellaImg from '../../assets/estrella.png';
         </div>
       </div>
     </section>
+
+    <!-- SECCIÓN 2: Desafíos de Lógica y Atención -->
+    <section class="categories-wrapper">
+      <div class="category-block">
+        <div class="category-banner">Desafíos de Lógica y Atención</div>
+        <div class="cards-grid">
+          
+          <!-- Tarjeta 1 -->
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Encuentra al intruso!</h3>
+                <p>Actividad de atención selectiva y categorización. El párvulo debe identificar de forma autónoma qué elemento rompe el patrón lógico o geográfico.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-orange-btn">Ver</button>
+          </div>
+
+          <!-- Tarjeta 2 -->
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Sombras mágicas!</h3>
+                <p>Fortalece la asociación cognitiva, la percepción espacial y el control del trazo, ejercitando la coordinación óculo-manual necesaria para la preescritura.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-orange-btn">Ver</button>
+          </div>
+
+          <!-- Tarjeta 3 -->
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Conteo de tesoros!</h3>
+                <p>Promueve el desarrollo del pensamiento matemático a través de la cuantificación y la correspondencia término a término con elementos reales del bosque.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-orange-btn">Ver</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: Exploración Sensorial y Entorno -->
+    <section class="categories-wrapper">
+      <div class="category-block">
+        <div class="category-banner">Exploración Sensorial y Entorno</div>
+        <div class="cards-grid">
+          
+          <!-- Tarjeta 1 -->
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Abriga al árbol!</h3>
+                <p>Experiencia de expresión artística libre mediante dactilopintura. Fortalece la musculatura de la mano y los dedos, clave para la preescritura.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-orange-btn">Ver</button>
+          </div>
+
+          <!-- Tarjeta 2 -->
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Sigue la caída!</h3>
+                <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-orange-btn">Ver</button>
+          </div>
+
+          <!-- Tarjeta 3 -->
+          <div class="activity-card-container">
+            <div class="star-badge">
+              <Image src={estrellaImg} alt="Misión Especial" class="star-graphic" />
+            </div>
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-yellow-title">Expedición a los árboles</h3>
+                <p>Hito de aprendizaje experiencial al aire libre para activar los sentidos, interactuar con el clima otoñal y recolectar tesoros orgánicos reales.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-yellow-btn">Ver</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 </Layout>
 
@@ -93,7 +199,7 @@ import estrellaImg from '../../assets/estrella.png';
     padding: 60px 5% 100px 5%;
   }
 
-  /* Estructura del Hero */
+  /* --- HERO EN ESCRITORIO ORIGINAL --- */
   .hero-section {
     display: flex;
     align-items: center;
@@ -120,12 +226,16 @@ import estrellaImg from '../../assets/estrella.png';
     font-weight: 500;
   }
   
+  /* Arreglo estricto para las 2 líneas */
   .main-title { 
     font-size: 2.8rem; 
     font-weight: 700; 
     color: #f07f3e; 
     line-height: 1.2; 
     margin: 0 0 25px 0; 
+    white-space: pre-line; /* Rompe únicamente donde encuentre un salto de línea (<br>) */
+    width: 100%;
+    display: block;
   }
   
   .hero-description { 
@@ -149,12 +259,12 @@ import estrellaImg from '../../assets/estrella.png';
     box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.1s ease;
   }
-
   .btn-back:hover {
     transform: translateY(2px);
     box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
+  /* Posicionamiento absoluto original para el zorro a la derecha */
   .hero-image-container {
     position: absolute;
     right: -40px;
@@ -169,8 +279,8 @@ import estrellaImg from '../../assets/estrella.png';
     object-fit: contain;
   }
 
-  /* Bloque de Actividades */
-  .category-block { margin-top: 60px; }
+  /* --- SECCIÓN DE TARJETAS --- */
+  .category-block { margin-top: 40px; margin-bottom: 40px; }
   
   .category-banner {
     background: #f39237; 
@@ -206,8 +316,7 @@ import estrellaImg from '../../assets/estrella.png';
     overflow: hidden; 
     display: flex;
     flex-direction: column;
-    margin-bottom: -18px; 
-    min-height: 420px;
+    min-height: 380px; 
   }
 
   .card-image-wrapper {
@@ -223,7 +332,7 @@ import estrellaImg from '../../assets/estrella.png';
   }
 
   .card-info {
-    padding: 25px 20px 30px 20px;
+    padding: 25px 20px;
     text-align: center;
   }
 
@@ -246,46 +355,118 @@ import estrellaImg from '../../assets/estrella.png';
 
   .btn-view {
     border: none;
-    padding: 10px 0;
+    padding: 11px 0;
     width: 140px;
     border-radius: 10px;
     font-weight: 700;
     font-size: 0.95rem;
     color: white;
     cursor: pointer;
-    z-index: 3;
+    margin-top: 25px; 
     transition: transform 0.1s ease;
   }
-
-  .btn-view:hover {
-    transform: scale(1.05);
-  }
+  .btn-view:hover { transform: scale(1.05); }
 
   .bg-orange-btn {
     background-color: #f07f3e;
     box-shadow: 0 4px 0px #cf6517;
   }
-
   .bg-yellow-btn {
     background-color: #fcd054;
     box-shadow: 0 4px 0px #dca51a;
   }
 
-  /* Ajustes para el contenedor de la estrella (Aumentado de tamaño y desplazado) */
+  /* Tamaño de la Estrella */
   .star-badge {
     position: absolute;
-    top: -26px;
-    right: -26px;
+    top: -40px;     
+    right: -40px;   
     z-index: 10;
-    width: 95px;
-    height: 95px;
+    width: 140px;    
+    height: 140px;
+    pointer-events: none; 
   }
 
-  /* Dimensiones escaladas obligatorias de la estrella */
   .star-graphic {
     width: 100% !important;
     height: auto !important;
     object-fit: contain;
-    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15));
+    filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.15));
+  }
+
+  /* ==========================================================================
+     MEDIA QUERIES (SÓLO ACTÚA EN PANTALLAS PEQUEÑAS)
+     ========================================================================== */
+
+  @media (max-width: 1100px) {
+    .main-title {
+      font-size: 2.4rem;
+    }
+    .hero-character {
+      width: 440px; 
+    }
+    .cards-grid {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .culpeo-page {
+      padding: 40px 6% 70px 6%;
+    }
+
+    .hero-section {
+      flex-direction: column;
+      text-align: center;
+      gap: 35px;
+      min-height: auto;
+    }
+
+    .hero-content {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-title {
+      font-size: 2.2rem;
+      white-space: normal; /* Permite flujo natural adaptativo en celulares pequeños */
+    }
+
+    .hero-image-container {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      margin: 0 auto;
+      max-width: 360px;
+    }
+
+    .hero-character {
+      width: 100%;
+    }
+
+    .cards-grid {
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .activity-card-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .activity-card {
+      min-height: auto; 
+    }
+
+    .star-badge {
+      width: 105px;
+      height: 105px;
+      top: -25px;
+      right: -25px;
+    }
   }
 </style>
