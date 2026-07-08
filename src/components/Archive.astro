@@ -8,11 +8,11 @@ import chungungoImg from '../assets/chungungo.png';
 import vizcachaImg from '../assets/Vizcacha.png';
 import coipoImg from '../assets/coipo.png';
 
-// Imágenes de los modales completos (agrega aquí las tuyas cuando estén listas)
+// Imágenes de los modales completos
 import modalCulpeo from '../assets/modal-culpeo.png';
 import modalChungungo from '../assets/modal-chungungo.png';
 import modalVizcacha from '../assets/modal-vizcacha.png';
-import modalCoipo from '../assets/modal-coipo.png'; // Tu imagen adjunta
+import modalCoipo from '../assets/modal-coipo.png';
 ---
 
 <section class="archive-section">
@@ -31,7 +31,7 @@ import modalCoipo from '../assets/modal-coipo.png'; // Tu imagen adjunta
       <Image src={culpeoImg} alt="Zorro Culpeo" class="animal-img" />
       <h3 class="animal-name text-orange">Zorro Culpeo</h3>
       <span class="animal-role">Tomo Otoño</span>
-      <button class="btn-animal bg-orange">Actividades</button>
+      <a href="/actividades/culpeo" class="btn-animal bg-orange">Actividades</a>
     </div>
 
     <div class="animal-card" data-id="chungungo">
@@ -73,7 +73,6 @@ import modalCoipo from '../assets/modal-coipo.png'; // Tu imagen adjunta
     const modalFullImg = document.getElementById('modalFullImg');
     const closeBtn = document.getElementById('closeModal');
 
-    // Mapeamos los IDs de las tarjetas con las rutas optimizadas por Astro
     const modalImages = {
       culpeo: modalCulpeo.src,
       chungungo: modalChungungo.src,
@@ -117,7 +116,7 @@ import modalCoipo from '../assets/modal-coipo.png'; // Tu imagen adjunta
     align-items: center;
   }
 
-  /* La imagen cargada hereda todo el diseño que hiciste en Illustrator/Figma */
+  /* La imagen cargada hereda todo el diseño */
   .modal-graphic { 
     width: 100%; 
     height: auto; 
@@ -159,7 +158,25 @@ import modalCoipo from '../assets/modal-coipo.png'; // Tu imagen adjunta
   .animal-img { width: 100%; max-width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px; }
   .animal-name { font-size: 1.3rem; font-weight: 800; margin: 0 0 5px 0; }
   .animal-role { color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 20px; font-weight: 600; }
-  .btn-animal { width: 100%; max-width: 160px; color: white; padding: 10px 0; font-size: 1rem; font-weight: 700; border-radius: 25px; border: none; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+  
+  /* Estilos unificados para botones y enlaces de tarjetas */
+  .btn-animal { 
+    display: inline-block;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-align: center;
+    width: 100%; 
+    max-width: 160px;
+    color: white; 
+    padding: 10px 0; 
+    font-size: 1rem; 
+    font-weight: 700;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
   .text-orange { color: var(--color-primary-orange); } .text-blue { color: var(--color-primary-blue); } .text-green { color: var(--color-primary-green); } .text-yellow { color: var(--color-primary-yellow); }
   .bg-orange { background-color: var(--color-primary-orange); } .bg-blue { background-color: var(--color-primary-blue); } .bg-green { background-color: var(--color-primary-green); } .bg-yellow { background-color: var(--color-primary-yellow); }
 </style>
