@@ -12,8 +12,8 @@ import ninoImg from '../assets/niño.png';
       Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio digital diseñado para potenciar el desarrollo integral mediante dinámicas y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico de nuestra fauna nativa.
     </p>
     <div class="button-container">
-      <button class="btn btn-primary">Ir a la App</button>
-      <button class="btn btn-secondary">Explorar</button>
+      <button class="btn btn-primary">Inicia Sesión</button>
+      <button class="btn btn-secondary">Regístrate</button>
     </div>
   </div>
 
@@ -40,7 +40,7 @@ import ninoImg from '../assets/niño.png';
 
   .hero-content {
     flex: 1;
-    max-width: 580px; /* Un poco más de ancho para que el texto caiga de forma natural sin saltos forzados */
+    max-width: 580px; 
     z-index: 2;
   }
 
@@ -88,7 +88,8 @@ import ninoImg from '../assets/niño.png';
   .btn-primary {
     background-color: var(--color-primary-blue);
     color: white;
-    box-shadow: 0 4px 10px rgba(92, 125, 185, 0.3);
+    /* Sombra difuminada suave que coincide con el diseño de los botones inferiores */
+    box-shadow: 0 4px 14px rgba(118, 152, 208, 0.4);
   }
 
   .btn-secondary {
@@ -100,7 +101,7 @@ import ninoImg from '../assets/niño.png';
   .hero-image-wrapper {
     flex: 1.2;
     display: flex;
-    justify-content: center; /* Vuelve a estar centrado */
+    justify-content: center; 
     align-items: center;
     position: relative;
     max-width: 650px;
@@ -113,7 +114,7 @@ import ninoImg from '../assets/niño.png';
     position: relative;
     z-index: 2;
     transform: scale(1.25);
-    transform-origin: center; /* Crece desde el centro para mantener la posición */
+    transform-origin: center; 
   }
 
   @media (max-width: 900px) {

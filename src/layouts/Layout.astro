@@ -1,6 +1,8 @@
 ---
+import Header from '../components/Header.astro'; // Asegúrate de que la ruta a tu componente Header sea la correcta
+
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -8,72 +10,87 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Mi Ruta Estacional - Aprender Jugando" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Mi Ruta Estacional - Aprender Jugando" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+        <title>{title}</title>
+    </head>
+    <body>
+        <!-- El Header se mantiene aquí para que aparezca en todas las páginas -->
+        <Header />
+        
+        <main>
+            <slot />
+        </main>
+    </body>
 </html>
 
 <style is:global>
-	:root {
-		/* Paleta de colores del diseño */
-		--color-primary-blue: #7698D0;
-		--color-primary-orange: #F18F42;
-		--color-primary-green: #82B06E;
-		--color-primary-yellow: #E8B851;
-		
-		--color-text-dark: #2D3748;
-		--color-text-light: #718096;
-		
-		--font-main: 'Nunito', sans-serif;
-	}
-	
-	* {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
+    :root {
+        /* Paleta de colores del diseño */
+        --color-primary-blue: #7698D0;
+        --color-primary-orange: #F18F42;
+        --color-primary-green: #82B06E;
+        --color-primary-yellow: #E8B851;
+        
+        --color-text-dark: #2D3748;
+        --color-text-light: #718096;
+        
+        --font-main: 'Nunito', sans-serif;
+    }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-	body {
-		font-family: var(--font-main);
-		color: var(--color-text-dark);
-		background-color: #FFFFFF;
-		overflow-x: hidden;
-	}
+    body {
+        font-family: var(--font-main);
+        color: var(--color-text-dark);
+        background-color: #FFFFFF;
+        overflow-x: hidden;
+    }
 
-	/* Clases de utilidad para botones */
-	.btn {
-		padding: 10px 32px;
-		border-radius: 50px;
-		font-weight: 700;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		border: none;
-	}
+    /* Asegura que el Header se quede fijo arriba y no se superponga de manera incorrecta */
+    header {
+        position: sticky;
+        top: 0;
+        background-color: #FFFFFF;
+        z-index: 1000; /* Lo mantiene por encima de las imágenes del Hero y Activities */
+        /* Opcional: puedes descomentar la siguiente línea si quieres una sombra sutil al bajar */
+        /* box-shadow: 0 2px 10px rgba(0,0,0,0.05); */
+    }
 
-	.btn-primary {
-		background-color: var(--color-primary-blue);
-		color: white;
-		box-shadow: 0 4px 6px rgba(118, 152, 208, 0.3);
-	}
+    /* Clases de utilidad para botones */
+    .btn {
+        padding: 10px 32px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+    }
 
-	.btn-secondary {
-		background-color: transparent;
-		color: var(--color-primary-blue);
-		border: 2px solid var(--color-primary-blue);
-	}
+    .btn-primary {
+        background-color: var(--color-primary-blue);
+        color: white;
+        box-shadow: 0 4px 6px rgba(118, 152, 208, 0.3);
+    }
 
-	.btn:hover {
-		transform: translateY(-2px);
-	}
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--color-primary-blue);
+        border: 2px solid var(--color-primary-blue);
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
 </style>
