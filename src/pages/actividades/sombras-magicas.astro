@@ -1,14 +1,18 @@
 ---
-// src/pages/actividades/crea-tu-companero.astro
+// src/pages/actividades/sombras-magicas.astro
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import culpeoImg from '../../assets/culpeo.png';
 
-// Si tienes una imagen específica de preview de la ficha, la puedes importar aquí
-// import previewFicha from '../../assets/preview-ficha.png';
+// Importación oficial usando el asset "dudoso.png"
+import zorroPreguntaImg from '../../assets/dudoso.png'; 
+
+// Corregido: Importación de tus nuevos assets para las láminas de siluetas
+import silueta1Img from '../../assets/silueta1.png';
+import silueta2Img from '../../assets/silueta2.png';
+import silueta3Img from '../../assets/silueta3.png';
 ---
 
-<Layout title="¡Crea a tu compañero! - Zorro Culpeo">
+<Layout title="¿Cómo funciona la actividad 'Sombras mágicas'? - Zorro Culpeo">
   <main class="detalle-actividad-page">
     
     <!-- Hero Section Detalle -->
@@ -16,41 +20,63 @@ import culpeoImg from '../../assets/culpeo.png';
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
         <h1 class="main-title">
-          ¿Cómo funciona la actividad<br>"¡Crea a tu compañero!"?
+          ¿Cómo funciona la actividad<br>"Sombras mágicas"?
         </h1>
         <p class="hero-description">
-          Esta experiencia pedagógica promueve el sentido de pertenencia, la identidad y la motricidad fina a través del troquelado o recortado. Al armar y personalizar a su propio Zorrito Culpeo, el párvulo crea un vínculo afectivo con su compañero de ruta, quien lo acompañará y guiará en cada uno de los desafíos y expediciones del trimestre.
+          Esta actividad fortalece la asociación cognitiva, la percepción espacial y el control del trazo. Al conectar el objeto con su silueta correspondiente, el párvulo ejercita la abstracción visual y la coordinación óculo-manual necesaria para la preescritura. Se recomienda motivar al niño a trazar las líneas utilizando lápices de distintos colores otoñales.
         </p>
         <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
       </div>
       
       <div class="hero-image-container">
-        <Image src={culpeoImg} alt="Zorro Culpeo" class="hero-character" />
+        <Image src={zorroPreguntaImg} alt="Zorro Culpeo con Signo de Pregunta" class="hero-character" />
       </div>
     </section>
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
       
-      <!-- Panel Izquierdo: Descarga de Ficha con Tamaño Controlado Fijo -->
+      <!-- Panel Izquierdo: Cuadrícula de Fichas Descargables con Tamaño Controlado Fijo -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
+          
+          <!-- Lámina 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <!-- Aquí puedes añadir la etiqueta <Image /> cuando tengas el asset de la ficha -->
-                <!-- <Image src={previewFicha} alt="Previsualización Ficha" class="sheet-image" /> -->
+                <Image src={silueta1Img} alt="Previsualización Lámina 1" class="sheet-image" />
               </div>
             </div>
             <button class="btn-download">Descargar</button>
           </div>
 
-          <!-- Icono central/final del signo más (+) centrado en la estructura -->
+          <!-- Lámina 2 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={silueta2Img} alt="Previsualización Lámina 2" class="sheet-image" />
+              </div>
+            </div>
+            <button class="btn-download">Descargar</button>
+          </div>
+
+          <!-- Lámina 3 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={silueta3Img} alt="Previsualización Lámina 3" class="sheet-image" />
+              </div>
+            </div>
+            <button class="btn-download">Descargar</button>
+          </div>
+
+          <!-- Icono final del signo más (+) -->
           <div class="separator-icon">
             <div class="plus-circle">
               <span>+</span>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -74,8 +100,8 @@ import culpeoImg from '../../assets/culpeo.png';
               <p><strong>Momento:</strong> En la Mesa (Aula u Hogar)</p>
             </div>
             <div class="data-item">
-              <span class="icon">🏫</span>
-              <p><strong>Área:</strong> Identidad, Autonomía y Motricidad Fina</p>
+              <span class="icon">🗺️</span>
+              <p><strong>Área:</strong> Percepción Espacial y Coordinación Óculo-Manual</p>
             </div>
           </div>
         </div>
@@ -88,10 +114,10 @@ import culpeoImg from '../../assets/culpeo.png';
               <span class="link-label">Actividad 3 :</span> ¡Encuentra al intruso!
             </a>
             <a href="#" class="activity-link">
-              <span class="link-label">Actividad 4 :</span> ¡Sombras mágicas!
+              <span class="link-label">Actividad 5 :</span> ¡Conteo de tesoros!
             </a>
             <a href="#" class="activity-link">
-              <span class="link-label">Actividad 5 :</span> ¡Conteo de tesoros!
+              <span class="link-label">Actividad 6 :</span> ¡Ayuda a nuestros amigos!
             </a>
           </div>
         </div>
@@ -217,7 +243,7 @@ import culpeoImg from '../../assets/culpeo.png';
     width: 100%;
   }
 
-  /* MANTIENE EL TAMAÑO CONTROLADO DE LOS RECUADROS ORIGINALES */
+  /* Tamaño controlado estricto de los recuadros de las láminas */
   .preview-card-box {
     background: #ffffff;
     width: 100%;
@@ -245,6 +271,7 @@ import culpeoImg from '../../assets/culpeo.png';
     box-sizing: border-box;
   }
 
+  /* Ajuste para que las láminas no se deformen */
   .sheet-image {
     width: 100%;
     height: 100%;
@@ -269,7 +296,7 @@ import culpeoImg from '../../assets/culpeo.png';
     transform: scale(1.05);
   }
 
-  /* Separador del signo más (+) centrado en su grilla */
+  /* Separador del signo más (+) */
   .separator-icon {
     display: flex;
     justify-content: center;
@@ -391,7 +418,7 @@ import culpeoImg from '../../assets/culpeo.png';
     font-weight: 600;
   }
 
-  /* --- ESTILOS DEL SITE FOOTER (100% ANCHO DE PANTALLA) --- */
+  /* Footer a pantalla completa (100vw) */
   .site-footer {
     background-color: #f39237;
     color: white;
@@ -416,7 +443,7 @@ import culpeoImg from '../../assets/culpeo.png';
     font-size: 0.85rem;
   }
 
-  /* Responsive Controlado */
+  /* Ajustes Responsivos */
   @media (max-width: 1024px) {
     .workspace-section {
       flex-direction: column;

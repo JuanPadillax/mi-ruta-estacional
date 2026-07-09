@@ -1,14 +1,18 @@
 ---
-// src/pages/actividades/crea-tu-companero.astro
+// src/pages/actividades/encuentra-el-intruso.astro
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import culpeoImg from '../../assets/culpeo.png';
 
-// Si tienes una imagen específica de preview de la ficha, la puedes importar aquí
-// import previewFicha from '../../assets/preview-ficha.png';
+// Importación de las ilustraciones de los zorros
+import zorroLupaImg from '../../assets/zorroconlupa.png';
+
+// Importación de los assets para las láminas de actividades
+import linea1Img from '../../assets/linea1.png';
+import linea2Img from '../../assets/linea2.png';
+import linea3Img from '../../assets/linea3.png';
 ---
 
-<Layout title="¡Crea a tu compañero! - Zorro Culpeo">
+<Layout title="¿Cómo funciona la actividad 'Encuentra al intruso'? - Zorro Culpeo">
   <main class="detalle-actividad-page">
     
     <!-- Hero Section Detalle -->
@@ -16,41 +20,63 @@ import culpeoImg from '../../assets/culpeo.png';
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
         <h1 class="main-title">
-          ¿Cómo funciona la actividad<br>"¡Crea a tu compañero!"?
+          ¿Cómo funciona la actividad<br>"Encuentra al intruso"?
         </h1>
         <p class="hero-description">
-          Esta experiencia pedagógica promueve el sentido de pertenencia, la identidad y la motricidad fina a través del troquelado o recortado. Al armar y personalizar a su propio Zorrito Culpeo, el párvulo crea un vínculo afectivo con su compañero de ruta, quien lo acompañará y guiará en cada uno de los desafíos y expediciones del trimestre.
+          Esta experiencia pedagógica trabaja la atención selectiva, la discriminación visual avanzada y la categorización cognitiva. El objetivo es que el párvulo identifique de forma autónoma qué elemento rompe el patrón lógico o geográfico de cada fila. Se sugiere a la educadora o familia fomentar el lenguaje pidiéndole al niño o niña que explique brevemente el porqué de su elección.
         </p>
         <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
       </div>
       
       <div class="hero-image-container">
-        <Image src={culpeoImg} alt="Zorro Culpeo" class="hero-character" />
+        <Image src={zorroLupaImg} alt="Zorro Culpeo con Lupa" class="hero-character" />
       </div>
     </section>
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
       
-      <!-- Panel Izquierdo: Descarga de Ficha con Tamaño Controlado Fijo -->
+      <!-- Panel Izquierdo: Cuadrícula de Fichas Descargables con Tamaño Controlado Fijo -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
+          
+          <!-- Lámina 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <!-- Aquí puedes añadir la etiqueta <Image /> cuando tengas el asset de la ficha -->
-                <!-- <Image src={previewFicha} alt="Previsualización Ficha" class="sheet-image" /> -->
+                <Image src={linea1Img} alt="Previsualización Lámina 1" class="sheet-image" />
               </div>
             </div>
             <button class="btn-download">Descargar</button>
           </div>
 
-          <!-- Icono central/final del signo más (+) centrado en la estructura -->
+          <!-- Lámina 2 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={linea2Img} alt="Previsualización Lámina 2" class="sheet-image" />
+              </div>
+            </div>
+            <button class="btn-download">Descargar</button>
+          </div>
+
+          <!-- Lámina 3 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={linea3Img} alt="Previsualización Lámina 3" class="sheet-image" />
+              </div>
+            </div>
+            <button class="btn-download">Descargar</button>
+          </div>
+
+          <!-- Icono final del signo más (+) -->
           <div class="separator-icon">
             <div class="plus-circle">
               <span>+</span>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -74,8 +100,8 @@ import culpeoImg from '../../assets/culpeo.png';
               <p><strong>Momento:</strong> En la Mesa (Aula u Hogar)</p>
             </div>
             <div class="data-item">
-              <span class="icon">🏫</span>
-              <p><strong>Área:</strong> Identidad, Autonomía y Motricidad Fina</p>
+              <span class="icon">🗺️</span>
+              <p><strong>Área:</strong> Atención Selectiva y Categorización Lógica</p>
             </div>
           </div>
         </div>
@@ -84,14 +110,14 @@ import culpeoImg from '../../assets/culpeo.png';
         <div class="data-card">
           <div class="card-header-banner bg-orange">Otras Actividades:</div>
           <div class="card-body-list links-list">
-            <a href="/actividades/encuentra-el-intruso" class="activity-link">
-              <span class="link-label">Actividad 3 :</span> ¡Encuentra al intruso!
-            </a>
             <a href="#" class="activity-link">
               <span class="link-label">Actividad 4 :</span> ¡Sombras mágicas!
             </a>
             <a href="#" class="activity-link">
               <span class="link-label">Actividad 5 :</span> ¡Conteo de tesoros!
+            </a>
+            <a href="#" class="activity-link">
+              <span class="link-label">Actividad 6 :</span> ¡Ayuda a nuestros amigos!
             </a>
           </div>
         </div>
@@ -245,6 +271,7 @@ import culpeoImg from '../../assets/culpeo.png';
     box-sizing: border-box;
   }
 
+  /* Control absoluto del tamaño de las imágenes cargadas */
   .sheet-image {
     width: 100%;
     height: 100%;

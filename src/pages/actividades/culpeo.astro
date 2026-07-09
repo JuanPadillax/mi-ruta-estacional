@@ -11,7 +11,6 @@ import estrellaImg from '../../assets/estrella.png';
 <Layout title="Estación de Otoño - Zorro Culpeo">
   <main class="culpeo-page">
     
-    <!-- Hero Section con el diseño original absoluto e intocable de escritorio -->
     <section class="hero-section">
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
@@ -27,13 +26,11 @@ import estrellaImg from '../../assets/estrella.png';
       </div>
     </section>
 
-    <!-- SECCIÓN 1: Reconocimiento y Bienvenida -->
     <section class="categories-wrapper">
       <div class="category-block">
         <div class="category-banner">Reconocimiento y Bienvenida</div>
         <div class="cards-grid">
           
-          <!-- Tarjeta 1 (Hacia Crea tu compañero) -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -47,7 +44,6 @@ import estrellaImg from '../../assets/estrella.png';
             <a href="/actividades/crea-tu-companero" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
-          <!-- Tarjeta 2 (¡Modificada para ir a Mi plato favorito!) -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -58,11 +54,9 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Actividad lúdica centrada en reconocer los cambios estacionales en la alimentación diaria y expresar preferencias individuales.</p>
               </div>
             </div>
-            <!-- Cambiado a enlace <a> apuntando a la nueva página -->
             <a href="/actividades/mi-plato-favorito" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
-          <!-- Tarjeta 3 (Con Estrella Especial) -->
           <div class="activity-card-container">
             <div class="star-badge">
               <Image src={estrellaImg} alt="Misión Especial" class="star-graphic" />
@@ -83,13 +77,11 @@ import estrellaImg from '../../assets/estrella.png';
       </div>
     </section>
 
-    <!-- SECCIÓN 2: Desafíos de Lógica y Atención -->
     <section class="categories-wrapper">
       <div class="category-block">
         <div class="category-banner">Desafíos de Lógica y Atención</div>
         <div class="cards-grid">
           
-          <!-- Tarjeta 1 -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -100,10 +92,9 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Actividad de atención selectiva y categorización. El párvulo debe identificar de forma autónoma qué elemento rompe el patrón lógico o geográfico.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <a href="/actividades/encuentra-el-intruso" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
-          <!-- Tarjeta 2 -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -114,10 +105,9 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Fortalece la asociación cognitiva, la percepción espacial y el control del trazo, ejercitando la coordinación óculo-manual necesaria para la preescritura.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <a href="/actividades/sombras-magicas" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
-          <!-- Tarjeta 3 -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -128,20 +118,18 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Promueve el desarrollo del pensamiento matemático a través de la cuantificación y la correspondencia término a término con elementos reales del bosque.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <a href="/actividades/conteo-de-tesoros" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 3: Exploración Sensorial y Entorno -->
     <section class="categories-wrapper">
       <div class="category-block">
         <div class="category-banner">Exploración Sensorial y Entorno</div>
         <div class="cards-grid">
           
-          <!-- Tarjeta 1 -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -152,10 +140,9 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Experiencia de expresión artística libre mediante dactilopintura. Fortalece la musculatura de la mano y los dedos, clave para la preescritura.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <a href="/actividades/abriga-al-arbol" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
-          <!-- Tarjeta 2 -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -166,10 +153,9 @@ import estrellaImg from '../../assets/estrella.png';
                 <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
               </div>
             </div>
-            <button class="btn-view bg-orange-btn">Ver</button>
+            <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
-          <!-- Tarjeta 3 -->
           <div class="activity-card-container">
             <div class="star-badge">
               <Image src={estrellaImg} alt="Misión Especial" class="star-graphic" />
@@ -190,14 +176,72 @@ import estrellaImg from '../../assets/estrella.png';
       </div>
     </section>
 
+    <section class="categories-wrapper">
+      <div class="category-block">
+        <div class="category-banner">Recapitulación y Cierre</div>
+        <div class="cards-grid">
+          
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Ayuda a nuestros amigos!</h3>
+                <p>Actividad lúdica de laberintos y resolución de problemas que fomenta la orientación espacial en el entorno del bosque nativo.</p>
+              </div>
+            </div>
+            <a href="/actividades/ayuda-a-nuestros-amigos" class="btn-view bg-orange-btn link-btn-style">Ver</a>
+          </div>
+
+          <div class="activity-card-container">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Pillemos al zorrito!</h3>
+                <p>Actividad lúdica de búsqueda y percepción visual adaptada al entorno natural del bosque nativo chileno.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-orange-btn">Ver</button>
+          </div>
+
+          <div class="activity-card-container">
+            <div class="star-badge">
+              <Image src={estrellaImg} alt="Misión Especial" class="star-graphic" />
+            </div>
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-yellow-title">Hora del cuento</h3>
+                <p>Experiencia narrativa e interactiva titulada "El viento frío y el calor del hogar", diseñada para trabajar la transición de la estación.</p>
+              </div>
+            </div>
+            <button class="btn-view bg-yellow-btn">Ver</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 Mi Ruta Estacional. Todos los derechos reservados.</p>
+      <p class="footer-links">Soporte Educadoras | Términos de Uso</p>
+    </div>
+  </footer>
 </Layout>
 
 <style>
   .culpeo-page {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 60px 5% 100px 5%;
+    padding: 60px 5% 0 5%;
   }
 
   /* --- HERO EN ESCRITORIO ORIGINAL --- */
@@ -234,7 +278,7 @@ import estrellaImg from '../../assets/estrella.png';
     color: #f07f3e; 
     line-height: 1.2; 
     margin: 0 0 25px 0; 
-    white-space: pre-line; /* Rompe únicamente donde encuentre un salto de línea (<br>) */
+    white-space: pre-line; 
     width: 100%;
     display: block;
   }
@@ -354,7 +398,8 @@ import estrellaImg from '../../assets/estrella.png';
     font-weight: 400;
   }
 
-  .btn-view {
+  /* Base común de diseño para botones y enlaces de tipo botón */
+  .btn-view, .link-btn-style {
     border: none;
     padding: 11px 0;
     width: 140px;
@@ -371,8 +416,10 @@ import estrellaImg from '../../assets/estrella.png';
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
   }
-  .btn-view:hover { transform: scale(1.05); }
+  
+  .btn-view:hover, .link-btn-style:hover { transform: scale(1.05); }
 
   .bg-orange-btn {
     background-color: #f07f3e;
@@ -401,46 +448,47 @@ import estrellaImg from '../../assets/estrella.png';
     filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.15));
   }
 
+  /* --- ESTILOS DEL SITE FOOTER --- */
+  .site-footer {
+    background-color: #f39237;
+    color: white;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 100px;
+    padding: 22px 0;
+    box-sizing: border-box;
+  }
+
+  .footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
   /* ==========================================================================
-     MEDIA QUERIES (SÓLO ACTÚA EN PANTALLAS PEQUEÑAS)
-     ========================================================================== */
+     MEDIA QUERIES
+     ========================================================================= */
 
   @media (max-width: 1100px) {
-    .main-title {
-      font-size: 2.4rem;
-    }
-    .hero-character {
-      width: 440px; 
-    }
-    .cards-grid {
-      gap: 20px;
-    }
+    .main-title { font-size: 2.4rem; }
+    .hero-character { width: 440px; }
+    .cards-grid { gap: 20px; }
   }
 
   @media (max-width: 850px) {
-    .culpeo-page {
-      padding: 40px 6% 70px 6%;
-    }
-
-    .hero-section {
-      flex-direction: column;
-      text-align: center;
-      gap: 35px;
-      min-height: auto;
-    }
-
-    .hero-content {
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .main-title {
-      font-size: 2.2rem;
-      white-space: normal; /* Permite flujo natural adaptativo en celulares pequeños */
-    }
-
+    .culpeo-page { padding: 40px 6% 0 6%; }
+    .hero-section { flex-direction: column; text-align: center; gap: 35px; min-height: auto; }
+    .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .main-title { font-size: 2.2rem; white-space: normal; }
+    
     .hero-image-container {
       position: relative;
       right: auto;
@@ -450,30 +498,16 @@ import estrellaImg from '../../assets/estrella.png';
       max-width: 360px;
     }
 
-    .hero-character {
-      width: 100%;
-    }
-
-    .cards-grid {
+    .hero-character { width: 100%; }
+    .cards-grid { flex-direction: column; align-items: center; gap: 50px; }
+    .activity-card-container { width: 100%; max-width: 420px; }
+    .activity-card { min-height: auto; }
+    .star-badge { width: 105px; height: 105px; top: -25px; right: -25px; }
+    
+    .footer-content {
       flex-direction: column;
-      align-items: center;
-      gap: 50px;
-    }
-
-    .activity-card-container {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .activity-card {
-      min-height: auto; 
-    }
-
-    .star-badge {
-      width: 105px;
-      height: 105px;
-      top: -25px;
-      right: -25px;
+      gap: 10px;
+      text-align: center;
     }
   }
 </style>
