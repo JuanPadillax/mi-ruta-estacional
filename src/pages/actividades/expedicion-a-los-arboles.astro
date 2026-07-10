@@ -1,0 +1,458 @@
+---
+// src/pages/actividades/expedicion-a-los-arboles.astro
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Importación oficial usando el asset del zorro "Zorro celebrando.png"
+import zorroCelebrandoImg from '../../assets/Zorro celebrando.png'; 
+---
+
+<Layout title="¿Cómo funciona 'Expedición a los árboles'? - Zorro Culpeo">
+  <main class="detalle-actividad-page">
+    
+    <!-- Hero Section Detalle -->
+    <section class="hero-detalle">
+      <div class="hero-content">
+        <span class="season-badge">Estación de Otoño</span>
+        <h1 class="main-title">
+          ¿Cómo funciona<br>"Expedición a los árboles"?
+        </h1>
+        <p class="hero-description">
+          Un hito de aprendizaje experimental al aire libre diseñado para activar todos los sentidos en el patio o entorno natural cercano. A través de la observación directa y la recolección de elementos caídos de la estación (hojas, cortezas, frutos), el párvulo investiga las características de la flora nativa, recolecta tesoros y fortalece su vínculo con el medioambiente.
+        </p>
+        <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
+      </div>
+      
+      <div class="hero-image-container">
+        <Image src={zorroCelebrandoImg} alt="Zorro Culpeo Celebrando con Estrella" class="hero-character" />
+      </div>
+    </section>
+
+    <!-- Área de Descarga (1 Recuadro + Signo Más) y Paneles Informativos -->
+    <section class="workspace-section">
+      
+      <!-- Panel Izquierdo: Configuración limpia de 1 único bloque de previsualización al lado del signo más (+) -->
+      <div class="download-grid-container">
+        <div class="worksheets-layout single-layout">
+          
+          <!-- Bloque de Descarga -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <!-- Aquí puedes añadir la imagen de la guía si la tienes, ej: <Image src={guiaCampoImg} alt="Guía de Campo" class="sheet-image" /> -->
+              </div>
+            </div>
+            <button class="btn-download">Descargar</button>
+          </div>
+
+          <!-- Icono lateral con el signo más (+) -->
+          <div class="separator-icon">
+            <div class="plus-circle">
+              <span>+</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Panel Derecho: Datos y Otras Actividades -->
+      <div class="info-panels-container">
+        
+        <!-- Bloque de Datos -->
+        <div class="data-card">
+          <div class="card-header-banner bg-orange">Datos:</div>
+          <div class="card-body-list">
+            <div class="data-item">
+              <span class="icon">👤</span>
+              <p><strong>Nivel:</strong> Medio Mayor (3 a 4 años)</p>
+            </div>
+            <div class="data-item">
+              <span class="icon">📄</span>
+              <p><strong>Fichas Incluidas:</strong> Guías de Exploración de Campo</p>
+            </div>
+            <div class="data-item">
+              <span class="icon">⏱️</span>
+              <p><strong>Momento:</strong> Hito Especial (Al Aire Libre / Patio)</p>
+            </div>
+            <div class="data-item">
+              <span class="icon">🗺️</span>
+              <p><strong>Área:</strong> Exploración del Entorno Natural y Asombro Sensorial</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque Otras Actividades -->
+        <div class="data-card">
+          <div class="card-header-banner bg-orange">Otras Actividades:</div>
+          <div class="card-body-list links-list">
+            <a href="/actividades/abriga-al-arbol" class="activity-link">
+              <span class="link-label">Actividad 7:</span> ¡Abriga al árbol!
+            </a>
+            <a href="/actividades/sigue-la-caida" class="activity-link">
+              <span class="link-label">Actividad 8:</span> ¡Sigue la caída!
+            </a>
+            <a href="/actividades/pillemos-al-zorrito" class="activity-link">
+              <span class="link-label">Actividad 10:</span> ¡Pillemos al zorrito!
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Institucional -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 Mi Ruta Estacional. Todos los derechos reservados.</p>
+      <p class="footer-links">Soporte Educadoras | Términos de Uso</p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .detalle-actividad-page {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 5% 0 5%;
+  }
+
+  /* Hero Layout */
+  .hero-detalle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 420px;
+    position: relative;
+    margin-bottom: 60px;
+    gap: 40px;
+  }
+  
+  .hero-content { 
+    max-width: 650px; 
+    text-align: left;
+    z-index: 2;
+  }
+  
+  .season-badge { 
+    font-size: 1.15rem; 
+    color: #b5b5b5; 
+    font-style: italic;
+    display: block; 
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  
+  .main-title { 
+    font-size: 2.8rem; 
+    font-weight: 700; 
+    color: #f07f3e; 
+    line-height: 1.2; 
+    margin: 0 0 25px 0; 
+  }
+  
+  .hero-description { 
+    color: #333; 
+    font-size: 1.05rem; 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+    font-weight: 400;
+  }
+
+  .btn-back { 
+    background: linear-gradient(to bottom, #f39237, #ee7623); 
+    color: white; 
+    padding: 12px 35px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.95rem;
+    display: inline-block; 
+    box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.1s ease;
+  }
+
+  .btn-back:hover {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+  }
+  
+  .hero-character { 
+    width: 440px; 
+    height: auto; 
+    object-fit: contain;
+  }
+
+  /* Sección Inferior Workspace */
+  .workspace-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 50px;
+    gap: 40px;
+  }
+
+  /* Contenedor de la cuadrícula izquierda */
+  .download-grid-container {
+    flex: 1;
+  }
+
+  .worksheets-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+  }
+
+  /* Panel de descarga individual */
+  .download-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Tamaño controlado estricto de los recuadros de las láminas */
+  .preview-card-box {
+    background: #ffffff;
+    width: 100%;
+    max-width: 320px; 
+    height: 320px;    
+    border-radius: 28px; 
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07); 
+    border: 1px solid #f2f2f2;
+    overflow: hidden;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .placeholder-preview {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px; 
+    box-sizing: border-box;
+  }
+
+  .sheet-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+  }
+
+  .btn-download {
+    border: none;
+    background-color: #f07f3e;
+    color: white;
+    width: 150px;
+    padding: 11px 0;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #cf6517;
+    transition: transform 0.1s ease;
+  }
+
+  .btn-download:hover {
+    transform: scale(1.05);
+  }
+
+  /* Separador del signo más (+) */
+  .separator-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+  }
+
+  .plus-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #f07f3e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(240, 127, 62, 0.2);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+
+  .plus-circle:hover {
+    transform: scale(1.08);
+  }
+
+  .plus-circle span {
+    color: #f07f3e;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-top: -4px;
+  }
+
+  /* Paneles de datos derechos */
+  .info-panels-container {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .data-card {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border: 1px solid #f6f6f6;
+    overflow: hidden;
+  }
+
+  .card-header-banner {
+    color: white;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .bg-orange {
+    background: #f07f3e;
+  }
+
+  .card-body-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .data-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .data-item .icon {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .data-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+  }
+
+  .data-item strong {
+    color: #f07f3e;
+    font-weight: 700;
+  }
+
+  /* Lista de Enlaces Actividades */
+  .links-list {
+    gap: 12px;
+  }
+
+  .activity-link {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 500;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s ease;
+  }
+
+  .activity-link:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .activity-link:hover {
+    color: #f07f3e;
+  }
+
+  .link-label {
+    color: #f07f3e;
+    font-weight: 600;
+  }
+
+  /* Footer Institucional */
+  .site-footer {
+    background-color: #f39237;
+    color: white;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 100px;
+    padding: 22px 0;
+    box-sizing: border-box;
+  }
+
+  .footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  /* Ajustes Responsivos */
+  @media (max-width: 1024px) {
+    .workspace-section {
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
+    .download-grid-container {
+      width: 100%;
+    }
+    .info-panels-container {
+      width: 100%;
+      max-width: 500px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .worksheets-layout {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .separator-icon {
+      height: auto;
+      padding: 20px 0;
+    }
+    .hero-detalle {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-image-container {
+      justify-content: center;
+    }
+    .footer-content {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+</style>
