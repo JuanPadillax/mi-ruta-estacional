@@ -5,8 +5,10 @@ import { Image } from 'astro:assets';
 ---
 
 <Layout title="Mi Perfil Pedagógico - Mi Ruta Estacional">
+  <!-- Layout con un flujo estático natural para que todo suba y baje con el scroll -->
   <main class="perfil-page">
     
+    <!-- Cabecera de Perfil Estática Natural -->
     <header class="perfil-header">
       <div class="header-left">
         <h1 class="page-title">Mi Perfil Pedagógico</h1>
@@ -17,17 +19,24 @@ import { Image } from 'astro:assets';
       </div>
       
       <div class="header-right">
+        <!-- Tarjeta de perfil plana y transparente sin bordes ni sombras -->
         <div class="profile-card" id="profileCard" style="display: none;">
           <div class="avatar-circle" id="userAvatar"></div>
           <div class="profile-info">
             <h3 id="userName">Cargando...</h3>
             <p class="info-relation" id="userRelation">Educadora de Párvulos</p>
             <p class="info-level" id="userLevel">Nivel Medio Mayor</p>
+            
+            <!-- Botón "Alumnos" integrado directamente debajo de la información -->
+            <a href="/listado-alumnos" class="btn-students-list">
+              Alumnos
+            </a>
           </div>
         </div>
       </div>
     </header>
 
+    <!-- SECCIÓN 1: Mis Actividades Guardadas -->
     <section class="perfil-section">
       <div class="section-banner-blue">
         <div class="banner-content">
@@ -40,6 +49,7 @@ import { Image } from 'astro:assets';
       </div>
 
       <div class="saved-activities-container">
+        <!-- Tarjeta de Actividad Guardada -->
         <div class="activity-card-wrapper">
           <div class="activity-card">
             <div class="card-image-wrapper">
@@ -65,6 +75,7 @@ import { Image } from 'astro:assets';
       </div>
     </section>
 
+    <!-- SECCIÓN 2: Mis Aportes a la Comunidad -->
     <section class="perfil-section">
       <div class="section-banner-blue">
         <div class="banner-content">
@@ -77,6 +88,7 @@ import { Image } from 'astro:assets';
       </div>
 
       <div class="saved-activities-container">
+        <!-- Tarjeta de Actividad Aportada -->
         <div class="activity-card-wrapper">
           <div class="activity-card">
             <div class="card-image-wrapper">
@@ -102,6 +114,7 @@ import { Image } from 'astro:assets';
       </div>
     </section>
 
+    <!-- SECCIÓN 3: Explorar Más -->
     <section class="perfil-section">
       <div class="section-banner-blue">
         <div class="banner-content">
@@ -109,7 +122,9 @@ import { Image } from 'astro:assets';
         </div>
       </div>
 
+      <!-- Carrusel / Slider de Exploración -->
       <div class="carousel-container">
+        <!-- Flecha Izquierda -->
         <button class="carousel-arrow left-arrow" aria-label="Anterior">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -117,6 +132,7 @@ import { Image } from 'astro:assets';
         </button>
 
         <div class="carousel-grid">
+          <!-- Tarjeta 1 -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -130,6 +146,7 @@ import { Image } from 'astro:assets';
             <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
+          <!-- Tarjeta 2 -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -143,6 +160,7 @@ import { Image } from 'astro:assets';
             <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
+          <!-- Tarjeta 3 -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -157,6 +175,7 @@ import { Image } from 'astro:assets';
           </div>
         </div>
 
+        <!-- Flecha Derecha -->
         <button class="carousel-arrow right-arrow" aria-label="Siguiente">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -167,6 +186,7 @@ import { Image } from 'astro:assets';
 
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-content">
       <p>© 2026 Mi Ruta Estacional. Todos los derechos reservados.</p>
@@ -209,7 +229,7 @@ import { Image } from 'astro:assets';
         userAvatarEl.style.justifyContent = 'center';
         userAvatarEl.style.color = '#FFFFFF';
         userAvatarEl.style.fontWeight = 'bold';
-        userAvatarEl.style.fontSize = '2rem';
+        userAvatarEl.style.fontSize = '1.8rem'; // Reducido levemente para que se adapte al círculo más pequeño
       }
 
       if (userRelationEl) {
@@ -255,9 +275,7 @@ import { Image } from 'astro:assets';
 </script>
 
 <style>
-  /* --- CORRECCIÓN DE APILAMIENTO GLOBAL (Z-INDEX) --- 
-     Forzamos a que el menú del Layout esté por encima de la página al hacer scroll
-  */
+  /* --- CORRECCIÓN DE APILAMIENTO GLOBAL (Z-INDEX) --- */
   :global(header), 
   :global(.nav), 
   :global(.navbar), 
@@ -270,13 +288,12 @@ import { Image } from 'astro:assets';
   .perfil-page {
     max-width: 1300px;
     margin: 0 auto;
-    /* Separación superior para que el navbar estático del layout no tape la cabecera */
     padding: 120px 5% 0 5%; 
     display: flex;
     flex-direction: column;
     gap: 40px;
     position: relative;
-    z-index: 1; /* Pasa de forma segura por debajo de la barra de navegación */
+    z-index: 1;
   }
 
   /* --- CABECERA DE PERFIL ESTÁTICA NATURAL --- */
@@ -290,6 +307,7 @@ import { Image } from 'astro:assets';
     position: relative;
     float: none; 
     clear: both;
+    gap: 30px;
   }
 
   .header-left {
@@ -321,15 +339,16 @@ import { Image } from 'astro:assets';
   .profile-card {
     display: flex;
     align-items: center;
-    gap: 20px;
-    background: #ffffff;
-    padding: 15px 25px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
-    border: 1px solid #f3f4f6;
+    gap: 20px; /* Reducido para mayor compacidad */
+    background: transparent; 
+    padding: 15px 0;
+    border-radius: 0;
+    box-shadow: none; 
+    border: none; 
     flex-shrink: 0;
   }
 
+  /* CÍRCULO AZUL REDUCIDO (Antes 120px, ahora 90px) */
   .avatar-circle {
     width: 90px;
     height: 90px;
@@ -338,20 +357,58 @@ import { Image } from 'astro:assets';
     flex-shrink: 0;
   }
 
+  /* Contenedor de información */
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  /* TEXTO DEL NOMBRE REDUCIDO (Antes 1.6rem, ahora 1.25rem) */
   .profile-info h3 {
     font-size: 1.25rem;
     font-weight: 700;
     color: #7695c5;
-    margin: 0 0 4px 0;
+    margin: 0;
     word-break: break-all;
     max-width: 250px;
   }
 
+  /* TEXTOS SECUNDARIOS REDUCIDOS (Antes 1.05rem, ahora 0.95rem) */
   .profile-info p {
     margin: 0;
     font-size: 0.95rem;
     color: #888;
     line-height: 1.4;
+  }
+
+  .profile-info .info-relation {
+    margin-top: 2px;
+  }
+
+  /* Estilo del Botón de Alumnos proporcional */
+  .btn-students-list {
+    border: none;
+    padding: 8px 0;
+    width: 140px; /* Ancho adaptado al nuevo tamaño de texto */
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #7695c5;
+    margin-top: 10px; /* Separación reducida proporcionalmente */
+    transition: transform 0.1s ease, background-color 0.2s ease;
+  }
+
+  .btn-students-list:hover {
+    transform: scale(1.03);
+    background-color: #6584b4;
   }
 
   /* --- SECCIONES Y BANNERS --- */
@@ -621,6 +678,10 @@ import { Image } from 'astro:assets';
     .profile-card {
       flex-direction: column;
       text-align: center;
+      gap: 15px;
+    }
+    .profile-info {
+      align-items: center;
     }
     .carousel-grid {
       flex-direction: column;

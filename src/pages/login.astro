@@ -130,7 +130,7 @@ import ninoImg from '../assets/niño.png';
         await signInWithEmailAndPassword(auth, email, password);
         
         // Redirección limpia reemplazando el historial
-        window.location.replace('/mi-perfil-familiar'); 
+        window.location.replace('/mi-perfil-pedagogico'); 
       } catch (error: any) {
         console.error("Error de credenciales:", error.code);
         if (error.code === 'auth/invalid-credential') {
