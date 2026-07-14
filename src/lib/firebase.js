@@ -1,23 +1,19 @@
 // src/lib/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth"; // IMPORTANTE: Importamos la autenticación
 
-// Configuración utilizando las variables de entorno de Astro
 const firebaseConfig = {
-  apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
-  authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.PUBLIC_FIREBASE_APP_ID
+  apiKey: "AIzaSyBHIWh8bPpoPTjgesqw2_M3oFsUzcm8YVE",
+  authDomain: "mi-ruta-estacional.firebaseapp.com",
+  projectId: "mi-ruta-estacional",
+  storageBucket: "mi-ruta-estacional.firebasestorage.app",
+  messagingSenderId: "740049235839",
+  appId: "1:740049235839:web:90ceb57b53a80cbb4d344a",
+  measurementId: "G-Q6QHHJJF15"
 };
 
-// Inicializar la App de Firebase
+// 1. Inicializamos la app con tus llaves hardcodeadas
 const app = initializeApp(firebaseConfig);
 
-// Exportar los servicios que usaremos
+// 2. EXTRAEMOS Y EXPORTAMOS 'auth' PARA QUE EL LOGIN LO PUEDA USAR
 export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);

@@ -1,18 +1,18 @@
 ---
-// src/pages/login.astro
+// src/pages/registro.astro
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import marcaWebLogo from '../assets/marcaweb.png';
 import ninoImg from '../assets/niño.png';
 ---
 
-<Layout title="Iniciar Sesión - Mi Ruta Estacional">
+<Layout title="Registrate - Mi Ruta Estacional">
   <main class="login-page">
     
-    <!-- Contenedor de contenido centralizado (Ampliado de max-1200px a max-1400px) -->
+    <!-- Contenedor de contenido centralizado (Ajustado para el formulario doble) -->
     <div class="login-main-container">
       
-      <!-- Columna Izquierda: Tarjeta de Login (Más ancha y espaciosa) -->
+      <!-- Columna Izquierda: Tarjeta de Registro (Bloqueada para que no se achique) -->
       <div class="login-card-wrapper">
         <div class="login-card">
           
@@ -23,67 +23,137 @@ import ninoImg from '../assets/niño.png';
               alt="Mi Ruta Estacional Logo" 
               class="card-logo"
             />
-            <h2 class="card-title">Bienvenida a tu espacio digital</h2>
+            <h2 class="card-title">Regístrate</h2>
             <p class="card-subtitle">
-              Ingresa tus datos para acceder a las planificaciones y fichas descargables.
+              Crea tu cuenta para comenzar a planificar y descargar todo el material de tu ruta estacional.
             </p>
           </div>
 
-          <!-- Formulario de Entrada (Campos e íconos ligeramente más grandes) -->
-          <form id="loginForm" class="login-form" onsubmit="event.preventDefault();">
+          <!-- Formulario de Registro en Dos Columnas -->
+          <form id="registerForm" class="login-form">
             
-            <!-- Campo Correo -->
-            <div class="input-group">
+            <!-- Fila Especial: Rol "Educadora" (Ocupa el ancho completo) -->
+            <div class="input-group full-width">
               <span class="input-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
                 </svg>
               </span>
               <input 
-                type="email" 
-                id="email" 
-                required
-                placeholder="fernanda.sepulveda@gmail.com" 
-                class="login-input"
+                type="text" 
+                id="role" 
+                value="Educadora" 
+                readonly
+                class="login-input readonly-input"
               />
-            </div>
-
-            <!-- Campo Contraseña -->
-            <div class="input-group">
-              <span class="input-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              <span class="info-icon" title="Tu cuenta se registrará bajo el rol de Educadora">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
               </span>
+            </div>
+
+            <!-- Contenedor Grid para Dos Columnas -->
+            <div class="form-grid">
+              
+              <!-- Columna Izquierda -->
+              <div class="grid-column">
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    id="fullName" 
+                    required 
+                    placeholder="Nombre completo *" 
+                    class="login-input"
+                  />
+                </div>
+
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    id="childName" 
+                    placeholder="Nombre del Párvulo (Opcional)" 
+                    class="login-input"
+                  />
+                </div>
+
+                <div class="input-group">
+                  <input 
+                    type="email" 
+                    id="email" 
+                    required 
+                    placeholder="Correo electrónico *" 
+                    class="login-input"
+                  />
+                </div>
+              </div>
+
+              <!-- Columna Derecha -->
+              <div class="grid-column">
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    id="institution" 
+                    required 
+                    placeholder="Institución o Escuela *" 
+                    class="login-input"
+                  />
+                </div>
+
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    id="educationLevel" 
+                    required 
+                    placeholder="Nivel educativo *" 
+                    class="login-input"
+                  />
+                </div>
+
+                <div class="input-group">
+                  <input 
+                    type="email" 
+                    id="confirmEmail" 
+                    required 
+                    placeholder="Confirmar correo electrónico *" 
+                    class="login-input"
+                  />
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Fila: Contraseña (Ancho completo) -->
+            <div class="input-group full-width">
               <input 
                 type="password" 
                 id="password" 
-                required
-                placeholder="*************" 
+                required 
+                placeholder="Contraseña *" 
                 class="login-input"
               />
             </div>
 
-            <!-- Botón Ingresar -->
+            <!-- Botón Registrarse -->
             <button type="submit" class="btn-submit">
-              Iniciar Sesión
+              Regístrate
             </button>
           </form>
 
           <!-- Enlaces de navegación interna -->
           <div class="card-navigation">
             <p class="register-hint">
-              ¿Aún no tienes cuenta? <a href="/registro" class="link-blue">Regístrate aquí.</a>
+              ¿Ya tienes una cuenta? <a href="/login" class="link-blue">Inicia sesión aquí.</a>
             </p>
-            <a href="/recuperar" class="link-forgot">¿Olvidaste tu contraseña?</a>
           </div>
 
         </div>
       </div>
 
-      <!-- Columna Derecha: Ilustración del Párvulo (Agrandada) -->
+      <!-- Columna Derecha: Ilustración del Párvulo (Mismo tamaño gigante) -->
       <div class="login-image-wrapper">
         <Image 
           src={ninoImg} 
@@ -95,7 +165,7 @@ import ninoImg from '../assets/niño.png';
 
     </div>
 
-    <!-- Footer de la página de acceso -->
+    <!-- Footer de la página -->
     <footer class="login-footer">
       <div class="footer-container">
         <span class="footer-copy">© 2026 Mi Ruta Estacional. Todos los derechos reservados.</span>
@@ -110,33 +180,38 @@ import ninoImg from '../assets/niño.png';
   </main>
 </Layout>
 
-
 <script>
   import { auth } from '../lib/firebase';
-  import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
+  import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const email = (document.getElementById('email') as HTMLInputElement).value;
+      const confirmEmail = (document.getElementById('confirmEmail') as HTMLInputElement).value;
       const password = (document.getElementById('password') as HTMLInputElement).value;
 
+      if (email !== confirmEmail) {
+        alert('Los correos electrónicos ingresados no coinciden.');
+        return;
+      }
+
       try {
-        // Forzar persistencia local antes de firmar
-        await setPersistence(auth, browserLocalPersistence);
-        await signInWithEmailAndPassword(auth, email, password);
-        
-        // Redirección limpia reemplazando el historial
-        window.location.replace('/mi-perfil-familiar'); 
+        // Registro básico con Firebase Auth
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert('Cuenta creada exitosamente.');
+        window.location.href = '/'; 
       } catch (error: any) {
-        console.error("Error de credenciales:", error.code);
-        if (error.code === 'auth/invalid-credential') {
-          alert('Correo o contraseña incorrectos. Por favor, verifica tus datos.');
+        console.error("Error al registrar usuario:", error.code);
+        if (error.code === 'auth/email-already-in-use') {
+          alert('Este correo electrónico ya se encuentra registrado.');
+        } else if (error.code === 'auth/weak-password') {
+          alert('La contraseña es muy débil. Intenta con al menos 6 caracteres.');
         } else {
-          alert('Ocurrió un inconveniente al validar tus datos.');
+          alert('Ocurrió un problema al crear tu cuenta.');
         }
       }
     });
@@ -164,17 +239,13 @@ import ninoImg from '../assets/niño.png';
     width: 100%;
     padding: 40px 5%;
     margin: auto 0;
-    gap: 80px; 
+    gap: 60px; 
   }
 
-  /* --- Tarjeta del Formulario (BLOQUEADO PARA EVITAR QUE SE ACHIQUE) --- */
+  /* --- Tarjeta del Registro (Bloqueada en ancho óptimo para 2 columnas) --- */
   .login-card-wrapper {
-    /* 
-      flex-grow: 0 (No crece de más)
-      flex-shrink: 0 (¡NUNCA se encoge para dar espacio a la imagen!)
-      flex-basis: 500px (Su tamaño base inicial e ideal siempre será 500px)
-    */
-    flex: 0 0 500px; 
+    /* flex-basis sube a 650px para dar espacio perfecto a los inputs paralelos */
+    flex: 0 0 650px; 
     display: flex;
     justify-content: center;
     z-index: 5; 
@@ -183,7 +254,7 @@ import ninoImg from '../assets/niño.png';
   .login-card {
     background-color: #FFFFFF;
     border-radius: 40px;
-    padding: 65px 55px;
+    padding: 55px 50px;
     width: 100%;
     box-shadow: 0 12px 50px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(0, 0, 0, 0.015);
@@ -194,17 +265,17 @@ import ninoImg from '../assets/niño.png';
 
   .card-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   .card-logo {
-    height: 58px;
+    height: 52px;
     width: auto;
     object-fit: contain;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
 
   .card-title {
@@ -217,24 +288,38 @@ import ninoImg from '../assets/niño.png';
 
   .card-subtitle {
     color: var(--color-text-light, #a0a0a0);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     line-height: 1.5;
-    max-width: 330px;
+    max-width: 420px;
     margin: 0;
   }
 
-  /* --- Inputs Estilo Underline --- */
+  /* --- Formulario y Diseño de Columnas (Grid) --- */
   .login-form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
   }
 
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px; /* Separación horizontal entre columnas */
+    width: 100%;
+  }
+
+  .grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Separación vertical interna */
+  }
+
+  /* Estructura del input con borde inferior */
   .input-group {
     position: relative;
     border-bottom: 2px solid #E2E8F0;
-    padding: 12px 0;
+    padding: 10px 0;
     display: flex;
     align-items: center;
     transition: border-color 0.2s;
@@ -244,6 +329,11 @@ import ninoImg from '../assets/niño.png';
     border-color: var(--color-primary-blue, #7191ca);
   }
 
+  .full-width {
+    grid-column: span 2;
+  }
+
+  /* Estilos específicos para el campo estático de Rol (Educadora) */
   .input-icon {
     color: #FCA311;
     display: flex;
@@ -256,14 +346,33 @@ import ninoImg from '../assets/niño.png';
     height: 20px;
   }
 
+  .info-icon {
+    color: #CBD5E1;
+    display: flex;
+    align-items: center;
+    cursor: help;
+  }
+
+  .info-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .readonly-input {
+    color: var(--color-primary-blue, #7191ca) !important;
+    font-weight: 600;
+    cursor: default;
+  }
+
+  /* Inputs limpios */
   .login-input {
     width: 100%;
     border: none;
     outline: none;
     background: transparent;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     color: var(--color-text-dark, #333333);
-    padding: 4px 0;
+    padding: 2px 0;
   }
 
   .login-input::placeholder {
@@ -296,11 +405,8 @@ import ninoImg from '../assets/niño.png';
 
   /* --- Navegación Secundaria de la Tarjeta --- */
   .card-navigation {
-    margin-top: 35px;
+    margin-top: 30px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
   }
 
   .register-hint {
@@ -319,24 +425,8 @@ import ninoImg from '../assets/niño.png';
     text-decoration: underline;
   }
 
-  .link-forgot {
-    font-size: 0.8rem;
-    color: #CBD5E1;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .link-forgot:hover {
-    color: #94A3B8;
-    text-decoration: underline;
-  }
-
-  /* --- Columna de Ilustración Flexible --- */
+  /* --- Columna de Ilustración Flexible (Igual que en login) --- */
   .login-image-wrapper {
-    /* 
-      flex-grow: 1 (Toma todo el espacio restante que el formulario no use)
-      flex-shrink: 1 (Si la pantalla se reduce, la imagen será la que se achique)
-    */
     flex: 1; 
     display: flex;
     justify-content: center;
@@ -399,7 +489,29 @@ import ninoImg from '../assets/niño.png';
   }
 
   /* --- Adaptabilidad Móvil --- */
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
+    .login-main-container {
+      gap: 40px;
+    }
+    .login-card-wrapper {
+      flex: 0 0 580px; /* Ajuste sutil para pantallas intermedias */
+    }
+    .login-illustration {
+      transform: scale(1.2) translateX(0);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .form-grid {
+      grid-template-columns: 1fr; /* Colapsa las 2 columnas a 1 sola si la pantalla se reduce de ancho */
+      gap: 25px;
+    }
+    .full-width {
+      grid-column: span 1;
+    }
+    .login-card-wrapper {
+      flex: 0 0 460px;
+    }
     .login-illustration {
       transform: scale(1.1) translateX(0);
     }
@@ -414,10 +526,9 @@ import ninoImg from '../assets/niño.png';
     }
 
     .login-card-wrapper {
-      /* En móviles quitamos la restricción rígida para evitar desbordes de pantalla */
       flex: 1 1 auto; 
       width: 100%;
-      max-width: 500px;
+      max-width: 600px;
     }
 
     .login-image-wrapper {

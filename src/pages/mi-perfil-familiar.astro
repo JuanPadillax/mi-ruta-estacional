@@ -1,0 +1,526 @@
+---
+// src/pages/mi-perfil-familiar.astro
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+---
+
+<Layout title="Mi Perfil Familiar - Mi Ruta Estacional">
+  <main class="perfil-page">
+    
+    <!-- Sección de Cabecera de Perfil -->
+    <header class="perfil-header">
+      <div class="header-left">
+        <h1 class="page-title">Mi Perfil Familiar</h1>
+        <h2 class="page-subtitle">Acompañando la Ruta Estacional</h2>
+        <p class="page-description">
+          Tu espacio personal para revisar las actividades sugeridas para el trimestre, explorar ideas divertidas para realizar juntos en casa y llevar un registro hermoso del crecimiento y aprendizaje de tu hijo.
+        </p>
+      </div>
+      
+      <div class="header-right">
+        <!-- Ocultamos la tarjeta inicialmente hasta comprobar el login con Firebase -->
+        <div class="profile-card" id="profileCard" style="display: none;">
+          <div class="avatar-circle" id="userAvatar"></div>
+          <div class="profile-info">
+            <h3 id="userName">Cargando...</h3>
+            <p class="info-relation" id="userRelation">Relación: Cargando...</p>
+            <p class="info-level" id="userLevel">Nivel: Cargando...</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECCIÓN 1: Mis Actividades Guardadas -->
+    <section class="perfil-section">
+      <div class="section-banner-blue">
+        <div class="banner-content">
+          <span class="bookmark-icon">🔖</span>
+          <div class="banner-text">
+            <h3>Mis Actividades Guardadas</h3>
+            <p>1 guardadas</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="saved-activities-container">
+        <!-- Tarjeta de Actividad Guardada -->
+        <div class="activity-card-wrapper">
+          <div class="activity-card">
+            <div class="card-image-wrapper">
+              <!-- Placeholder gris simulando la imagen de niños trabajando -->
+              <div class="card-image-placeholder kids-craft-bg"></div>
+            </div>
+            <div class="card-info">
+              <h3 class="text-orange-title">¡Sigue la caída!</h3>
+              <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+            </div>
+          </div>
+          <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+          <span class="completion-date">Fecha de realización: 00/00/0000</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: Explorar Más -->
+    <section class="perfil-section">
+      <div class="section-banner-blue">
+        <div class="banner-content">
+          <h3>Explorar Más</h3>
+        </div>
+      </div>
+
+      <!-- Carrusel / Slider de Exploración -->
+      <div class="carousel-container">
+        <!-- Flecha Izquierda -->
+        <button class="carousel-arrow left-arrow" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="carousel-grid">
+          <!-- Tarjeta 1 -->
+          <div class="activity-card-wrapper">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder kids-craft-bg"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Sigue la caída!</h3>
+                <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+              </div>
+            </div>
+            <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+          </div>
+
+          <!-- Tarjeta 2 -->
+          <div class="activity-card-wrapper">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder kids-craft-bg"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Sigue la caída!</h3>
+                <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+              </div>
+            </div>
+            <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+          </div>
+
+          <!-- Tarjeta 3 -->
+          <div class="activity-card-wrapper">
+            <div class="activity-card">
+              <div class="card-image-wrapper">
+                <div class="card-image-placeholder"></div>
+              </div>
+              <div class="card-info">
+                <h3 class="text-orange-title">¡Sigue la caída!</h3>
+                <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+              </div>
+            </div>
+            <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+          </div>
+        </div>
+
+        <!-- Flecha Derecha -->
+        <button class="carousel-arrow right-arrow" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 Mi Ruta Estacional. Todos los derechos reservados.</p>
+      <p class="footer-links">Soporte Educadoras | Términos de Uso</p>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  import { auth } from '../lib/firebase';
+  import { onAuthStateChanged } from 'firebase/auth';
+
+  const profileCard = document.getElementById('profileCard');
+  const userNameEl = document.getElementById('userName');
+  const userRelationEl = document.getElementById('userRelation');
+  const userLevelEl = document.getElementById('userLevel');
+  const userAvatarEl = document.getElementById('userAvatar');
+
+  // Bandera para evitar expulsiones prematuras mientras Firebase carga
+  let authInitialized = false;
+
+  onAuthStateChanged(auth, (user) => {
+    authInitialized = true;
+
+    if (user) {
+      if (profileCard) {
+        profileCard.style.display = 'flex';
+      }
+
+      const name = user.displayName || user.email?.split('@')[0] || "Usuario";
+      
+      if (userNameEl) {
+        userNameEl.textContent = name;
+      }
+
+      if (userAvatarEl) {
+        const initial = name.charAt(0).toUpperCase();
+        userAvatarEl.textContent = initial;
+        userAvatarEl.style.display = 'flex';
+        userAvatarEl.style.alignItems = 'center';
+        userAvatarEl.style.justifyContent = 'center';
+        userAvatarEl.style.color = '#FFFFFF';
+        userAvatarEl.style.fontWeight = 'bold';
+        userAvatarEl.style.fontSize = '2rem';
+      }
+
+      if (userRelationEl) {
+        userRelationEl.textContent = "Apoderado Activo";
+      }
+      if (userLevelEl) {
+        userLevelEl.textContent = "Acceso Familiar";
+      }
+
+    } else {
+      // Solo redirige si ya se procesó el estado inicial de Firebase y efectivamente no hay sesión
+      if (authInitialized) {
+        console.log('Usuario no autenticado. Redirigiendo al Login...');
+        window.location.replace('/login');
+      }
+    }
+  });
+</script>
+
+<style>
+  .perfil-page {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 5% 0 5%;
+  }
+
+  /* --- CABECERA DE PERFIL --- */
+  .perfil-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    gap: 40px;
+  }
+
+  .header-left {
+    max-width: 650px;
+  }
+
+  .page-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #7695c5;
+    margin: 0 0 5px 0;
+  }
+
+  .page-subtitle {
+    font-size: 2.1rem;
+    font-weight: 400;
+    color: #a4b6d4;
+    margin: 0 0 20px 0;
+  }
+
+  .page-description {
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Ficha de Perfil del Usuario (Derecha) */
+  .profile-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    padding: 15px;
+  }
+
+  .avatar-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #7695c5;
+    flex-shrink: 0;
+  }
+
+  .profile-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #7695c5;
+    margin: 0 0 4px 0;
+  }
+
+  .profile-info p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.4;
+  }
+
+  /* --- BANNERS AZULES --- */
+  .perfil-section {
+    margin-bottom: 60px;
+  }
+
+  .section-banner-blue {
+    background-color: #7695c5;
+    border-radius: 20px;
+    padding: 20px 35px;
+    color: white;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(118, 149, 197, 0.15);
+  }
+
+  .banner-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .banner-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .banner-text p {
+    margin: 3px 0 0 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  .bookmark-icon {
+    font-size: 1.8rem;
+  }
+
+  /* --- TARJETAS Y CONTENEDORES --- */
+  .saved-activities-container {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 25px;
+  }
+
+  .activity-card-wrapper {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .activity-card {
+    background: #ffffff;
+    border-radius: 28px;
+    width: 100%;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+    border: 1px solid #f2f2f2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+  }
+
+  .card-image-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #e2e8f0;
+  }
+
+  /* Estilizado simulando la foto de niños de tu diseño original */
+  .kids-craft-bg {
+    background-image: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-info {
+    padding: 20px 15px;
+    text-align: center;
+  }
+
+  .card-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .text-orange-title {
+    color: #f07f3e;
+  }
+
+  .card-info p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Botón Ver */
+  .btn-view {
+    border: none;
+    padding: 11px 0;
+    width: 140px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: transform 0.1s ease;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .btn-view:hover {
+    transform: scale(1.05);
+  }
+
+  .bg-orange-btn {
+    background-color: #f07f3e;
+    box-shadow: 0 4px 0px #cf6517;
+  }
+
+  .completion-date {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* --- SECCIÓN DE CARRUSEL (EXPLORAR MÁS) --- */
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+  }
+
+  .carousel-grid {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    gap: 30px;
+  }
+
+  /* Flechas de Navegación */
+  .carousel-arrow {
+    background: none;
+    border: none;
+    color: #7695c5;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .carousel-arrow:hover {
+    transform: scale(1.2);
+    color: #5575a5;
+  }
+
+  .carousel-arrow svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* --- FOOTER COMPLETO --- */
+  .site-footer {
+    background-color: #f39237;
+    color: white;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 100px;
+    padding: 22px 0;
+    box-sizing: border-box;
+  }
+
+  .footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  .footer-links {
+    margin: 0;
+  }
+
+  /* --- MEDIA QUERIES --- */
+  @media (max-width: 1024px) {
+    .carousel-grid {
+      gap: 15px;
+    }
+    .carousel-grid .activity-card-wrapper:last-child {
+      display: none; /* Oculta la tercera tarjeta en tablets medianas */
+    }
+  }
+
+  @media (max-width: 850px) {
+    .perfil-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 25px;
+    }
+    .profile-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .carousel-grid {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .carousel-grid .activity-card-wrapper:last-child {
+      display: flex;
+    }
+    .saved-activities-container {
+      justify-content: center;
+      padding-left: 0;
+    }
+    .carousel-arrow {
+      display: none; /* Oculta las flechas en versión vertical móvil */
+    }
+    .footer-content {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+</style>
