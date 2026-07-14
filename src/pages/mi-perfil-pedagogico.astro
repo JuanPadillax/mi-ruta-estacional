@@ -7,7 +7,6 @@ import { Image } from 'astro:assets';
 <Layout title="Mi Perfil Pedagógico - Mi Ruta Estacional">
   <main class="perfil-page">
     
-    <!-- Sección de Cabecera de Perfil -->
     <header class="perfil-header">
       <div class="header-left">
         <h1 class="page-title">Mi Perfil Pedagógico</h1>
@@ -18,11 +17,10 @@ import { Image } from 'astro:assets';
       </div>
       
       <div class="header-right">
-        <!-- Ocultamos la tarjeta inicialmente hasta comprobar el login con Firebase -->
         <div class="profile-card" id="profileCard" style="display: none;">
           <div class="avatar-circle" id="userAvatar"></div>
           <div class="profile-info">
-            <h3 id="userName">Alejandra Cáceres</h3>
+            <h3 id="userName">Cargando...</h3>
             <p class="info-relation" id="userRelation">Educadora de Párvulos</p>
             <p class="info-level" id="userLevel">Nivel Medio Mayor</p>
           </div>
@@ -30,7 +28,6 @@ import { Image } from 'astro:assets';
       </div>
     </header>
 
-    <!-- SECCIÓN 1: Mis Actividades Guardadas -->
     <section class="perfil-section">
       <div class="section-banner-blue">
         <div class="banner-content">
@@ -43,7 +40,6 @@ import { Image } from 'astro:assets';
       </div>
 
       <div class="saved-activities-container">
-        <!-- Tarjeta de Actividad Guardada -->
         <div class="activity-card-wrapper">
           <div class="activity-card">
             <div class="card-image-wrapper">
@@ -55,12 +51,20 @@ import { Image } from 'astro:assets';
             </div>
           </div>
           <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
-          <span class="completion-date">Fecha de realización: 00/00/0000</span>
+          
+          <div class="date-input-container">
+            <label for="completionDate" class="date-label">Fecha de realización:</label>
+            <input 
+              type="date" 
+              id="completionDate" 
+              class="editable-date-input" 
+              value="2026-07-13" 
+            />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 2: Mis Aportes a la Comunidad -->
     <section class="perfil-section">
       <div class="section-banner-blue">
         <div class="banner-content">
@@ -73,7 +77,6 @@ import { Image } from 'astro:assets';
       </div>
 
       <div class="saved-activities-container">
-        <!-- Tarjeta de Actividad Aportada -->
         <div class="activity-card-wrapper">
           <div class="activity-card">
             <div class="card-image-wrapper">
@@ -85,12 +88,20 @@ import { Image } from 'astro:assets';
             </div>
           </div>
           <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
-          <span class="completion-date">Fecha de realización: 00/00/0000</span>
+          
+          <div class="date-input-container">
+            <label for="uploadDate" class="date-label">Fecha de subida:</label>
+            <input 
+              type="date" 
+              id="uploadDate" 
+              class="editable-date-input" 
+              value="2026-07-13" 
+            />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 3: Explorar Más -->
     <section class="perfil-section">
       <div class="section-banner-blue">
         <div class="banner-content">
@@ -98,9 +109,7 @@ import { Image } from 'astro:assets';
         </div>
       </div>
 
-      <!-- Carrusel / Slider de Exploración -->
       <div class="carousel-container">
-        <!-- Flecha Izquierda -->
         <button class="carousel-arrow left-arrow" aria-label="Anterior">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,7 +117,6 @@ import { Image } from 'astro:assets';
         </button>
 
         <div class="carousel-grid">
-          <!-- Tarjeta 1 -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -122,7 +130,6 @@ import { Image } from 'astro:assets';
             <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
-          <!-- Tarjeta 2 -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -136,7 +143,6 @@ import { Image } from 'astro:assets';
             <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
           </div>
 
-          <!-- Tarjeta 3 -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -151,7 +157,6 @@ import { Image } from 'astro:assets';
           </div>
         </div>
 
-        <!-- Flecha Derecha -->
         <button class="carousel-arrow right-arrow" aria-label="Siguiente">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -162,7 +167,6 @@ import { Image } from 'astro:assets';
 
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-content">
       <p>© 2026 Mi Ruta Estacional. Todos los derechos reservados.</p>
@@ -208,7 +212,6 @@ import { Image } from 'astro:assets';
         userAvatarEl.style.fontSize = '2rem';
       }
 
-      // Información específica del Rol Pedagógico
       if (userRelationEl) {
         userRelationEl.textContent = "Educadora de Párvulos";
       }
@@ -223,22 +226,70 @@ import { Image } from 'astro:assets';
       }
     }
   });
+
+  // Persistir la fecha de realización de actividades guardadas
+  const dateInput = document.getElementById('completionDate') as HTMLInputElement;
+  if (dateInput) {
+    const savedDate = localStorage.getItem('pedagogicoCompletionDate');
+    if (savedDate) {
+      dateInput.value = savedDate;
+    }
+    dateInput.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      localStorage.setItem('pedagogicoCompletionDate', target.value);
+    });
+  }
+
+  // Persistir la fecha de subida de aportes comunitarios
+  const uploadInput = document.getElementById('uploadDate') as HTMLInputElement;
+  if (uploadInput) {
+    const savedUploadDate = localStorage.getItem('pedagogicoUploadDate');
+    if (savedUploadDate) {
+      uploadInput.value = savedUploadDate;
+    }
+    uploadInput.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      localStorage.setItem('pedagogicoUploadDate', target.value);
+    });
+  }
 </script>
 
 <style>
+  /* --- CORRECCIÓN DE APILAMIENTO GLOBAL (Z-INDEX) --- 
+     Forzamos a que el menú del Layout esté por encima de la página al hacer scroll
+  */
+  :global(header), 
+  :global(.nav), 
+  :global(.navbar), 
+  :global(nav) {
+    z-index: 9999 !important;
+    background-color: #FFFFFF !important;
+  }
+
+  /* --- ESTILOS DE PÁGINA TOTALMENTE ESTÁTICOS --- */
   .perfil-page {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 60px 5% 0 5%;
+    /* Separación superior para que el navbar estático del layout no tape la cabecera */
+    padding: 120px 5% 0 5%; 
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    z-index: 1; /* Pasa de forma segura por debajo de la barra de navegación */
   }
 
-  /* --- CABECERA DE PERFIL --- */
+  /* --- CABECERA DE PERFIL ESTÁTICA NATURAL --- */
   .perfil-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
-    gap: 40px;
+    padding: 20px 0;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    float: none; 
+    clear: both;
   }
 
   .header-left {
@@ -256,7 +307,7 @@ import { Image } from 'astro:assets';
     font-size: 2.1rem;
     font-weight: 400;
     color: #a4b6d4;
-    margin: 0 0 20px 0;
+    margin: 0 0 15px 0;
   }
 
   .page-description {
@@ -266,13 +317,17 @@ import { Image } from 'astro:assets';
     margin: 0;
   }
 
-  /* Ficha de Perfil del Usuario (Derecha) */
+  /* Ficha de Perfil del Usuario */
   .profile-card {
     display: flex;
     align-items: center;
     gap: 20px;
     background: #ffffff;
-    padding: 15px;
+    padding: 15px 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f3f4f6;
+    flex-shrink: 0;
   }
 
   .avatar-circle {
@@ -288,6 +343,8 @@ import { Image } from 'astro:assets';
     font-weight: 700;
     color: #7695c5;
     margin: 0 0 4px 0;
+    word-break: break-all;
+    max-width: 250px;
   }
 
   .profile-info p {
@@ -297,9 +354,11 @@ import { Image } from 'astro:assets';
     line-height: 1.4;
   }
 
-  /* --- BANNERS AZULES --- */
+  /* --- SECCIONES Y BANNERS --- */
   .perfil-section {
-    margin-bottom: 60px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .section-banner-blue {
@@ -307,7 +366,7 @@ import { Image } from 'astro:assets';
     border-radius: 20px;
     padding: 20px 35px;
     color: white;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     box-shadow: 0 4px 15px rgba(118, 149, 197, 0.15);
   }
 
@@ -333,11 +392,13 @@ import { Image } from 'astro:assets';
     font-size: 1.8rem;
   }
 
-  /* --- TARJETAS Y CONTENEDORES --- */
+  /* --- CONTENEDORES DE TARJETAS --- */
   .saved-activities-container {
     display: flex;
     justify-content: flex-start;
-    padding-left: 25px;
+    padding-left: 10px;
+    position: relative;
+    z-index: 1;
   }
 
   .activity-card-wrapper {
@@ -346,6 +407,7 @@ import { Image } from 'astro:assets';
     flex-direction: column;
     align-items: center;
     position: relative;
+    z-index: 1;
   }
 
   .activity-card {
@@ -410,7 +472,7 @@ import { Image } from 'astro:assets';
     font-size: 0.95rem;
     color: white;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 20px;
     transition: transform 0.1s ease;
     text-align: center;
     text-decoration: none;
@@ -430,20 +492,49 @@ import { Image } from 'astro:assets';
     box-shadow: 0 4px 0px #cf6517;
   }
 
-  .completion-date {
+  /* --- FECHAS INTERACTIVAS EDITABLES --- */
+  .date-input-container {
     margin-top: 15px;
-    font-size: 0.8rem;
-    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .date-label {
+    font-size: 0.78rem;
+    color: #888;
     font-style: italic;
   }
 
-  /* --- SECCIÓN DE CARRUSEL --- */
+  .editable-date-input {
+    font-family: inherit;
+    font-size: 0.82rem;
+    color: #666;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: #fafafa;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .editable-date-input:focus {
+    border-color: #7695c5;
+    background: #ffffff;
+  }
+
+  /* --- CARRUSEL --- */
   .carousel-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
     position: relative;
+    width: 100%;
   }
 
   .carousel-grid {
@@ -479,7 +570,7 @@ import { Image } from 'astro:assets';
     height: 40px;
   }
 
-  /* --- FOOTER COMPLETO --- */
+  /* --- SITE FOOTER --- */
   .site-footer {
     background-color: #f39237;
     color: white;
@@ -508,7 +599,7 @@ import { Image } from 'astro:assets';
     margin: 0;
   }
 
-  /* --- RESPONSIVE --- */
+  /* --- RESPONSIVIDAD --- */
   @media (max-width: 1024px) {
     .carousel-grid {
       gap: 15px;
@@ -519,6 +610,9 @@ import { Image } from 'astro:assets';
   }
 
   @media (max-width: 850px) {
+    .perfil-page {
+      padding-top: 100px;
+    }
     .perfil-header {
       flex-direction: column;
       text-align: center;
