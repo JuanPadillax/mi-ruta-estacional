@@ -12,7 +12,6 @@ import ninoImg from '../assets/niño.png';
       Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio digital diseñado para potenciar el desarrollo integral mediante dinámicas y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico de nuestra fauna nativa.
     </p>
     <div class="button-container">
-      <!-- Cambiamos los <button> por enlaces <a> hacia sus respectivas rutas -->
       <a href="/login" class="btn btn-primary">Inicia Sesión</a>
       <a href="/registro" class="btn btn-secondary">Regístrate</a>
     </div>
@@ -32,101 +31,102 @@ import ninoImg from '../assets/niño.png';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 5%;
-    max-width: 1250px;
+    /* Aumentamos el padding superior (de 80px a 160px) para empujar toda la sección hacia abajo */
+    padding: 160px 5% 100px; 
+    max-width: 1400px;
     margin: 0 auto;
-    gap: 30px;
-    position: relative;
+    gap: 40px;
+    /* Altura mínima para que la sección respire y se centre verticalmente con el fondo */
+    min-height: 85vh; 
+    box-sizing: border-box;
   }
 
   .hero-content {
     flex: 1;
-    max-width: 580px; 
-    z-index: 2;
+    max-width: 680px; /* Un poco más de ancho para el texto */
   }
 
   .subtitle {
     display: block;
     color: var(--color-text-light);
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     font-style: italic;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .title {
     color: var(--color-primary-blue);
-    font-size: 3.2rem;
+    /* Tamaño optimizado para 2 líneas */
+    font-size: 3.2rem; 
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 25px;
-    letter-spacing: -4px;
+    margin-bottom: 30px;
+    letter-spacing: -2px;
   }
 
   .description {
     color: var(--color-text-dark);
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 35px;
+    line-height: 1.6;
+    margin-bottom: 45px;
   }
 
   .button-container {
     display: flex;
-    gap: 15px;
+    gap: 30px; /* Separación asegurada */
   }
 
-  /* Adaptamos las clases para que eliminen subrayados nativos de las etiquetas <a> */
   .btn {
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    padding: 10px 35px;
-    border-radius: 6px;
+    padding: 18px 45px;
+    border-radius: 8px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     cursor: pointer;
     border: none;
-    transition: opacity 0.2s;
+    transition: transform 0.2s;
   }
-  .btn:hover { opacity: 0.9; }
+  
+  .btn:hover { transform: scale(1.05); }
 
   .btn-primary {
     background-color: var(--color-primary-blue);
     color: white;
-    /* Sombra difuminada suave que coincide con el diseño de los botones inferiores */
-    box-shadow: 0 4px 14px rgba(118, 152, 208, 0.4);
+    box-shadow: 0 6px 20px rgba(118, 152, 208, 0.4);
   }
 
   .btn-secondary {
     background-color: transparent;
     color: var(--color-primary-blue);
-    border: 2px solid var(--color-primary-blue);
+    border: 3px solid var(--color-primary-blue);
   }
 
   .hero-image-wrapper {
-    flex: 1.2;
+    flex: 1;
     display: flex;
     justify-content: center; 
     align-items: center;
-    position: relative;
-    max-width: 650px;
   }
 
   .hero-img {
     width: 100%;
+    max-width: 600px;
     height: auto;
     object-fit: contain;
-    position: relative;
-    z-index: 2;
-    transform: scale(1.25);
-    transform-origin: center; 
+    /* Mantenemos el tamaño grande */
+    transform: scale(1.4); 
   }
 
-  @media (max-width: 900px) {
-    .hero { flex-direction: column; text-align: center; overflow: hidden; }
-    .hero-content { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
-    .title { font-size: 2.5rem; }
-    .hero-image-wrapper { max-width: 500px; margin-top: 40px; }
-    .hero-img { transform: scale(1); }
+  @media (max-width: 1024px) {
+    .hero { 
+      flex-direction: column; 
+      text-align: center; 
+      padding: 120px 5% 60px; /* Ajuste para tablets */
+    }
+    .hero-content { align-items: center; max-width: 100%; }
+    .title { font-size: 2.8rem; }
   }
 </style>
