@@ -2,18 +2,30 @@
 // src/components/ModalDescarga.astro
 ---
 
-<!-- 1. HTML DEL MODAL (Esto es lo que faltaba para que el script pudiera interactuar) -->
+<!-- 1. HTML DEL MODAL -->
 <div id="downloadModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-modal" aria-label="Cerrar modal">&times;</button>
     <h2 class="modal-title">Descargar material educativo</h2>
     <p class="modal-subtitle">
-      Selecciona el formato de tu preferencia para guardar e imprimir las fichas didácticas de esta actividad. Prepara tu material y dale continuidad a la experiencia en el aula o el hogar.
+      Selecciona el formato de tu preferencia para guardar e imprimir las fichas
+      didácticas de esta actividad. Prepara tu material y dale continuidad a la
+      experiencia en el aula o el hogar.
     </p>
-    
+
     <div class="modal-options-header">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7695c5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#7695c5"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
+        ></path>
       </svg>
       <span>Descargar como:</span>
     </div>
@@ -22,98 +34,124 @@
       <div class="format-card" data-format="png">
         <!-- Icono de imagen representado en un SVG limpio -->
         <svg width="45" height="45" viewBox="0 0 24 24" fill="#cbd5e1">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+          <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+          ></path>
         </svg>
         <span class="badge badge-png">PNG</span>
       </div>
       <div class="format-card" data-format="pdf">
         <!-- Icono de PDF representado en un SVG limpio -->
         <svg width="45" height="45" viewBox="0 0 24 24" fill="#f87171">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+          <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+          ></path>
         </svg>
         <span class="badge badge-pdf">PDF</span>
       </div>
     </div>
 
-    <button id="confirmDownload" class="btn-confirm-download" disabled>Descargar</button>
+    <button id="confirmDownload" class="btn-confirm-download" disabled
+      >Descargar</button
+    >
   </div>
 </div>
 
-<!-- 2. LÓGICA DE PROGRAMACIÓN (TypeScript compatible) -->
+<!-- 2. LÓGICA DE PROGRAMACIÓN (TypeScript y Firebase compatible) -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    
-    const modal = document.getElementById('downloadModal');
-    const closeBtn = document.querySelector('.close-modal');
-    const confirmBtn = document.getElementById('confirmDownload') as HTMLButtonElement | null;
-    const formatCards = document.querySelectorAll('.format-card');
-    
+  import { auth } from "../lib/firebase";
+  import { onAuthStateChanged } from "firebase/auth";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("downloadModal");
+    const closeBtn = document.querySelector(".close-modal");
+    const confirmBtn = document.getElementById(
+      "confirmDownload",
+    ) as HTMLButtonElement | null;
+    const formatCards = document.querySelectorAll(".format-card");
+
     let selectedFormat: string | null = null;
-    let currentPngFile: string | null = '';
-    let currentPdfFile: string | null = '';
+    let currentPngFile: string | null = "";
+    let currentPdfFile: string | null = "";
+    let userSessionActive = false;
 
     // Si los elementos críticos no se encuentran en la página, se evita ejecutar el script
     if (!modal || !closeBtn || !confirmBtn) return;
 
+    // Monitorear el estado de autenticación en tiempo real
+    onAuthStateChanged(auth, (user) => {
+      userSessionActive = !!user;
+    });
+
     // Escuchar el clic de los botones de descarga de cada lámina
-    document.querySelectorAll('.btn-download').forEach(button => {
-      button.addEventListener('click', () => {
-        currentPngFile = button.getAttribute('data-png');
-        currentPdfFile = button.getAttribute('data-pdf');
-        
-        modal.classList.add('active');
-        
+    document.querySelectorAll(".btn-download").forEach((button) => {
+      button.addEventListener("click", () => {
+        // Bloqueo inclusivo: si no está logueado, redirigir al login
+        if (!userSessionActive) {
+          alert(
+            "¡Hola! El material interactivo de esta sección es exclusivo para nuestra red de escuelas asociadas. Inicia sesión o regístrate con tus datos escolares.",
+          );
+          window.location.href = "/login";
+          return;
+        }
+
+        currentPngFile = button.getAttribute("data-png");
+        currentPdfFile = button.getAttribute("data-pdf");
+
+        modal.classList.add("active");
+
         selectedFormat = null;
-        formatCards.forEach(c => c.classList.remove('selected'));
+        formatCards.forEach((c) => c.classList.remove("selected"));
         confirmBtn.disabled = true;
       });
     });
 
     // Controlar la selección visual del formato de archivo (PNG o PDF)
-    formatCards.forEach(card => {
-      card.addEventListener('click', () => {
-        formatCards.forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        selectedFormat = card.getAttribute('data-format');
+    formatCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        formatCards.forEach((c) => c.classList.remove("selected"));
+        card.classList.add("selected");
+        selectedFormat = card.getAttribute("data-format");
         confirmBtn.disabled = false;
       });
     });
 
     // Evento para cerrar la interfaz del modal
-    closeBtn.addEventListener('click', () => { 
-      modal.classList.remove('active'); 
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
     });
 
     // Acción para gatillar la descarga en el formato deseado
-    confirmBtn.addEventListener('click', () => {
+    confirmBtn.addEventListener("click", () => {
       if (!selectedFormat) return;
-      
-      const fileName = selectedFormat === 'png' ? currentPngFile : currentPdfFile;
+
+      const fileName =
+        selectedFormat === "png" ? currentPngFile : currentPdfFile;
       if (!fileName) return;
 
       const downloadUrl = `/descargas/${fileName}`;
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = downloadUrl;
-      a.download = fileName; 
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      
-      modal.classList.remove('active');
+
+      modal.classList.remove("active");
     });
   });
 </script>
 
-<!-- 3. DISEÑO Y ESTILOS VISUALES (Encapsulados para toda la plataforma) -->
+<!-- 3. DISEÑO Y ESTILOS VISUALES -->
 <style>
   /* =========================================================
      ESTILOS DEL MODAL DE DESCARGA
      ========================================================= */
   .modal-overlay {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
     display: flex;
@@ -148,18 +186,18 @@
 
   .close-modal {
     position: absolute;
-    top: 20px; 
+    top: 20px;
     right: 20px;
-    background: none; 
+    background: none;
     border: none;
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
     color: #a0a0a0;
-    cursor: pointer; 
+    cursor: pointer;
     transition: color 0.2s;
   }
-  
-  .close-modal:hover { 
-    color: #333; 
+
+  .close-modal:hover {
+    color: #333;
   }
 
   .modal-title {
@@ -168,7 +206,16 @@
     font-weight: 700;
     margin: 0 0 15px 0;
     text-align: left;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
   }
 
   .modal-subtitle {
@@ -177,7 +224,16 @@
     line-height: 1.5;
     text-align: left;
     margin-bottom: 30px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
   }
 
   .modal-options-header {
@@ -187,7 +243,16 @@
     margin-bottom: 15px;
     color: #555;
     font-weight: 600;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
   }
 
   .format-options {
@@ -230,15 +295,24 @@
     margin-top: -15px;
     position: relative;
     letter-spacing: 0.5px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
   }
 
-  .badge-png { 
-    background: #c084fc; 
+  .badge-png {
+    background: #c084fc;
   }
-  
-  .badge-pdf { 
-    background: #ef4444; 
+
+  .badge-pdf {
+    background: #ef4444;
   }
 
   .btn-confirm-download {
@@ -254,8 +328,19 @@
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    transition: background-color 0.2s, transform 0.1s;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    transition:
+      background-color 0.2s,
+      transform 0.1s;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
   }
 
   .btn-confirm-download:not(:disabled):hover {

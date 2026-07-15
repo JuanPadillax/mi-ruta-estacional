@@ -1,0 +1,472 @@
+---
+// src/pages/admin/dashboard.astro
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import marcaWebLogo from "../../assets/marcaweb.png";
+---
+
+<Layout title="Panel de Administración - Mi Ruta Estacional">
+  <main class="admin-page">
+    <!-- Barra Superior de Navegación del Panel -->
+
+    <!-- Contenido Principal -->
+    <div class="admin-container">
+      <!-- Bloque de Bienvenida -->
+      <section class="welcome-banner">
+        <h1>¡Hola, Administrador!</h1>
+        <p>
+          Desde aquí puedes gestionar los accesos de las instituciones asociadas
+          al programa educativo.
+        </p>
+      </section>
+
+      <div class="admin-grid">
+        <!-- Tarjeta 1: Formulario para Agregar Escuelas -->
+        <div class="admin-card">
+          <div class="card-header-banner">
+            Registrar Nueva Escuela / Colegio
+          </div>
+          <div class="card-body">
+            <form id="addSchoolForm" class="admin-form">
+              <div class="input-field">
+                <label for="schoolName">Nombre de la Institución *</label>
+                <input
+                  type="text"
+                  id="schoolName"
+                  required
+                  placeholder="Ej: Colegio Estacional de Valparaíso"
+                />
+              </div>
+
+              <div class="input-field">
+                <label for="schoolCode"
+                  >Código de Acceso Único (Para la Educadora) *</label
+                >
+                <input
+                  type="text"
+                  id="schoolCode"
+                  required
+                  placeholder="Ej: VALPO-SAG-2026"
+                  class="uppercase-input"
+                />
+                <span class="field-hint"
+                  >Este es el código secreto que usará la parvularia para
+                  registrarse.</span
+                >
+              </div>
+
+              <div class="input-field">
+                <label for="schoolCommune">Comuna / Ciudad</label>
+                <input
+                  type="text"
+                  id="schoolCommune"
+                  placeholder="Ej: Valparaíso"
+                />
+              </div>
+
+              <button type="submit" class="btn-admin-submit"
+                >Registrar Escuela</button
+              >
+            </form>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Listado de Escuelas Registradas -->
+        <div class="admin-card">
+          <div class="card-header-banner bg-blue">Escuelas de la Red</div>
+          <div class="card-body">
+            <div class="table-wrapper">
+              <table class="schools-table">
+                <thead>
+                  <tr>
+                    <th>Institución</th>
+                    <th>Código de Acceso</th>
+                    <th>Comuna</th>
+                  </tr>
+                </thead>
+                <tbody id="schoolsTableBody">
+                  <tr>
+                    <td colspan="3" class="loading-row"
+                      >Cargando escuelas asociadas...</td
+                    >
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { auth } from "../../lib/firebase";
+  import { onAuthStateChanged, signOut } from "firebase/auth";
+  import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+  } from "firebase/firestore";
+
+  const db = getFirestore();
+  const addSchoolForm = document.getElementById(
+    "addSchoolForm",
+  ) as HTMLFormElement | null;
+  const schoolsTableBody = document.getElementById("schoolsTableBody");
+  const btnSignOut = document.getElementById("btnSignOut");
+
+  // 1. SEGURIDAD EXTREMA: Verificar sesión y validar si es Administrador
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      // Si no hay sesión iniciada, expulsar al login
+      window.location.href = "/login";
+      return;
+    }
+
+    try {
+      const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+      if (!userDoc.exists() || userDoc.data().rol !== "admin") {
+        alert(
+          "Acceso no autorizado. Se requieren credenciales de administrador.",
+        );
+        window.location.href = "/login";
+      } else {
+        // Si todo está bien, cargar escuelas asociadas
+        loadSchools();
+      }
+    } catch (error) {
+      console.error("Error al validar administrador:", error);
+      window.location.href = "/login";
+    }
+  });
+
+  // 2. LÓGICA PARA CARGAR LAS ESCUELAS REGISTRADAS
+  async function loadSchools() {
+    if (!schoolsTableBody) return;
+
+    try {
+      const q = query(collection(db, "escuelas"), orderBy("nombre", "asc"));
+      const querySnapshot = await getDocs(q);
+
+      schoolsTableBody.innerHTML = "";
+
+      if (querySnapshot.empty) {
+        schoolsTableBody.innerHTML = `<tr><td colspan="3" class="empty-row">No hay escuelas registradas aún.</td></tr>`;
+        return;
+      }
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${data.nombre}</strong></td>
+          <td><span class="code-badge">${data.codigoAccesoEscuela}</span></td>
+          <td>${data.comuna || "No especificado"}</td>
+        `;
+        schoolsTableBody.appendChild(tr);
+      });
+    } catch (error) {
+      console.error("Error al cargar escuelas:", error);
+      schoolsTableBody.innerHTML = `<tr><td colspan="3" class="error-row">Error al cargar listado.</td></tr>`;
+    }
+  }
+
+  // 3. LÓGICA PARA CREAR NUEVA ESCUELA
+  if (addSchoolForm) {
+    addSchoolForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = (
+        document.getElementById("schoolName") as HTMLInputElement
+      ).value.trim();
+      const code = (
+        document.getElementById("schoolCode") as HTMLInputElement
+      ).value
+        .trim()
+        .toUpperCase();
+      const commune = (
+        document.getElementById("schoolCommune") as HTMLInputElement
+      ).value.trim();
+
+      try {
+        // Guardar la escuela en Firestore
+        await addDoc(collection(db, "escuelas"), {
+          nombre: name,
+          codigoAccesoEscuela: code,
+          comuna: commune,
+          fechaCreacion: new Date().toISOString(),
+        });
+
+        alert("¡Escuela registrada con éxito!");
+        addSchoolForm.reset();
+
+        // Recargar la tabla dinámicamente
+        loadSchools();
+      } catch (error) {
+        console.error("Error al guardar escuela:", error);
+        alert("Ocurrió un problema al guardar la escuela.");
+      }
+    });
+  }
+
+  // 4. BOTÓN CERRAR SESIÓN
+  if (btnSignOut) {
+    btnSignOut.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "/login";
+    });
+  }
+</script>
+
+<style>
+  /* --- Estructura Global --- */
+  .admin-page {
+    min-height: 100vh;
+    background-color: #f8fafc;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    padding-bottom: 50px;
+  }
+
+  /* --- Barra Superior --- */
+  .admin-header {
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 15px 5%;
+  }
+
+  .header-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .admin-logo {
+    height: 40px;
+    width: auto;
+  }
+
+  .admin-badge {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-logout {
+    background-color: transparent;
+    border: 1.5px solid #f1f5f9;
+    color: #64748b;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-logout:hover {
+    background-color: #f1f5f9;
+    color: #334155;
+  }
+
+  /* --- Contenido Principal --- */
+  .admin-container {
+    max-width: 1300px;
+    margin: 40px auto 0 auto;
+    padding: 0 5%;
+  }
+
+  .welcome-banner {
+    margin-bottom: 35px;
+  }
+
+  .welcome-banner h1 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+  }
+
+  .welcome-banner p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* --- Cuadrícula de Dos Columnas --- */
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+  }
+
+  .admin-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+  }
+
+  .card-header-banner {
+    background-color: #fca311;
+    color: #ffffff;
+    padding: 18px 25px;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .card-header-banner.bg-blue {
+    background-color: #7191ca;
+  }
+
+  .card-body {
+    padding: 30px 25px;
+  }
+
+  /* --- Formularios del Panel --- */
+  .admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .input-field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .input-field input {
+    background-color: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .input-field input:focus {
+    border-color: #7191ca;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(113, 145, 202, 0.15);
+  }
+
+  .uppercase-input {
+    text-transform: uppercase;
+  }
+
+  .field-hint {
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+
+  .btn-admin-submit {
+    background-color: #7191ca;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(113, 145, 202, 0.2);
+    transition: opacity 0.2s;
+  }
+
+  .btn-admin-submit:hover {
+    opacity: 0.95;
+  }
+
+  /* --- Tabla del listado de escuelas --- */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .schools-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+
+  .schools-table th {
+    color: #475569;
+    font-weight: 700;
+    padding: 12px 15px;
+    border-bottom: 2px solid #f1f5f9;
+  }
+
+  .schools-table td {
+    padding: 16px 15px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+
+  .schools-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .code-badge {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px dashed #bfdbfe;
+  }
+
+  .loading-row,
+  .empty-row,
+  .error-row {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px 0 !important;
+  }
+
+  .error-row {
+    color: #ef4444;
+  }
+
+  /* --- Adaptabilidad Móvil --- */
+  @media (max-width: 900px) {
+    .admin-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .admin-container {
+      margin-top: 25px;
+    }
+  }
+</style>

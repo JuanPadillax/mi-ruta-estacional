@@ -1,94 +1,326 @@
 ---
 // src/components/Header.astro
-import { Image } from 'astro:assets';
-import marcaWebLogo from '../assets/marcaweb.png'; 
+import { Image } from "astro:assets";
+import logoImg from "../assets/marcaweb.png";
+
+interface Props {
+  panelLabel?: string;
+}
+
+const { panelLabel = "" } = Astro.props;
 ---
 
-<header class="header">
+<header class="main-header">
   <div class="header-container">
-    <div class="logo-container">
-      <a href="/" class="logo-link">
-        <Image 
-          src={marcaWebLogo} 
-          alt="Logo Mi Ruta Estacional" 
-          class="logo-img"
+    <!-- Lado Izquierdo: Marca y Logo -->
+    <a href="/" class="brand-link">
+      <div class="brand">
+        <Image
+          src={logoImg}
+          alt="Mi Ruta Estacional Logo"
+          class="header-logo"
         />
-      </a>
-    </div>
-    
-    <div class="user-action">
-      <!-- Cambiamos <button> por <a> conservando exactamente sus estilos y comportamiento -->
-      <a href="/login" class="user-icon" aria-label="Perfil de usuario / Iniciar sesión">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </a>
+        {panelLabel && <span class="header-badge">{panelLabel}</span>}
+      </div>
+    </a>
+
+    <!-- Lado Derecho: Contenedor con nombre y botón circular -->
+    <div class="header-user-wrapper">
+      <!-- Nombre dinámico a la izquierda del icono circular (Se llena con JS) -->
+      <span id="headerUserNameSpan" class="header-user-name hidden"></span>
+
+      <div class="header-user-area">
+        <button
+          id="headerUserBtn"
+          class="header-user-circle"
+          aria-label="Menú de usuario"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="user-svg"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- Dropdown Flotante del Usuario -->
+        <div id="userDropdown" class="user-dropdown">
+          <div id="dropdownLoading" class="dropdown-info">Verificando...</div>
+          <div id="dropdownContent" class="dropdown-menu-content hidden">
+            <p class="user-dropdown-title">Opciones de cuenta</p>
+            <hr class="dropdown-divider" />
+            <a href="/login" id="dropdownProfileLink" class="dropdown-item"
+              >Mi Perfil</a
+            >
+            <button id="dropdownSignOutBtn" class="dropdown-item btn-signout"
+              >Cerrar Sesión</button
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
 
+<script>
+  import { auth } from "../lib/firebase";
+  import { onAuthStateChanged, signOut } from "firebase/auth";
+  import { getFirestore, doc, getDoc } from "firebase/firestore";
+
+  const db = getFirestore();
+  const userBtn = document.getElementById("headerUserBtn");
+  const dropdown = document.getElementById("userDropdown");
+  const dropdownLoading = document.getElementById("dropdownLoading");
+  const dropdownContent = document.getElementById("dropdownContent");
+  const headerUserNameSpan = document.getElementById("headerUserNameSpan");
+  const dropdownProfileLink = document.getElementById(
+    "dropdownProfileLink",
+  ) as HTMLAnchorElement | null;
+  const dropdownSignOutBtn = document.getElementById("dropdownSignOutBtn");
+
+  // Toggle Dropdown al hacer clic en el botón circular
+  userBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdown?.classList.toggle("active");
+  });
+
+  // Cerrar dropdown si se hace clic afuera
+  document.addEventListener("click", () => {
+    dropdown?.classList.remove("active");
+  });
+
+  // Controlar Estado de la Sesión
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+        if (userDoc.exists() && headerUserNameSpan && dropdownProfileLink) {
+          const userData = userDoc.data();
+          const nombreCompleto = userData.nombre || "Usuario";
+
+          // Extraemos solo el primer nombre para mantener el Header limpio
+          const primerNombre = nombreCompleto.split(" ")[0];
+
+          // Mostramos el nombre al lado izquierdo del botón circular
+          headerUserNameSpan.textContent = primerNombre;
+          headerUserNameSpan.classList.remove("hidden");
+
+          let perfilUrl = "/";
+          if (userData.rol === "admin") perfilUrl = "/admin/dashboard";
+          else if (userData.rol === "educadora")
+            perfilUrl = "/mi-perfil-pedagogico";
+          else if (userData.rol === "familia")
+            perfilUrl = "/mi-perfil-familiar";
+
+          dropdownProfileLink.href = perfilUrl;
+          dropdownProfileLink.textContent = "Mi Perfil";
+
+          dropdownLoading?.classList.add("hidden");
+          dropdownContent?.classList.remove("hidden");
+          if (dropdownSignOutBtn) dropdownSignOutBtn.classList.remove("hidden");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      if (headerUserNameSpan && dropdownProfileLink) {
+        // Modo Invitado (No mostramos el nombre a la izquierda, solo el botón)
+        headerUserNameSpan.classList.add("hidden");
+        headerUserNameSpan.textContent = "";
+
+        dropdownLoading?.classList.add("hidden");
+        dropdownContent?.classList.remove("hidden");
+        dropdownProfileLink.href = "/login";
+        dropdownProfileLink.textContent = "Iniciar Sesión";
+        if (dropdownSignOutBtn) dropdownSignOutBtn.classList.add("hidden");
+      }
+    }
+  });
+
+  // Evento Cerrar Sesión
+  dropdownSignOutBtn?.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "/";
+  });
+</script>
+
 <style>
-  /* Contenedor principal fijo y con la sombra impecable */
-  .header {
+  .main-header {
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 15px 5%;
+    width: 100%;
     position: sticky;
     top: 0;
-    width: 100%;
-    background-color: #FFFFFF;
-    z-index: 1000;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    z-index: 100;
   }
 
-  /* Contenedor interno que centra todo verticalmente */
   .header-container {
+    max-width: 1300px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center; 
-    padding: 15px 5%;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .logo-container {
-    display: flex;
     align-items: center;
   }
 
-  .logo-link {
-    display: flex;
-    align-items: center;
+  .brand-link {
     text-decoration: none;
   }
 
-  /* Controla el tamaño de tu logo aquí */
-  .logo-img {
-    height: 50px;       /* Ajusta la altura a lo que mejor le quede a tu diseño */
-    width: auto;        /* Mantiene la proporción original para que no se deforme */
-    object-fit: contain;
-  }
-
-  .user-action {
+  .brand {
     display: flex;
-    align-items: center; 
+    align-items: center;
+    gap: 15px;
   }
 
-  /* Mantenemos las mismas clases y agregamos text-decoration para que no herede estilos de enlace */
-  .user-icon {
-    background-color: var(--color-primary-blue);
-    color: white;
-    border: none;
-    width: 40px;
+  .header-logo {
     height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    transition: transform 0.2s;
+    width: auto;
   }
-  
-  .user-icon:hover { transform: scale(1.05); }
-  .user-icon svg { width: 18px; height: 18px; }
+
+  .header-badge {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* --- Contenedor Derecho del Usuario --- */
+  .header-user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Separación entre el nombre y el botón circular */
+  }
+
+  /* Estilo del nombre a la izquierda del botón circular */
+  .header-user-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #7191ca;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .header-user-area {
+    position: relative;
+  }
+
+  /* --- Botón Circular Oficial del Header --- */
+  .header-user-circle {
+    background-color: #7191ca;
+    color: #ffffff;
+    border: 2px dashed #7191ca;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px;
+    box-shadow: 0 4px 10px rgba(113, 145, 202, 0.2);
+    transition:
+      transform 0.2s,
+      background-color 0.2s;
+  }
+
+  .header-user-circle:hover {
+    transform: scale(1.05);
+    background-color: #5f80b8;
+  }
+
+  .user-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* --- Dropdown Flotante --- */
+  .user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    width: 220px;
+    padding: 15px;
+    display: none;
+    flex-direction: column;
+    z-index: 101;
+  }
+
+  .user-dropdown.active {
+    display: flex;
+  }
+
+  .dropdown-info {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-align: center;
+  }
+
+  .user-dropdown-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 5px 0;
+    padding-left: 12px;
+  }
+
+  .dropdown-divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 8px 0;
+  }
+
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    font-size: 0.88rem;
+    color: #64748b;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: #7191ca;
+  }
+
+  .btn-signout {
+    color: #ef4444;
+  }
+
+  .btn-signout:hover {
+    background-color: #fef2f2;
+    color: #ef4444;
+  }
+
+  .hidden {
+    display: none !important;
+  }
 </style>

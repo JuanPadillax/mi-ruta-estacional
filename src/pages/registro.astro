@@ -2,32 +2,30 @@
 // src/pages/registro.astro
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import marcaWebLogo from "../assets/marcaweb.png";
+import homepageLogo from "../assets/marcaweb.png";
 import ninoImg from "../assets/niño.png";
 ---
 
 <Layout title="Regístrate - Mi Ruta Estacional">
   <main class="login-page">
-    <!-- Contenedor centralizado -->
     <div class="login-main-container">
       <!-- Columna Izquierda: Tarjeta de Registro -->
       <div class="login-card-wrapper">
         <div class="login-card">
-          <!-- Logo y Cabecera de la Tarjeta -->
           <div class="card-header">
             <Image
-              src={marcaWebLogo}
+              src={homepageLogo}
               alt="Mi Ruta Estacional Logo"
               class="card-logo"
             />
             <h2 class="card-title">Regístrate</h2>
             <p class="card-subtitle">
-              Crea tu cuenta para comenzar a planificar y descargar todo el
-              material de tu ruta estacional.
+              Crea tu cuenta oficial para la red de escuelas asociadas de tu
+              ruta estacional.
             </p>
           </div>
 
-          <!-- Pestañas para Selección de Rol (Mantiene el diseño de marca) -->
+          <!-- Selector de Rol -->
           <div class="role-selector">
             <button type="button" class="role-tab active" data-role="educadora"
               >Educadora</button
@@ -37,9 +35,8 @@ import ninoImg from "../assets/niño.png";
             >
           </div>
 
-          <!-- Formulario de Registro en Dos Columnas -->
+          <!-- Formulario de Registro -->
           <form id="registerForm" class="login-form">
-            <!-- Campo oculto para almacenar el rol seleccionado -->
             <input type="hidden" id="role" value="educadora" />
 
             <!-- Contenedor Grid para Dos Columnas -->
@@ -56,7 +53,20 @@ import ninoImg from "../assets/niño.png";
                   />
                 </div>
 
+                <!-- Campo RUT Chileno -->
                 <div class="input-group">
+                  <input
+                    type="text"
+                    id="rut"
+                    required
+                    placeholder="RUT (Ej: 12.345.678-K) *"
+                    class="login-input"
+                    maxlength="12"
+                  />
+                </div>
+
+                <!-- Correo Electrónico + Botón de Código -->
+                <div class="input-group email-group">
                   <input
                     type="email"
                     id="email"
@@ -64,6 +74,28 @@ import ninoImg from "../assets/niño.png";
                     placeholder="Correo electrónico *"
                     class="login-input"
                   />
+                  <button
+                    type="button"
+                    id="btnSendCode"
+                    class="btn-inline-action">Enviar Código</button
+                  >
+                </div>
+
+                <!-- Campo para ingresar el Código recibido -->
+                <div id="verificationContainer" class="input-group hidden">
+                  <input
+                    type="text"
+                    id="verificationCode"
+                    placeholder="Ingresa el código enviado *"
+                    class="login-input"
+                    maxlength="6"
+                  />
+                  <button
+                    type="button"
+                    id="btnVerifyCode"
+                    class="btn-inline-action success-color"
+                    >Validar Código</button
+                  >
                 </div>
               </div>
 
@@ -121,22 +153,28 @@ import ninoImg from "../assets/niño.png";
               </div>
             </div>
 
-            <!-- Fila: Contraseña (Ancho completo) -->
+            <!-- Contraseña -->
             <div class="input-group full-width">
               <input
                 type="password"
                 id="password"
                 required
-                placeholder="Contraseña *"
+                placeholder="Contraseña (mínimo 6 caracteres) *"
                 class="login-input"
               />
             </div>
 
-            <!-- Botón Registrarse -->
-            <button type="submit" class="btn-submit"> Regístrate </button>
+            <!-- Botón Registrarse (Desactivado hasta verificar el correo) -->
+            <button
+              type="submit"
+              id="btnSubmitRegister"
+              class="btn-submit"
+              disabled
+            >
+              Verifica tu correo para registrarte
+            </button>
           </form>
 
-          <!-- Enlaces de navegación interna -->
           <div class="card-navigation">
             <p class="register-hint">
               ¿Ya tienes una cuenta? <a href="/login" class="link-blue"
@@ -147,7 +185,7 @@ import ninoImg from "../assets/niño.png";
         </div>
       </div>
 
-      <!-- Columna Derecha: Ilustración del Párvulo -->
+      <!-- Columna Derecha: Ilustración -->
       <div class="login-image-wrapper">
         <Image
           src={ninoImg}
@@ -158,7 +196,6 @@ import ninoImg from "../assets/niño.png";
       </div>
     </div>
 
-    <!-- Footer de la página -->
     <footer class="login-footer">
       <div class="footer-container">
         <span class="footer-copy"
@@ -177,11 +214,11 @@ import ninoImg from "../assets/niño.png";
 <script>
   import { auth } from "../lib/firebase";
   import { createUserWithEmailAndPassword } from "firebase/auth";
-  // Importamos Firestore para guardar la información
   import {
     getFirestore,
     doc,
     setDoc,
+    getDoc, // 👈 Añadido getDoc a las importaciones para resolver el error en la línea 347
     collection,
     query,
     where,
@@ -190,14 +227,151 @@ import ninoImg from "../assets/niño.png";
   } from "firebase/firestore";
 
   const db = getFirestore();
-  const registerForm = document.getElementById("registerForm");
+  const registerForm = document.getElementById(
+    "registerForm",
+  ) as HTMLFormElement | null;
   const roleTabs = document.querySelectorAll(".role-tab");
   const roleInput = document.getElementById("role") as HTMLInputElement;
 
   const educadoraFields = document.getElementById("educadoraFields");
   const familiaFields = document.getElementById("familiaFields");
 
-  // Lógica interactiva para alternar roles
+  const rutInput = document.getElementById("rut") as HTMLInputElement;
+  const emailInput = document.getElementById("email") as HTMLInputElement;
+  const btnSendCode = document.getElementById(
+    "btnSendCode",
+  ) as HTMLButtonElement;
+  const verificationContainer = document.getElementById(
+    "verificationContainer",
+  );
+  const verificationCodeInput = document.getElementById(
+    "verificationCode",
+  ) as HTMLInputElement;
+  const btnVerifyCode = document.getElementById(
+    "btnVerifyCode",
+  ) as HTMLButtonElement;
+  const btnSubmitRegister = document.getElementById(
+    "btnSubmitRegister",
+  ) as HTMLButtonElement;
+
+  let emailVerified = false;
+  let generatedVerificationCode = "";
+
+  // --- 1. LÓGICA DE FORMATEO Y VALIDACIÓN DE RUT CHILENO ---
+  rutInput?.addEventListener("input", (e) => {
+    let value = rutInput.value.replace(/[^0-9kK]/g, "");
+    if (value.length > 1) {
+      const dv = value.slice(-1).toUpperCase();
+      const rutNums = value.slice(0, -1);
+
+      // Aplicar puntos y guion
+      let formatted = "";
+      if (rutNums.length > 6) {
+        formatted = rutNums.replace(/^(\d{1,2})(\d{3})(\d{3})$/, "$1.$2.$3");
+      } else if (rutNums.length > 3) {
+        formatted = rutNums.replace(/^(\d{1,3})(\d{3})$/, "$1.$2");
+      } else {
+        formatted = rutNums;
+      }
+      rutInput.value = formatted ? `${formatted}-${dv}` : dv;
+    } else {
+      rutInput.value = value.toUpperCase();
+    }
+  });
+
+  function validarRutChileno(rutCompleto: string): boolean {
+    if (!/^[0-9]+[-|‐][0-9kK]{1}$/.test(rutCompleto.replace(/\./g, "")))
+      return false;
+    const tmp = rutCompleto.replace(/\./g, "").split("-");
+    let ruts = parseInt(tmp[0], 10);
+    const dv = tmp[1].toUpperCase();
+
+    let M = 0,
+      S = 1;
+    for (; ruts; ruts = Math.floor(ruts / 10)) {
+      S = (S + (ruts % 10) * (9 - (M++ % 6))) % 11;
+    }
+    const dvEsperado = S ? (S - 1).toString() : "K";
+    return dv === dvEsperado;
+  }
+
+  // --- 2. LÓGICA ENVIAR CÓDIGO DE VERIFICACIÓN AL CORREO ---
+  btnSendCode?.addEventListener("click", async () => {
+    const email = emailInput.value.trim();
+    if (!email || !emailInput.checkValidity()) {
+      alert("Por favor, ingresa un correo electrónico válido primero.");
+      return;
+    }
+
+    btnSendCode.disabled = true;
+    btnSendCode.textContent = "Enviando...";
+
+    // Generamos un código de 6 dígitos al azar
+    generatedVerificationCode = Math.floor(
+      100000 + Math.random() * 900000,
+    ).toString();
+
+    try {
+      // Guardamos el código temporalmente en Firestore asociado al correo para mayor seguridad
+      await setDoc(doc(db, "codigos_verificacion", email.toLowerCase()), {
+        codigo: generatedVerificationCode,
+        fecha: new Date().toISOString(),
+      });
+
+      // ALERTA DE PRUEBA: En desarrollo simulamos la recepción para que veas el código
+      alert(
+        `[Modo Desarrollo] Se ha enviado un correo a ${email}. Código de verificación: ${generatedVerificationCode}`,
+      );
+
+      verificationContainer?.classList.remove("hidden");
+      btnSendCode.textContent = "Reenviar Código";
+      btnSendCode.disabled = false;
+    } catch (error) {
+      console.error("Error al generar código de verificación:", error);
+      alert("Hubo un error al procesar el envío del código.");
+      btnSendCode.disabled = false;
+      btnSendCode.textContent = "Enviar Código";
+    }
+  });
+
+  // --- 3. VALIDAR EL CÓDIGO INGRESADO ---
+  btnVerifyCode?.addEventListener("click", async () => {
+    const enteredCode = verificationCodeInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!enteredCode) {
+      alert("Ingresa el código que recibiste.");
+      return;
+    }
+
+    try {
+      const codeDoc = await getDoc(doc(db, "codigos_verificacion", email));
+
+      if (codeDoc.exists() && codeDoc.data().codigo === enteredCode) {
+        emailVerified = true;
+        alert("¡Correo electrónico verificado con éxito!");
+
+        // Bloqueamos cambios en el email verificado
+        emailInput.readOnly = true;
+        verificationCodeInput.readOnly = true;
+        btnVerifyCode.disabled = true;
+        btnSendCode.disabled = true;
+
+        // Desbloqueamos el botón de registro oficial
+        btnSubmitRegister.disabled = false;
+        btnSubmitRegister.textContent = "Regístrate";
+      } else {
+        alert(
+          "El código ingresado es incorrecto. Por favor, verifica e inténtalo de nuevo.",
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error al verificar el código.");
+    }
+  });
+
+  // --- 4. ALTERNAR ROLES ---
   roleTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       roleTabs.forEach((t) => t.classList.remove("active"));
@@ -209,8 +383,6 @@ import ninoImg from "../assets/niño.png";
       if (selectedRole === "educadora") {
         educadoraFields?.classList.remove("hidden");
         familiaFields?.classList.add("hidden");
-
-        // Hacemos obligatorios los inputs correspondientes
         (document.getElementById("schoolCode") as HTMLInputElement).required =
           true;
         (
@@ -223,7 +395,6 @@ import ninoImg from "../assets/niño.png";
       } else {
         educadoraFields?.classList.add("hidden");
         familiaFields?.classList.remove("hidden");
-
         (document.getElementById("schoolCode") as HTMLInputElement).required =
           false;
         (
@@ -237,26 +408,33 @@ import ninoImg from "../assets/niño.png";
     });
   });
 
-  // Asegurar requerimientos al iniciar
-  if (roleInput.value === "educadora") {
-    (document.getElementById("schoolCode") as HTMLInputElement).required = true;
-    (document.getElementById("educationLevel") as HTMLInputElement).required =
-      true;
-  }
-
-  // Lógica de Registro Dinámico
+  // --- 5. LÓGICA DE REGISTRO COMPLETA EN FIREBASE ---
   if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      if (!emailVerified) {
+        alert(
+          "Debes validar tu correo electrónico con el código de seguridad.",
+        );
+        return;
+      }
+
+      const rutVal = rutInput.value.trim();
+      if (!validarRutChileno(rutVal)) {
+        alert(
+          "El RUT ingresado no es válido. Verifica los puntos, guion o el dígito verificador.",
+        );
+        return;
+      }
+
       const role = roleInput.value;
       const fullName = (document.getElementById("fullName") as HTMLInputElement)
         .value;
-      const email = (document.getElementById("email") as HTMLInputElement)
-        .value;
+      const email = emailInput.value.trim();
       const confirmEmail = (
         document.getElementById("confirmEmail") as HTMLInputElement
-      ).value;
+      ).value.trim();
       const password = (document.getElementById("password") as HTMLInputElement)
         .value;
 
@@ -269,17 +447,13 @@ import ninoImg from "../assets/niño.png";
         let escuelaId = "";
         let alumnoDocRef = null;
 
-        // --- VALIDACIONES CON FIRESTORE ---
-
         if (role === "educadora") {
           const schoolCode = (
             document.getElementById("schoolCode") as HTMLInputElement
           ).value.trim();
-
-          // Buscar si el código de escuela existe
           const q = query(
             collection(db, "escuelas"),
-            where("codigoAcceso", "==", schoolCode),
+            where("codigoAccesoEscuela", "==", schoolCode),
           );
           const querySnapshot = await getDocs(q);
 
@@ -287,8 +461,6 @@ import ninoImg from "../assets/niño.png";
             alert("El código de escuela ingresado no es válido.");
             return;
           }
-
-          // Tomar el ID de la primera escuela que coincida
           escuelaId = querySnapshot.docs[0].id;
         } else if (role === "familia") {
           const studentCode = (
@@ -296,8 +468,6 @@ import ninoImg from "../assets/niño.png";
           ).value
             .trim()
             .toUpperCase();
-
-          // Buscar si el código de vinculación del alumno existe
           const q = query(
             collection(db, "alumnos"),
             where("codigoVinculacion", "==", studentCode),
@@ -305,18 +475,15 @@ import ninoImg from "../assets/niño.png";
           const querySnapshot = await getDocs(q);
 
           if (querySnapshot.empty) {
-            alert(
-              "El código de vinculación del párvulo no es válido. Solicítalo a tu educadora.",
-            );
+            alert("El código de vinculación del párvulo no es válido.");
             return;
           }
 
-          // Guardamos referencia de la ficha del alumno para actualizarla después
           alumnoDocRef = querySnapshot.docs[0].ref;
           escuelaId = querySnapshot.docs[0].data().escuelaId;
         }
 
-        // --- CREACIÓN DE CUENTA EN AUTH ---
+        // Crear Cuenta en Authentication
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
@@ -324,9 +491,10 @@ import ninoImg from "../assets/niño.png";
         );
         const uid = userCredential.user.uid;
 
-        // --- GUARDADO DE DATOS EN FIRESTORE ---
+        // Guardar Perfil en Firestore
         const userProfile: any = {
           nombre: fullName,
+          rut: rutVal,
           email: email,
           rol: role,
           escuelaId: escuelaId,
@@ -345,32 +513,25 @@ import ninoImg from "../assets/niño.png";
           userProfile.alumnoId = alumnoDocRef?.id || "";
         }
 
-        // Crear documento del usuario
         await setDoc(doc(db, "usuarios", uid), userProfile);
 
-        // Si es familia, asociar el UID del apoderado a la ficha de su hijo
         if (role === "familia" && alumnoDocRef) {
           await updateDoc(alumnoDocRef, {
             padreAsociadoId: uid,
           });
         }
 
-        alert("Cuenta creada exitosamente en la plataforma.");
-
-        // Redirección dinámica según el rol
-        if (role === "educadora") {
-          window.location.href = "/mi-perfil-pedagogico";
-        } else {
-          window.location.href = "/mi-perfil-familiar";
-        }
+        alert("¡Registro exitoso! Bienvenido a la plataforma.");
+        window.location.href =
+          role === "educadora"
+            ? "/mi-perfil-pedagogico"
+            : "/mi-perfil-familiar";
       } catch (error: any) {
-        console.error("Error al registrar usuario:", error);
+        console.error(error);
         if (error.code === "auth/email-already-in-use") {
           alert("Este correo electrónico ya se encuentra registrado.");
-        } else if (error.code === "auth/weak-password") {
-          alert("La contraseña es muy débil. Debe tener mínimo 6 caracteres.");
         } else {
-          alert("Ocurrió un problema en el servidor al crear tu cuenta.");
+          alert("Ocurrió un error inesperado al procesar tu registro.");
         }
       }
     });
@@ -378,7 +539,7 @@ import ninoImg from "../assets/niño.png";
 </script>
 
 <style>
-  /* --- Estructura y Fondo de la Página --- */
+  /* --- Se hereda todo el excelente estilo estacional anterior --- */
   .login-page {
     min-height: calc(100vh - 80px);
     background-color: #fafafa;
@@ -401,7 +562,6 @@ import ninoImg from "../assets/niño.png";
     gap: 60px;
   }
 
-  /* --- Tarjeta del Registro (Espacio perfecto a 2 columnas) --- */
   .login-card-wrapper {
     flex: 0 0 650px;
     display: flex;
@@ -452,7 +612,6 @@ import ninoImg from "../assets/niño.png";
     margin: 0;
   }
 
-  /* Selector de Rol interactivo */
   .role-selector {
     display: flex;
     background-color: #f1f5f9;
@@ -482,7 +641,6 @@ import ninoImg from "../assets/niño.png";
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   }
 
-  /* --- Formulario y Diseño de Columnas (Grid) --- */
   .login-form {
     width: 100%;
     display: flex;
@@ -503,7 +661,6 @@ import ninoImg from "../assets/niño.png";
     gap: 25px;
   }
 
-  /* Estructura del input con borde inferior */
   .input-group {
     position: relative;
     border-bottom: 2px solid #e2e8f0;
@@ -531,7 +688,45 @@ import ninoImg from "../assets/niño.png";
     display: none;
   }
 
-  /* Inputs limpios */
+  /* Estilos específicos para verificación de correo */
+  .email-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .btn-inline-action {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-inline-action:hover:not(:disabled) {
+    background-color: #e2e8f0;
+    color: #1e293b;
+  }
+
+  .btn-inline-action.success-color {
+    background-color: #7191ca;
+    color: white;
+  }
+
+  .btn-inline-action.success-color:hover:not(:disabled) {
+    background-color: #5f80b8;
+  }
+
+  .btn-inline-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .login-input {
     width: 100%;
     border: none;
@@ -546,7 +741,6 @@ import ninoImg from "../assets/niño.png";
     color: #cbd5e1;
   }
 
-  /* --- Botón del Formulario --- */
   .btn-submit {
     background-color: var(--color-primary-blue, #7191ca);
     color: #ffffff;
@@ -564,15 +758,16 @@ import ninoImg from "../assets/niño.png";
     box-shadow: 0 4px 14px rgba(118, 152, 208, 0.3);
   }
 
-  .btn-submit:hover {
+  .btn-submit:hover:not(:disabled) {
     opacity: 0.95;
   }
 
-  .btn-submit:active {
-    transform: scale(0.99);
+  .btn-submit:disabled {
+    background-color: #cbd5e1;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 
-  /* --- Navegación Secundaria --- */
   .card-navigation {
     margin-top: 25px;
     text-align: center;
@@ -594,7 +789,6 @@ import ninoImg from "../assets/niño.png";
     text-decoration: underline;
   }
 
-  /* --- Ilustración Flexible --- */
   .login-image-wrapper {
     flex: 1;
     display: flex;
@@ -613,7 +807,6 @@ import ninoImg from "../assets/niño.png";
     transform-origin: center;
   }
 
-  /* --- Footer --- */
   .login-footer {
     width: 100%;
     background-color: #ffffff;
@@ -655,6 +848,10 @@ import ninoImg from "../assets/niño.png";
   .divider {
     font-size: 0.75rem;
     color: #e2e8f0;
+  }
+
+  .hidden {
+    display: none !important;
   }
 
   /* --- Adaptabilidad Móvil --- */

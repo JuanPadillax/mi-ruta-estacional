@@ -1,113 +1,156 @@
 ---
 // src/components/Hero.astro
-import { Image } from 'astro:assets';
-import ninoImg from '../assets/niño.png'; 
+import { Image } from "astro:assets";
+import ninoImg from "../assets/niño.png";
 ---
 
 <section class="hero">
   <div class="hero-content">
     <span class="subtitle">Sistema Modular de Aprendizaje</span>
-    <h1 class="title">Una ruta diseñada para<br>aprender jugando.</h1>
+    <h1 class="title">Una ruta diseñada para<br />aprender jugando.</h1>
     <p class="description">
-      Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio digital diseñado para potenciar el desarrollo integral mediante dinámicas y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico de nuestra fauna nativa.
+      Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio
+      digital diseñado para potenciar el desarrollo integral mediante dinámicas
+      y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico
+      de nuestra fauna nativa.
     </p>
-    <div class="button-container">
+
+    <!-- Contenedor Dinámico con Estilo del Mockup -->
+    <div id="heroActionContainer" class="button-container">
       <a href="/login" class="btn btn-primary">Inicia Sesión</a>
       <a href="/registro" class="btn btn-secondary">Regístrate</a>
     </div>
   </div>
 
   <div class="hero-image-wrapper">
-    <Image 
-      src={ninoImg} 
-      alt="Niño aprendiendo con libro" 
-      class="hero-img"
-    />
+    <Image src={ninoImg} alt="Niño aprendiendo con libro" class="hero-img" />
   </div>
 </section>
+
+<script>
+  import { auth } from "../lib/firebase";
+  import { onAuthStateChanged } from "firebase/auth";
+  import { getFirestore, doc, getDoc } from "firebase/firestore";
+
+  const db = getFirestore();
+  const heroContainer = document.getElementById("heroActionContainer");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!heroContainer) return;
+
+    if (user) {
+      try {
+        const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          let perfilUrl = "/";
+          if (userData.rol === "admin") perfilUrl = "/admin/dashboard";
+          else if (userData.rol === "educadora")
+            perfilUrl = "/mi-perfil-pedagogico";
+          else if (userData.rol === "familia")
+            perfilUrl = "/mi-perfil-familiar";
+
+          heroContainer.innerHTML = `
+            <a href="${perfilUrl}" class="btn btn-primary">Ir a mi Panel de Trabajo</a>
+          `;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      heroContainer.innerHTML = `
+        <a href="/login" class="btn btn-primary">Inicia Sesión</a>
+        <a href="/registro" class="btn btn-secondary">Regístrate</a>
+      `;
+    }
+  });
+</script>
 
 <style>
   .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Aumentamos el padding superior (de 80px a 160px) para empujar toda la sección hacia abajo */
-    padding: 160px 5% 100px; 
+    padding: 160px 5% 100px;
     max-width: 1400px;
     margin: 0 auto;
     gap: 40px;
-    /* Altura mínima para que la sección respire y se centre verticalmente con el fondo */
-    min-height: 85vh; 
+    min-height: 85vh;
     box-sizing: border-box;
   }
 
   .hero-content {
     flex: 1;
-    max-width: 680px; /* Un poco más de ancho para el texto */
+    max-width: 680px;
   }
 
   .subtitle {
     display: block;
-    color: var(--color-text-light);
+    color: #94a3b8;
     font-size: 1.1rem;
     font-style: italic;
     margin-bottom: 15px;
   }
 
   .title {
-    color: var(--color-primary-blue);
-    /* Tamaño optimizado para 2 líneas */
-    font-size: 3.2rem; 
+    color: #7191ca;
+    font-size: 3.2rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 30px;
-    letter-spacing: -2px;
+    letter-spacing: -1.5px;
   }
 
   .description {
-    color: var(--color-text-dark);
-    font-size: 1.25rem;
-    font-weight: 600;
+    color: #475569;
+    font-size: 1.2rem;
+    font-weight: 500;
     line-height: 1.6;
     margin-bottom: 45px;
   }
 
   .button-container {
     display: flex;
-    gap: 30px; /* Separación asegurada */
+    gap: 20px;
   }
 
+  /* --- Botones Oficiales del Mockup --- */
   .btn {
     display: inline-block;
     text-align: center;
-    text-decoration: none;
-    padding: 18px 45px;
-    border-radius: 8px;
+    text-decoration: none !important; /* Eliminación estricta de subrayado */
+    text-decoration-line: none !important;
+    padding: 16px 40px;
+    border-radius: 30px; /* Bordes ovalados perfectos */
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     cursor: pointer;
-    border: none;
-    transition: transform 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
-  
-  .btn:hover { transform: scale(1.05); }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
 
   .btn-primary {
-    background-color: var(--color-primary-blue);
-    color: white;
-    box-shadow: 0 6px 20px rgba(118, 152, 208, 0.4);
+    background-color: #7191ca;
+    color: #ffffff !important;
+    box-shadow: 0 8px 25px rgba(113, 145, 202, 0.35);
   }
 
   .btn-secondary {
     background-color: transparent;
-    color: var(--color-primary-blue);
-    border: 3px solid var(--color-primary-blue);
+    color: #7191ca !important;
+    border: 2px solid #7191ca;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
   }
 
   .hero-image-wrapper {
     flex: 1;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
   }
 
@@ -116,17 +159,24 @@ import ninoImg from '../assets/niño.png';
     max-width: 600px;
     height: auto;
     object-fit: contain;
-    /* Mantenemos el tamaño grande */
-    transform: scale(1.4); 
+    transform: scale(1.4);
   }
 
   @media (max-width: 1024px) {
-    .hero { 
-      flex-direction: column; 
-      text-align: center; 
-      padding: 120px 5% 60px; /* Ajuste para tablets */
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 120px 5% 60px;
     }
-    .hero-content { align-items: center; max-width: 100%; }
-    .title { font-size: 2.8rem; }
+    .hero-content {
+      align-items: center;
+      max-width: 100%;
+    }
+    .title {
+      font-size: 2.8rem;
+    }
+    .button-container {
+      justify-content: center;
+    }
   }
 </style>

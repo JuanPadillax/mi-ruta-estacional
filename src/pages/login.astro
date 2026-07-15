@@ -1,50 +1,60 @@
 ---
 // src/pages/login.astro
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import marcaWebLogo from '../assets/marcaweb.png';
-import ninoImg from '../assets/niño.png';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import marcaWebLogo from "../assets/marcaweb.png";
+import ninoImg from "../assets/niño.png";
 ---
 
 <Layout title="Iniciar Sesión - Mi Ruta Estacional">
   <main class="login-page">
-    
-    <!-- Contenedor de contenido centralizado (Ampliado de max-1200px a max-1400px) -->
+    <!-- Contenedor de contenido centralizado -->
     <div class="login-main-container">
-      
-      <!-- Columna Izquierda: Tarjeta de Login (Más ancha y espaciosa) -->
+      <!-- Columna Izquierda: Tarjeta de Login -->
       <div class="login-card-wrapper">
         <div class="login-card">
-          
           <!-- Logo y Cabecera de la Tarjeta -->
           <div class="card-header">
-            <Image 
-              src={marcaWebLogo} 
-              alt="Mi Ruta Estacional Logo" 
+            <Image
+              src={marcaWebLogo}
+              alt="Mi Ruta Estacional Logo"
               class="card-logo"
             />
             <h2 class="card-title">Bienvenida a tu espacio digital</h2>
             <p class="card-subtitle">
-              Ingresa tus datos para acceder a las planificaciones y fichas descargables.
+              Ingresa tus datos para acceder a las planificaciones y fichas
+              descargables.
             </p>
           </div>
 
-          <!-- Formulario de Entrada (Campos e íconos ligeramente más grandes) -->
-          <form id="loginForm" class="login-form" onsubmit="event.preventDefault();">
-            
+          <!-- Formulario de Entrada -->
+          <form
+            id="loginForm"
+            class="login-form"
+            onsubmit="event.preventDefault();"
+          >
             <!-- Campo Correo -->
             <div class="input-group">
               <span class="input-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
               </span>
-              <input 
-                type="email" 
-                id="email" 
+              <input
+                type="email"
+                id="email"
                 required
-                placeholder="fernanda.sepulveda@gmail.com" 
+                placeholder="fernanda.sepulveda@gmail.com"
                 class="login-input"
               />
             </div>
@@ -52,53 +62,63 @@ import ninoImg from '../assets/niño.png';
             <!-- Campo Contraseña -->
             <div class="input-group">
               <span class="input-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"
+                  ></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
               </span>
-              <input 
-                type="password" 
-                id="password" 
+              <input
+                type="password"
+                id="password"
                 required
-                placeholder="*************" 
+                placeholder="*************"
                 class="login-input"
               />
             </div>
 
             <!-- Botón Ingresar -->
-            <button type="submit" class="btn-submit">
-              Iniciar Sesión
-            </button>
+            <button type="submit" class="btn-submit"> Iniciar Sesión </button>
           </form>
 
           <!-- Enlaces de navegación interna -->
           <div class="card-navigation">
             <p class="register-hint">
-              ¿Aún no tienes cuenta? <a href="/registro" class="link-blue">Regístrate aquí.</a>
+              ¿Aún no tienes cuenta? <a href="/registro" class="link-blue"
+                >Regístrate aquí.</a
+              >
             </p>
-            <a href="/recuperar" class="link-forgot">¿Olvidaste tu contraseña?</a>
+            <a href="/recuperar" class="link-forgot"
+              >¿Olvidaste tu contraseña?</a
+            >
           </div>
-
         </div>
       </div>
 
-      <!-- Columna Derecha: Ilustración del Párvulo (Agrandada) -->
+      <!-- Columna Derecha: Ilustración del Párvulo -->
       <div class="login-image-wrapper">
-        <Image 
-          src={ninoImg} 
-          alt="Niño interactuando con el libro de Mi Ruta Estacional" 
+        <Image
+          src={ninoImg}
+          alt="Niño interactuando con el libro de Mi Ruta Estacional"
           class="login-illustration"
           loading="eager"
         />
       </div>
-
     </div>
 
     <!-- Footer de la página de acceso -->
     <footer class="login-footer">
       <div class="footer-container">
-        <span class="footer-copy">© 2026 Mi Ruta Estacional. Todos los derechos reservados.</span>
+        <span class="footer-copy"
+          >© 2026 Mi Ruta Estacional. Todos los derechos reservados.</span
+        >
         <div class="footer-links">
           <a href="#">Soporte Educadoras</a>
           <span class="divider">|</span>
@@ -106,37 +126,72 @@ import ninoImg from '../assets/niño.png';
         </div>
       </div>
     </footer>
-
   </main>
 </Layout>
 
-
 <script>
-  import { auth } from '../lib/firebase';
-  import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
+  import { auth } from "../lib/firebase";
+  import {
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence,
+  } from "firebase/auth";
+  // Importamos Firestore para consultar el rol del usuario
+  import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-  const loginForm = document.getElementById('loginForm');
+  const db = getFirestore();
+  const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      const email = (document.getElementById('email') as HTMLInputElement).value;
-      const password = (document.getElementById('password') as HTMLInputElement).value;
+
+      const email = (document.getElementById("email") as HTMLInputElement)
+        .value;
+      const password = (document.getElementById("password") as HTMLInputElement)
+        .value;
 
       try {
         // Forzar persistencia local antes de firmar
         await setPersistence(auth, browserLocalPersistence);
-        await signInWithEmailAndPassword(auth, email, password);
-        
-        // Redirección limpia reemplazando el historial
-        window.location.replace('/mi-perfil-pedagogico'); 
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        const uid = userCredential.user.uid;
+
+        // 1. Buscamos el rol del usuario registrado en Firestore
+        const userDocRef = doc(db, "usuarios", uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          const rol = userData.rol;
+
+          // 2. Redirección limpia reemplazando el historial según el rol correspondiente
+          if (rol === "admin") {
+            window.location.replace("/admin/dashboard");
+          } else if (rol === "educadora") {
+            window.location.replace("/mi-perfil-pedagogico");
+          } else if (rol === "familia") {
+            window.location.replace("/mi-perfil-familiar");
+          } else {
+            // Fallback por defecto si no coincide ningún rol estructurado
+            window.location.replace("/");
+          }
+        } else {
+          // Fallback si la cuenta existe en Auth pero no tiene documento en Firestore
+          window.location.replace("/");
+        }
       } catch (error: any) {
         console.error("Error de credenciales:", error.code);
-        if (error.code === 'auth/invalid-credential') {
-          alert('Correo o contraseña incorrectos. Por favor, verifica tus datos.');
+        if (error.code === "auth/invalid-credential") {
+          alert(
+            "Correo o contraseña incorrectos. Por favor, verifica tus datos.",
+          );
         } else {
-          alert('Ocurrió un inconveniente al validar tus datos.');
+          alert("Ocurrió un inconveniente al validar tus datos.");
         }
       }
     });
@@ -147,7 +202,7 @@ import ninoImg from '../assets/niño.png';
   /* --- Estructura y Fondo de la Página --- */
   .login-page {
     min-height: calc(100vh - 80px);
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -160,28 +215,23 @@ import ninoImg from '../assets/niño.png';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1440px; 
+    max-width: 1440px;
     width: 100%;
     padding: 40px 5%;
     margin: auto 0;
-    gap: 80px; 
+    gap: 80px;
   }
 
   /* --- Tarjeta del Formulario (BLOQUEADO PARA EVITAR QUE SE ACHIQUE) --- */
   .login-card-wrapper {
-    /* 
-      flex-grow: 0 (No crece de más)
-      flex-shrink: 0 (¡NUNCA se encoge para dar espacio a la imagen!)
-      flex-basis: 500px (Su tamaño base inicial e ideal siempre será 500px)
-    */
-    flex: 0 0 500px; 
+    flex: 0 0 500px;
     display: flex;
     justify-content: center;
-    z-index: 5; 
+    z-index: 5;
   }
 
   .login-card {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 40px;
     padding: 65px 55px;
     width: 100%;
@@ -233,7 +283,7 @@ import ninoImg from '../assets/niño.png';
 
   .input-group {
     position: relative;
-    border-bottom: 2px solid #E2E8F0;
+    border-bottom: 2px solid #e2e8f0;
     padding: 12px 0;
     display: flex;
     align-items: center;
@@ -245,7 +295,7 @@ import ninoImg from '../assets/niño.png';
   }
 
   .input-icon {
-    color: #FCA311;
+    color: #fca311;
     display: flex;
     align-items: center;
     margin-right: 14px;
@@ -267,13 +317,13 @@ import ninoImg from '../assets/niño.png';
   }
 
   .login-input::placeholder {
-    color: #CBD5E1;
+    color: #cbd5e1;
   }
 
   /* --- Botón del Formulario --- */
   .btn-submit {
     background-color: var(--color-primary-blue, #7191ca);
-    color: #FFFFFF;
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     padding: 15px;
@@ -282,7 +332,9 @@ import ninoImg from '../assets/niño.png';
     cursor: pointer;
     width: 100%;
     margin-top: 15px;
-    transition: opacity 0.2s, transform 0.1s;
+    transition:
+      opacity 0.2s,
+      transform 0.1s;
     box-shadow: 0 4px 14px rgba(118, 152, 208, 0.3);
   }
 
@@ -305,7 +357,7 @@ import ninoImg from '../assets/niño.png';
 
   .register-hint {
     font-size: 0.85rem;
-    color: #94A3B8;
+    color: #94a3b8;
     margin: 0;
   }
 
@@ -321,27 +373,23 @@ import ninoImg from '../assets/niño.png';
 
   .link-forgot {
     font-size: 0.8rem;
-    color: #CBD5E1;
+    color: #cbd5e1;
     text-decoration: none;
     transition: color 0.2s;
   }
 
   .link-forgot:hover {
-    color: #94A3B8;
+    color: #94a3b8;
     text-decoration: underline;
   }
 
   /* --- Columna de Ilustración Flexible --- */
   .login-image-wrapper {
-    /* 
-      flex-grow: 1 (Toma todo el espacio restante que el formulario no use)
-      flex-shrink: 1 (Si la pantalla se reduce, la imagen será la que se achique)
-    */
-    flex: 1; 
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 800px; 
+    max-width: 800px;
     position: relative;
     z-index: 1;
   }
@@ -350,15 +398,15 @@ import ninoImg from '../assets/niño.png';
     width: 100%;
     height: auto;
     object-fit: contain;
-    transform: scale(1.4) translateX(20px); 
+    transform: scale(1.4) translateX(20px);
     transform-origin: center;
   }
 
   /* --- Footer --- */
   .login-footer {
     width: 100%;
-    background-color: #FFFFFF;
-    border-top: 1px solid #E2E8F0;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
     padding: 24px 5%;
   }
 
@@ -373,7 +421,7 @@ import ninoImg from '../assets/niño.png';
 
   .footer-copy {
     font-size: 0.75rem;
-    color: #94A3B8;
+    color: #94a3b8;
   }
 
   .footer-links {
@@ -384,7 +432,7 @@ import ninoImg from '../assets/niño.png';
 
   .footer-links a {
     font-size: 0.75rem;
-    color: #94A3B8;
+    color: #94a3b8;
     text-decoration: none;
     transition: color 0.2s;
   }
@@ -395,7 +443,7 @@ import ninoImg from '../assets/niño.png';
 
   .divider {
     font-size: 0.75rem;
-    color: #E2E8F0;
+    color: #e2e8f0;
   }
 
   /* --- Adaptabilidad Móvil --- */
@@ -414,8 +462,7 @@ import ninoImg from '../assets/niño.png';
     }
 
     .login-card-wrapper {
-      /* En móviles quitamos la restricción rígida para evitar desbordes de pantalla */
-      flex: 1 1 auto; 
+      flex: 1 1 auto;
       width: 100%;
       max-width: 500px;
     }

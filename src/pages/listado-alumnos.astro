@@ -1,21 +1,35 @@
 ---
 // src/pages/listado-alumnos.astro
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
 ---
 
 <Layout title="Listado de Alumnos - Mi Ruta Estacional">
+  <Header panelLabel="Perfil Pedagógico" />
+
   <div class="page-container">
-    
     <main class="alumnos-page">
       <div class="alumnos-cabecera-flujo">
         <a href="/mi-perfil-pedagogico" class="btn-back">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="back-icon-svg">
-            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="back-icon-svg"
+          >
+            <path
+              d="M19 12H5M5 12L12 19M5 12L12 5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
           </svg>
           Volver a mi Perfil
         </a>
         <h1 class="page-title">Listado de Alumnos</h1>
-        <h2 class="page-subtitle">Nivel Medio Mayor — Año Pedagógico 2026</h2>
+        <h2 class="page-subtitle" id="schoolLevelSubtitle">
+          Cargando nivel pedagógico...
+        </h2>
       </div>
 
       <section class="alumnos-section">
@@ -24,22 +38,39 @@ import Layout from '../layouts/Layout.astro';
             <span class="students-icon">🎒</span>
             <div class="banner-text">
               <h3>Registro de Matrícula</h3>
-              <p>12 alumnos registrados activos</p>
+              <p id="totalStudentsText">0 alumnos registrados activos</p>
             </div>
           </div>
         </div>
 
         <div class="table-controls">
           <div class="controls-left">
-            <span class="selected-counter" id="selectedCounter">0 alumnos seleccionados</span>
+            <span class="selected-counter" id="selectedCounter"
+              >0 alumnos seleccionados</span
+            >
           </div>
           <div class="controls-right">
             <button class="btn-control-secondary" id="btnEditTable">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
-                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
               </svg>
-              Editar Tabla
+              Gestión Avanzada
             </button>
             <button class="btn-control-primary" id="btnAddStudent">
               <div class="plus-circle">+</div>
@@ -53,161 +84,25 @@ import Layout from '../layouts/Layout.astro';
             <thead>
               <tr>
                 <th class="col-checkbox">
-                  <input type="checkbox" id="selectAll" class="custom-checkbox" />
+                  <input
+                    type="checkbox"
+                    id="selectAll"
+                    class="custom-checkbox"
+                  />
                 </th>
                 <th class="col-num">N°</th>
                 <th class="col-name">Nombre de Alumno</th>
                 <th class="col-guardian">Apoderado Asociado</th>
                 <th class="col-code">Código de Acceso</th>
                 <th class="col-progress">Bitácora (Progreso)</th>
-                <th class="col-chat">Chat con Apoderado</th>
+                <th class="col-chat">Acciones</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="studentsTableBody">
               <tr>
-                <td><input type="checkbox" class="student-select custom-checkbox" /></td>
-                <td class="num-cell">1</td>
-                <td class="student-name-cell">Felipe Eduardo Sepúlveda Cáceres</td>
-                <td>Cesar Sepúlveda</td>
-                <td>
-                  <div class="code-wrapper">
-                    <span class="access-code">RUT-BMD94</span>
-                    <button class="btn-copy" data-code="RUT-BMD94" title="Copiar código">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div class="fraction-progress" data-current="6">
-                    <span class="fraction-badge fraction-high clickable-progress" title="Haga clic para editar progreso">6 / 8</span>
-                  </div>
-                </td>
-                <td>
-                  <a href="/chat" class="btn-chat-link" title="Iniciar chat con Fernanda Sepúlveda">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="chat-icon">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="student-select custom-checkbox" /></td>
-                <td class="num-cell">2</td>
-                <td class="student-name-cell">Catalina Ignacia Rojas Flores</td>
-                <td>Héctor Rojas</td>
-                <td>
-                  <div class="code-wrapper">
-                    <span class="access-code">RUT-CRF88</span>
-                    <button class="btn-copy" data-code="RUT-CRF88" title="Copiar código">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div class="fraction-progress" data-current="3">
-                    <span class="fraction-badge fraction-medium clickable-progress" title="Haga clic para editar progreso">3 / 8</span>
-                  </div>
-                </td>
-                <td>
-                  <a href="/chat" class="btn-chat-link" title="Iniciar chat con Héctor Rojas">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="chat-icon">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="student-select custom-checkbox" /></td>
-                <td class="num-cell">3</td>
-                <td class="student-name-cell">Gaspar Alonso Silva Aravena</td>
-                <td>Marta Aravena</td>
-                <td>
-                  <div class="code-wrapper">
-                    <span class="access-code">RUT-GSA91</span>
-                    <button class="btn-copy" data-code="RUT-GSA91" title="Copiar código">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div class="fraction-progress" data-current="7">
-                    <span class="fraction-badge fraction-high clickable-progress" title="Haga clic para editar progreso">7 / 8</span>
-                  </div>
-                </td>
-                <td>
-                  <a href="/chat" class="btn-chat-link" title="Iniciar chat con Marta Aravena">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="chat-icon">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="student-select custom-checkbox" /></td>
-                <td class="num-cell">4</td>
-                <td class="student-name-cell">Isabella Paz Vergara Castro</td>
-                <td>Julio Vergara</td>
-                <td>
-                  <div class="code-wrapper">
-                    <span class="access-code">RUT-IPC96</span>
-                    <button class="btn-copy" data-code="RUT-IPC96" title="Copiar código">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div class="fraction-progress" data-current="1">
-                    <span class="fraction-badge fraction-low clickable-progress" title="Haga clic para editar progreso">1 / 8</span>
-                  </div>
-                </td>
-                <td>
-                  <a href="/chat" class="btn-chat-link" title="Iniciar chat con Julio Vergara">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="chat-icon">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="student-select custom-checkbox" /></td>
-                <td class="num-cell">5</td>
-                <td class="student-name-cell">Mateo León Contreras Carrasco</td>
-                <td>Sofía Carrasco</td>
-                <td>
-                  <div class="code-wrapper">
-                    <span class="access-code">RUT-MLC85</span>
-                    <button class="btn-copy" data-code="RUT-MLC85" title="Copiar código">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div class="fraction-progress" data-current="4">
-                    <span class="fraction-badge fraction-medium clickable-progress" title="Haga clic para editar progreso">4 / 8</span>
-                  </div>
-                </td>
-                <td>
-                  <a href="/chat" class="btn-chat-link" title="Iniciar chat con Sofía Carrasco">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="chat-icon">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </a>
-                </td>
+                <td colspan="7" class="loading-row"
+                  >Sincronizando nómina escolar...</td
+                >
               </tr>
             </tbody>
           </table>
@@ -223,6 +118,7 @@ import Layout from '../layouts/Layout.astro';
     </footer>
   </div>
 
+  <!-- MODAL 1: GESTIÓN DE LA TABLA (EDITAR / ELIMINAR REGISTROS SELECCIONADOS) -->
   <div class="modal-overlay" id="modalEditTable">
     <div class="modal-card">
       <div class="modal-header header-edit">
@@ -230,178 +126,608 @@ import Layout from '../layouts/Layout.astro';
         <h3>Gestión de la Tabla</h3>
       </div>
       <div class="modal-body">
-        <p>Desde este panel puedes realizar cambios directos sobre los registros escolares:</p>
+        <p>
+          Selecciona un alumno de la nómina usando la casilla y luego presiona
+          una de las siguientes opciones:
+        </p>
+        <div class="modal-actions-wrapper">
+          <button id="btnEditSelected" class="action-modal-btn edit-color"
+            >✏️ Editar Nombre</button
+          >
+          <button id="btnDeleteSelected" class="action-modal-btn delete-color"
+            >🗑️ Dar de Baja Alumno</button
+          >
+        </div>
+        <hr class="modal-divider" />
         <ul>
-          <li><strong>Editar progreso:</strong> Haz clic directamente sobre cualquier insignia de la columna <em>"Bitácora"</em> para actualizar su avance al instante.</li>
-          <li><strong>Selección múltiple:</strong> Utiliza las casillas de verificación de la izquierda para seleccionar alumnos y aplicar acciones grupales.</li>
+          <li>
+            <strong>Editar progreso:</strong> Puedes hacer clic directamente sobre
+            cualquier insignia de la columna <em>"Bitácora"</em> en la tabla para
+            actualizar su avance al instante.
+          </li>
         </ul>
       </div>
       <div class="modal-footer">
-        <button class="btn-modal-close btn-orange" onclick="closeModal('modalEditTable')">Entendido</button>
+        <button
+          type="button"
+          class="btn-modal-close btn-orange"
+          id="btnCloseEditTable">Volver</button
+        >
       </div>
     </div>
   </div>
 
+  <!-- MODAL 2: FORMULARIO DINÁMICO PARA AGREGAR / EDITAR ALUMNO -->
   <div class="modal-overlay" id="modalAddStudent">
     <div class="modal-card">
-      <div class="modal-header header-add">
+      <div class="modal-header header-add" id="addModalHeader">
         <span class="modal-icon">👤</span>
-        <h3>Agregar Nuevo Alumno</h3>
+        <h3 id="addModalTitle">Agregar Nuevo Alumno</h3>
       </div>
-      <div class="modal-body">
-        <p>Para ingresar un nuevo alumno al <strong>Nivel Medio Mayor 2026</strong>, se requiere completar los siguientes campos en el formulario de registro:</p>
-        <ol>
-          <li>Nombre completo del estudiante.</li>
-          <li>Nombre del Apoderado principal o tutor legal.</li>
-          <li>Generar automáticamente su código único de vinculación familiar.</li>
-        </ol>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-modal-close btn-blue" onclick="closeModal('modalAddStudent')">Continuar</button>
-      </div>
+      <form id="studentForm">
+        <input type="hidden" id="editStudentId" value="" />
+        <div class="modal-body">
+          <p>
+            Completa la información del párvulo para incorporarlo al nivel
+            actual:
+          </p>
+
+          <div class="modal-form-group">
+            <label for="studentName">Nombre Completo del Párvulo *</label>
+            <input
+              type="text"
+              id="studentName"
+              required
+              placeholder="Ej: Felipe Eduardo Sepúlveda Cáceres"
+              class="modal-input"
+            />
+          </div>
+
+          <div class="modal-form-group">
+            <label>Código de Vinculación Familiar Autogenerado</label>
+            <div class="autocode-container">
+              <span id="generatedCodeDisplay" class="autocode-placeholder"
+                >Escribe un nombre...</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn-modal-cancel"
+            id="btnCancelAddStudent">Cancelar</button
+          >
+          <button
+            type="submit"
+            class="btn-modal-close btn-blue"
+            id="btnSubmitForm">Guardar Alumno</button
+          >
+        </div>
+      </form>
     </div>
   </div>
 </Layout>
 
 <script>
-  import { auth } from '../lib/firebase';
-  import { onAuthStateChanged } from 'firebase/auth';
+  import { auth } from "../lib/firebase";
+  import { onAuthStateChanged } from "firebase/auth";
+  import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
+    doc,
+    getDoc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    orderBy,
+  } from "firebase/firestore";
 
-  onAuthStateChanged(auth, (user) => {
+  const db = getFirestore();
+  let currentEducadoraUid = "";
+  let currentEscuelaId = "";
+  let currentEducadoraNivel = "Nivel Medio Mayor";
+
+  // Referencias a elementos del DOM
+  const schoolLevelSubtitle = document.getElementById("schoolLevelSubtitle");
+  const totalStudentsText = document.getElementById("totalStudentsText");
+  const studentsTableBody = document.getElementById("studentsTableBody");
+  const selectedCounter = document.getElementById("selectedCounter");
+  const selectAllCheckbox = document.getElementById(
+    "selectAll",
+  ) as HTMLInputElement | null;
+
+  // Formulario y Inputs
+  const studentForm = document.getElementById(
+    "studentForm",
+  ) as HTMLFormElement | null;
+  const editStudentId = document.getElementById(
+    "editStudentId",
+  ) as HTMLInputElement | null;
+  const studentNameInput = document.getElementById(
+    "studentName",
+  ) as HTMLInputElement | null;
+  const generatedCodeDisplay = document.getElementById("generatedCodeDisplay");
+  const btnSubmitForm = document.getElementById("btnSubmitForm");
+  const addModalTitle = document.getElementById("addModalTitle");
+  const addModalHeader = document.getElementById("addModalHeader");
+
+  // Botones de cierre de los modales
+  const btnCloseEditTable = document.getElementById("btnCloseEditTable");
+  const btnCancelAddStudent = document.getElementById("btnCancelAddStudent");
+
+  // Controladores de Acciones del Modal de Gestión
+  const btnEditSelected = document.getElementById("btnEditSelected");
+  const btnDeleteSelected = document.getElementById("btnDeleteSelected");
+
+  // Función local para cerrar modales de forma segura
+  function closeModal(id: string) {
+    document.getElementById(id)?.classList.remove("active");
+  }
+
+  // --- 1. VERIFICACIÓN DE AUTENTICACIÓN Y ROL ---
+  onAuthStateChanged(auth, async (user) => {
     if (!user) {
-      window.location.replace('/login');
+      window.location.replace("/login");
+      return;
+    }
+
+    try {
+      const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+      if (!userDoc.exists() || userDoc.data().rol !== "educadora") {
+        alert("Acceso Restringido: Esta sección requiere perfil de Educadora.");
+        window.location.replace("/login");
+        return;
+      }
+
+      const userData = userDoc.data();
+      currentEducadoraUid = user.uid;
+      currentEscuelaId = userData.escuelaId || "";
+      currentEducadoraNivel = userData.nivelEducativo || "Nivel Medio Mayor";
+
+      // Actualizar encabezados con información real
+      if (schoolLevelSubtitle) {
+        schoolLevelSubtitle.textContent = `${currentEducadoraNivel} — Año Pedagógico 2026`;
+      }
+
+      // Cargar lista de alumnos
+      await renderStudentsTable();
+    } catch (error) {
+      console.error("Error cargando perfil:", error);
+      window.location.replace("/login");
     }
   });
 
-  const selectAllCheckbox = document.getElementById('selectAll') as HTMLInputElement;
-  const studentCheckboxes = document.querySelectorAll('.student-select') as NodeListOf<HTMLInputElement>;
-  const selectedCounter = document.getElementById('selectedCounter');
-
-  function updateSelectedCount() {
-    const checkedCount = Array.from(studentCheckboxes).filter(cb => cb.checked).length;
-    if (selectedCounter) {
-      selectedCounter.textContent = `${checkedCount} alumno${checkedCount === 1 ? '' : 's'} seleccionado${checkedCount === 1 ? '' : 's'}`;
-    }
+  // --- 2. GENERADOR DE CÓDIGO DE VINCULACIÓN ---
+  function crearCodigoVinculacion(nombre: string): string {
+    const limpio = nombre
+      .trim()
+      .toUpperCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^A-Z]/g, "");
+    const prefijo = limpio.substring(0, 3).padEnd(3, "X");
+    const aleatorio = Math.floor(100 + Math.random() * 900);
+    return `${prefijo}-${aleatorio}`;
   }
 
-  if (selectAllCheckbox) {
-    selectAllCheckbox.addEventListener('change', () => {
-      const isChecked = selectAllCheckbox.checked;
-      studentCheckboxes.forEach(cb => {
-        cb.checked = isChecked;
-        const row = cb.closest('tr');
-        if (row) row.classList.toggle('row-selected', isChecked);
+  // Escuchar escritura en el input para previsualizar el código
+  studentNameInput?.addEventListener("input", () => {
+    const name = studentNameInput.value;
+    if (name.trim().length >= 3) {
+      const previewCode = crearCodigoVinculacion(name);
+      if (generatedCodeDisplay) {
+        generatedCodeDisplay.textContent = previewCode;
+        generatedCodeDisplay.classList.remove("autocode-placeholder");
+      }
+    } else {
+      if (generatedCodeDisplay) {
+        generatedCodeDisplay.textContent = "Escribe un nombre...";
+        generatedCodeDisplay.classList.add("autocode-placeholder");
+      }
+    }
+  });
+
+  // --- 3. CARGAR Y RENDERIZAR TABLA DE ALUMNOS DESDE FIRESTORE ---
+  // --- 3. CARGAR Y RENDERIZAR TABLA DE ALUMNOS DESDE FIRESTORE ---
+  async function renderStudentsTable() {
+    if (!studentsTableBody) return;
+
+    try {
+      // 1. Simplificamos la query eliminando el "orderBy" directo en Firebase para evitar requerir índices compuestos
+      const q = query(
+        collection(db, "alumnos"),
+        where("educadoraId", "==", currentEducadoraUid),
+      );
+
+      const querySnapshot = await getDocs(q);
+      studentsTableBody.innerHTML = "";
+
+      if (querySnapshot.empty) {
+        studentsTableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="empty-row">No tienes alumnos registrados en tu aula todavía. ¡Comienza agregando uno!</td>
+          </tr>
+        `;
+        if (totalStudentsText)
+          totalStudentsText.textContent = "0 alumnos registrados activos";
+        return;
+      }
+
+      if (totalStudentsText) {
+        const total = querySnapshot.size;
+        totalStudentsText.textContent = `${total} alumno${total === 1 ? "" : "s"} registrado${total === 1 ? "" : "s"} activo${total === 1 ? "" : "s"}`;
+      }
+
+      // 2. Metemos los alumnos en un array temporal para ordenarlos alfabéticamente de forma local con JavaScript
+      const alumnosOrdenados: any[] = [];
+      querySnapshot.forEach((docSnap) => {
+        alumnosOrdenados.push({
+          id: docSnap.id,
+          ...docSnap.data(),
+        });
       });
-      updateSelectedCount();
+
+      // Ordenamos localmente por nombreCompleto
+      alumnosOrdenados.sort((a, b) => {
+        const nombreA = (a.nombreCompleto || "").toUpperCase();
+        const nombreB = (b.nombreCompleto || "").toUpperCase();
+        return nombreA.localeCompare(nombreB, "es", { sensitivity: "base" });
+      });
+
+      // 3. Renderizamos las filas con los datos ya ordenados
+      let index = 1;
+      alumnosOrdenados.forEach((student) => {
+        const id = student.id;
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-student-id", id);
+
+        const progressVal =
+          student.progresoBitacora !== undefined ? student.progresoBitacora : 0;
+        let badgeClass = "fraction-low";
+        if (progressVal >= 6) badgeClass = "fraction-high";
+        else if (progressVal >= 3) badgeClass = "fraction-medium";
+
+        const apoderadoText = student.nombreApoderado
+          ? student.nombreApoderado
+          : `<span class="apoderado-pending">No Vinculado</span>`;
+
+        tr.innerHTML = `
+          <td><input type="checkbox" class="student-select custom-checkbox" data-id="${id}" /></td>
+          <td class="num-cell">${index}</td>
+          <td class="student-name-cell">${student.nombreCompleto}</td>
+          <td class="guardian-cell">${apoderadoText}</td>
+          <td>
+            <div class="code-wrapper">
+              <span class="access-code">${student.codigoVinculacion}</span>
+              <button class="btn-copy" data-code="${student.codigoVinculacion}" title="Copiar código">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+          <td>
+            <div class="fraction-progress" data-current="${progressVal}">
+              <span class="fraction-badge ${badgeClass} clickable-progress" title="Clic para editar progreso">${progressVal} / 8</span>
+            </div>
+          </td>
+          <td>
+            <div class="action-buttons-cell">
+              <a href="/chat" class="btn-chat-link" title="Ir al Chat">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="chat-icon">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </td>
+        `;
+
+        studentsTableBody.appendChild(tr);
+        index++;
+      });
+
+      initTableInteractivity();
+    } catch (error) {
+      console.error("Error renderizando nómina:", error);
+    }
+  }
+
+  // --- 4. INTERACTIVIDAD DE ELEMENTOS DE LA TABLA ---
+  function initTableInteractivity() {
+    const studentCheckboxes = document.querySelectorAll(
+      ".student-select",
+    ) as NodeListOf<HTMLInputElement>;
+
+    if (selectAllCheckbox) {
+      selectAllCheckbox.checked = false;
+      selectAllCheckbox.addEventListener("change", () => {
+        const isChecked = selectAllCheckbox.checked;
+        studentCheckboxes.forEach((cb) => {
+          cb.checked = isChecked;
+          const row = cb.closest("tr");
+          if (row) row.classList.toggle("row-selected", isChecked);
+        });
+        updateSelectedCount(studentCheckboxes);
+      });
+    }
+
+    studentCheckboxes.forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const row = cb.closest("tr");
+        if (row) row.classList.toggle("row-selected", cb.checked);
+
+        if (selectAllCheckbox) {
+          selectAllCheckbox.checked = Array.from(studentCheckboxes).every(
+            (sc) => sc.checked,
+          );
+        }
+        updateSelectedCount(studentCheckboxes);
+      });
+    });
+
+    document.querySelectorAll(".btn-copy").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const code = btn.getAttribute("data-code");
+        if (code) {
+          try {
+            await navigator.clipboard.writeText(code);
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = "✔";
+            btn.classList.add("copied");
+            setTimeout(() => {
+              btn.innerHTML = originalHTML;
+              btn.classList.remove("copied");
+            }, 1500);
+          } catch (err) {
+            console.error("Error al copiar:", err);
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll(".fraction-progress").forEach((container) => {
+      const badge = container.querySelector(".fraction-badge") as HTMLElement;
+      if (badge) {
+        bindProgressClick(badge, container as HTMLElement);
+      }
     });
   }
 
-  studentCheckboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      const row = cb.closest('tr');
-      if (row) row.classList.toggle('row-selected', cb.checked);
-      
-      if (selectAllCheckbox) {
-        selectAllCheckbox.checked = Array.from(studentCheckboxes).every(sc => sc.checked);
-      }
-      updateSelectedCount();
-    });
-  });
+  function updateSelectedCount(checkboxes: NodeListOf<HTMLInputElement>) {
+    const checkedCount = Array.from(checkboxes).filter(
+      (cb) => cb.checked,
+    ).length;
+    if (selectedCounter) {
+      selectedCounter.textContent = `${checkedCount} alumno${checkedCount === 1 ? "" : "s"} seleccionado${checkedCount === 1 ? "" : "s"}`;
+    }
+  }
 
-  const copyButtons = document.querySelectorAll('.btn-copy');
-  copyButtons.forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const code = btn.getAttribute('data-code');
-      if (code) {
-        try {
-          await navigator.clipboard.writeText(code);
-          const originalHTML = btn.innerHTML;
-          btn.innerHTML = '✔';
-          btn.classList.add('copied');
-          setTimeout(() => {
-            btn.innerHTML = originalHTML;
-            btn.classList.remove('copied');
-          }, 1500);
-        } catch (err) {
-          console.error('Error al copiar:', err);
-        }
-      }
-    });
-  });
-
+  // --- 5. EDITAR PROGRESO DIRECTAMENTE EN LA CELDA ---
   function bindProgressClick(badge: HTMLElement, container: HTMLElement) {
-    badge.addEventListener('click', (e) => {
+    badge.addEventListener("click", (e) => {
       e.stopPropagation();
-      const currentVal = parseInt(container.getAttribute('data-current') || '0', 10);
-      
-      const select = document.createElement('select');
-      select.className = 'progress-inline-select';
-      
+      const studentRow = container.closest("tr");
+      const studentId = studentRow?.getAttribute("data-student-id");
+      if (!studentId) return;
+
+      const currentVal = parseInt(
+        container.getAttribute("data-current") || "0",
+        10,
+      );
+
+      const select = document.createElement("select");
+      select.className = "progress-inline-select";
+
       for (let i = 0; i <= 8; i++) {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = i.toString();
         option.textContent = `${i} / 8`;
         if (i === currentVal) option.selected = true;
         select.appendChild(option);
       }
 
-      container.innerHTML = '';
+      container.innerHTML = "";
       container.appendChild(select);
       select.focus();
 
-      const saveChange = () => {
+      const saveChange = async () => {
         const newVal = parseInt(select.value, 10);
-        container.setAttribute('data-current', newVal.toString());
+        container.setAttribute("data-current", newVal.toString());
 
-        let badgeClass = 'fraction-low';
-        if (newVal >= 6) {
-          badgeClass = 'fraction-high';
-        } else if (newVal >= 3) {
-          badgeClass = 'fraction-medium';
+        try {
+          await updateDoc(doc(db, "alumnos", studentId), {
+            progresoBitacora: newVal,
+          });
+        } catch (error) {
+          console.error("Error actualizando progreso:", error);
         }
 
-        container.innerHTML = `<span class="fraction-badge ${badgeClass} clickable-progress" title="Haga clic para editar progreso">${newVal} / 8</span>`;
-        
-        const newBadge = container.querySelector('.fraction-badge') as HTMLElement;
+        let badgeClass = "fraction-low";
+        if (newVal >= 6) badgeClass = "fraction-high";
+        else if (newVal >= 3) badgeClass = "fraction-medium";
+
+        container.innerHTML = `<span class="fraction-badge ${badgeClass} clickable-progress" title="Clic para editar progreso">${newVal} / 8</span>`;
+
+        const newBadge = container.querySelector(
+          ".fraction-badge",
+        ) as HTMLElement;
         bindProgressClick(newBadge, container);
       };
 
-      select.addEventListener('change', saveChange);
-      select.addEventListener('blur', saveChange);
+      select.addEventListener("change", saveChange);
+      select.addEventListener("blur", saveChange);
     });
   }
 
-  const progressContainers = document.querySelectorAll('.fraction-progress');
-  progressContainers.forEach(container => {
-    const badge = container.querySelector('.fraction-badge') as HTMLElement;
-    if (badge) {
-      bindProgressClick(badge, container as HTMLElement);
+  // --- 6. AGREGAR O EDITAR ALUMNO MEDIANTE FORMULARIO ---
+  if (studentForm) {
+    studentForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!studentNameInput || !editStudentId) return;
+
+      const name = studentNameInput.value.trim();
+      const studentId = editStudentId.value.trim();
+
+      if (!name) return;
+
+      try {
+        if (studentId) {
+          await updateDoc(doc(db, "alumnos", studentId), {
+            nombreCompleto: name,
+          });
+          alert("Datos actualizados correctamente.");
+        } else {
+          const codigoGenerado =
+            generatedCodeDisplay?.textContent || crearCodigoVinculacion(name);
+
+          await addDoc(collection(db, "alumnos"), {
+            nombreCompleto: name,
+            nivel: currentEducadoraNivel,
+            escuelaId: currentEscuelaId,
+            educadoraId: currentEducadoraUid,
+            codigoVinculacion: codigoGenerado,
+            progresoBitacora: 0,
+            padreAsociadoId: null,
+            nombreApoderado: null,
+            fechaRegistro: new Date().toISOString(),
+          });
+          alert(`¡Párvulo registrado!\nCódigo asignado: ${codigoGenerado}`);
+        }
+
+        closeModal("modalAddStudent");
+        studentForm.reset();
+        editStudentId.value = "";
+        if (generatedCodeDisplay)
+          generatedCodeDisplay.textContent = "Escribe un nombre...";
+        await renderStudentsTable();
+      } catch (error) {
+        console.error("Error al guardar alumno:", error);
+        alert("Ocurrió un error.");
+      }
+    });
+  }
+
+  // --- 7. ACCIONES DEL PANEL DE GESTIÓN AVANZADA ---
+  btnEditSelected?.addEventListener("click", async () => {
+    const selectedCb = document.querySelector(
+      ".student-select:checked",
+    ) as HTMLInputElement | null;
+    if (!selectedCb) {
+      alert(
+        "Por favor, selecciona primero un alumno de la lista usando la casilla.",
+      );
+      return;
+    }
+
+    const id = selectedCb.getAttribute("data-id");
+    if (
+      !id ||
+      !studentNameInput ||
+      !editStudentId ||
+      !addModalTitle ||
+      !addModalHeader
+    )
+      return;
+
+    try {
+      const docSnap = await getDoc(doc(db, "alumnos", id));
+      if (docSnap.exists()) {
+        const studentData = docSnap.data();
+
+        editStudentId.value = id;
+        studentNameInput.value = studentData.nombreCompleto;
+        if (generatedCodeDisplay) {
+          generatedCodeDisplay.textContent = studentData.codigoVinculacion;
+          generatedCodeDisplay.classList.remove("autocode-placeholder");
+        }
+
+        addModalTitle.textContent = "Modificar Datos del Alumno";
+        addModalHeader.classList.remove("header-add");
+        addModalHeader.classList.add("header-edit");
+
+        closeModal("modalEditTable");
+        document.getElementById("modalAddStudent")?.classList.add("active");
+      }
+    } catch (err) {
+      console.error(err);
     }
   });
 
-  const btnEditTable = document.getElementById('btnEditTable');
-  const btnAddStudent = document.getElementById('btnAddStudent');
+  btnDeleteSelected?.addEventListener("click", async () => {
+    const selectedCb = document.querySelector(
+      ".student-select:checked",
+    ) as HTMLInputElement | null;
+    if (!selectedCb) {
+      alert("Selecciona al alumno que deseas dar de baja.");
+      return;
+    }
+
+    const id = selectedCb.getAttribute("data-id");
+    if (!id) return;
+
+    const confirmacion = confirm(
+      "¿Estás completamente seguro de eliminar a este alumno? El apoderado vinculado ya no tendrá acceso a la plataforma.",
+    );
+    if (!confirmacion) return;
+
+    try {
+      await deleteDoc(doc(db, "alumnos", id));
+      alert("Alumno removido exitosamente de la nómina.");
+      closeModal("modalEditTable");
+      await renderStudentsTable();
+    } catch (error) {
+      console.error(error);
+      alert("No se pudo remover al alumno.");
+    }
+  });
+
+  // --- 8. CONTROL DE MODALES ---
+  const btnEditTable = document.getElementById("btnEditTable");
+  const btnAddStudent = document.getElementById("btnAddStudent");
 
   if (btnEditTable) {
-    btnEditTable.addEventListener('click', () => {
-      document.getElementById('modalEditTable')?.classList.add('active');
+    btnEditTable.addEventListener("click", () => {
+      document.getElementById("modalEditTable")?.classList.add("active");
     });
   }
 
   if (btnAddStudent) {
-    btnAddStudent.addEventListener('click', () => {
-      document.getElementById('modalAddStudent')?.classList.add('active');
+    btnAddStudent.addEventListener("click", () => {
+      if (editStudentId) editStudentId.value = "";
+      if (studentForm) studentForm.reset();
+      if (generatedCodeDisplay) {
+        generatedCodeDisplay.textContent = "Escribe un nombre...";
+        generatedCodeDisplay.classList.add("autocode-placeholder");
+      }
+      if (addModalTitle) addModalTitle.textContent = "Agregar Nuevo Alumno";
+      if (addModalHeader) {
+        addModalHeader.classList.remove("header-edit");
+        addModalHeader.classList.add("header-add");
+      }
+      document.getElementById("modalAddStudent")?.classList.add("active");
     });
   }
 
-  (window as any).closeModal = function(id: string) {
-    document.getElementById(id)?.classList.remove('active');
-  }
+  // Sincronizar botones de cierre con la función local closeModal
+  btnCloseEditTable?.addEventListener("click", () => {
+    closeModal("modalEditTable");
+  });
 
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
+  btnCancelAddStudent?.addEventListener("click", () => {
+    closeModal("modalAddStudent");
+  });
+
+  // Cerrar haciendo clic en el fondo overlay
+  document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+    overlay.addEventListener("click", (e) => {
       if (e.target === overlay) {
-        overlay.classList.remove('active');
+        overlay.classList.remove("active");
       }
     });
   });
@@ -409,12 +735,12 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   /* --- GARANTÍA DE NAVBAR GLOBAL --- */
-  :global(header), 
-  :global(.nav), 
-  :global(.navbar), 
+  :global(header),
+  :global(.nav),
+  :global(.navbar),
   :global(nav),
-  :global([class*="Header"]), 
-  :global([class*="Nav"]), 
+  :global([class*="Header"]),
+  :global([class*="Nav"]),
   :global([class*="navbar"]),
   :global(#header) {
     position: fixed !important;
@@ -422,25 +748,26 @@ import Layout from '../layouts/Layout.astro';
     left: 0 !important;
     width: 100% !important;
     z-index: 99999 !important;
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     opacity: 1 !important;
     border-bottom: 1px solid #eef1f5 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
   }
 
   /* --- FORZADO DE BODY Y ESTRUCTURA DE PANTALLA COMPLETA --- */
-  :global(html), :global(body) {
+  :global(html),
+  :global(body) {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #FCFDFE;
+    background-color: #fcfdfe;
   }
 
   .page-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #FCFDFE;
+    background-color: #fcfdfe;
   }
 
   /* --- CONTENEDOR DE LA PÁGINA --- */
@@ -576,7 +903,9 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     gap: 10px;
     box-shadow: 0 4px 12px rgba(243, 146, 55, 0.15);
-    transition: transform 0.15s ease, background-color 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      background-color 0.15s ease;
   }
 
   .btn-control-primary:hover {
@@ -610,7 +939,9 @@ import Layout from '../layouts/Layout.astro';
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
   }
 
   .btn-control-secondary:hover {
@@ -678,12 +1009,38 @@ import Layout from '../layouts/Layout.astro';
     cursor: pointer;
   }
 
-  .col-checkbox { width: 40px; text-align: center; }
-  .col-num { width: 50px; text-align: center; }
-  .col-name { font-weight: 700; width: 30%; }
-  .col-code { width: 22%; }
-  .num-cell { text-align: center; color: #888; }
-  .student-name-cell { color: #555; font-weight: 700; }
+  .col-checkbox {
+    width: 40px;
+    text-align: center;
+  }
+  .col-num {
+    width: 50px;
+    text-align: center;
+  }
+  .col-name {
+    font-weight: 700;
+    width: 30%;
+  }
+  .col-code {
+    width: 22%;
+  }
+  .num-cell {
+    text-align: center;
+    color: #888;
+  }
+  .student-name-cell {
+    color: #555;
+    font-weight: 700;
+  }
+
+  .apoderado-pending {
+    color: #b45309;
+    background-color: #fef3c7;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
 
   /* --- CÓDIGOS DE ACCESO --- */
   .code-wrapper {
@@ -741,7 +1098,9 @@ import Layout from '../layouts/Layout.astro';
 
   .clickable-progress {
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
   }
 
   .clickable-progress:hover {
@@ -759,7 +1118,7 @@ import Layout from '../layouts/Layout.astro';
     background-color: #fff;
     cursor: pointer;
     outline: none;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   }
 
   .fraction-badge {
@@ -795,12 +1154,14 @@ import Layout from '../layouts/Layout.astro';
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    display: inline-flex; /* Centra el contenido SVG */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    text-decoration: none; /* Elimina cualquier subrayado de enlace */
-    transition: background-color 0.15s, transform 0.1s;
+    text-decoration: none;
+    transition:
+      background-color 0.15s,
+      transform 0.1s;
   }
 
   .btn-chat-link:hover {
@@ -914,7 +1275,7 @@ import Layout from '../layouts/Layout.astro';
     margin: 0 0 15px 0;
   }
 
-  .modal-body ul, .modal-body ol {
+  .modal-body ul {
     margin: 0;
     padding-left: 20px;
   }
@@ -927,12 +1288,120 @@ import Layout from '../layouts/Layout.astro';
     margin-bottom: 0;
   }
 
+  /* Formulario dentro del modal */
+  .modal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .modal-form-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  .modal-input {
+    background-color: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .modal-input:focus {
+    border-color: #7695c5;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(118, 149, 197, 0.15);
+  }
+
+  .autocode-container {
+    background-color: #f1f5f9;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #generatedCodeDisplay {
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .autocode-placeholder {
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+    font-style: italic;
+  }
+
+  /* Acciones de gestión */
+  .modal-actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .action-modal-btn {
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+  }
+
+  .action-modal-btn.edit-color {
+    background-color: #e0f2fe;
+    color: #0369a1;
+  }
+  .action-modal-btn.edit-color:hover {
+    background-color: #bae6fd;
+  }
+
+  .action-modal-btn.delete-color {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  .action-modal-btn.delete-color:hover {
+    background-color: #fecaca;
+  }
+
+  .modal-divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 20px 0;
+  }
+
   .modal-footer {
     padding: 20px 30px;
     background-color: #f8fafc;
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
     border-top: 1px solid #f1f5f9;
+  }
+
+  .btn-modal-cancel {
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-weight: 700;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+  .btn-modal-cancel:hover {
+    background-color: #f1f5f9;
   }
 
   .btn-modal-close {
@@ -943,7 +1412,9 @@ import Layout from '../layouts/Layout.astro';
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.95rem;
-    transition: transform 0.1s ease, filter 0.15s ease;
+    transition:
+      transform 0.1s ease,
+      filter 0.15s ease;
   }
 
   .btn-modal-close:hover {
@@ -957,6 +1428,14 @@ import Layout from '../layouts/Layout.astro';
 
   .btn-blue {
     background-color: #7695c5;
+  }
+
+  .empty-row,
+  .loading-row {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px 0 !important;
+    font-weight: 500;
   }
 
   @media (max-width: 850px) {
