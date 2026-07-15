@@ -1,62 +1,92 @@
 ---
 // src/pages/actividades/pillemos-al-zorrito.astro
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import ModalDescarga from "../../components/ModalDescarga.astro";
 
 // Importación oficial usando el asset del zorro "picaro.png"
-import zorroPicaroImg from '../../assets/picaro.png'; 
+import zorroPicaroImg from "../../assets/picaro.png";
 
 // Importación de las láminas para esconder al zorrito
-import cuevaImg from '../../assets/cueva.png';
-import troncoImg from '../../assets/tronco.png';
+import cuevaImg from "../../assets/cueva.png";
+import troncoImg from "../../assets/tronco.png";
 ---
 
-<Layout title="¿Cómo funciona la actividad '¡Pillemos al zorrito!'? - Zorro Culpeo">
+<Layout
+  title="¿Cómo funciona la actividad '¡Pillemos al zorrito!'? - Zorro Culpeo"
+>
   <main class="detalle-actividad-page">
-    
     <!-- Hero Section Detalle -->
     <section class="hero-detalle">
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
         <h1 class="main-title">
-          ¿Cómo funciona la actividad<br>"¡Pillemos al zorrito!"?
+          ¿Cómo funciona la actividad<br />"¡Pillemos al zorrito!"?
         </h1>
         <p class="hero-description">
-          Esta experiencia de búsqueda y localización visual potencia la atención sostenida, la percepción de fondo-figura y la concentración. Al rastrear el paisaje boscoso otoñal para encontrar al Zorrito Culpeo, el párvulo consolida su familiaridad con el personaje y el entorno natural. Se sugiere guiar al niño o niña para que describa verbalmente la ubicación o el escondite utilizando nociones espaciales (arriba, abajo, detrás, al lado).
+          Esta experiencia de búsqueda y localización visual potencia la
+          atención sostenida, la percepción de fondo-figura y la concentración.
+          Al rastrear el paisaje boscoso otoñal para encontrar al Zorrito
+          Culpeo, el párvulo consolida su familiaridad con el personaje y el
+          entorno natural. Se sugiere guiar al niño o niña para que describa
+          verbalmente la ubicación o el escondite utilizando nociones espaciales
+          (arriba, abajo, detrás, al lado).
         </p>
         <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
       </div>
-      
+
       <div class="hero-image-container">
-        <Image src={zorroPicaroImg} alt="Zorro Culpeo Pícaro" class="hero-character" />
+        <Image
+          src={zorroPicaroImg}
+          alt="Zorro Culpeo Pícaro"
+          class="hero-character"
+        />
       </div>
     </section>
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
-      
       <!-- Panel Izquierdo: Cuadrícula simétrica con 2 Láminas arriba y 2 Signos Más abajo -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
-          
           <!-- Lámina 1: Cueva -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={cuevaImg} alt="Previsualización Lámina Cueva" class="sheet-image" />
+                <Image
+                  src={cuevaImg}
+                  alt="Previsualización Lámina Cueva"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Pillemos al zorrito1.png"
+              data-pdf="Pillemos al zorrito1.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 2: Tronco -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={troncoImg} alt="Previsualización Lámina Tronco" class="sheet-image" />
+                <Image
+                  src={troncoImg}
+                  alt="Previsualización Lámina Tronco"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Pillemos al zorrito2.png"
+              data-pdf="Pillemos al zorrito2.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Signo Más Izquierdo -->
@@ -72,13 +102,11 @@ import troncoImg from '../../assets/tronco.png';
               <span>+</span>
             </div>
           </div>
-
         </div>
       </div>
 
       <!-- Panel Derecho: Datos y Otras Actividades -->
       <div class="info-panels-container">
-        
         <!-- Bloque de Datos -->
         <div class="data-card">
           <div class="card-header-banner bg-orange">Datos:</div>
@@ -89,7 +117,9 @@ import troncoImg from '../../assets/tronco.png';
             </div>
             <div class="data-item">
               <span class="icon">📄</span>
-              <p><strong>Fichas Incluidas:</strong> 3 Láminas de Búsqueda y Atención</p>
+              <p>
+                <strong>Fichas Incluidas:</strong> 3 Láminas de Búsqueda y Atención
+              </p>
             </div>
             <div class="data-item">
               <span class="icon">⏱️</span>
@@ -97,7 +127,9 @@ import troncoImg from '../../assets/tronco.png';
             </div>
             <div class="data-item">
               <span class="icon">🗺️</span>
-              <p><strong>Área:</strong> Percepción Visual y Orientación Espacial</p>
+              <p>
+                <strong>Área:</strong> Percepción Visual y Orientación Espacial
+              </p>
             </div>
           </div>
         </div>
@@ -110,13 +142,14 @@ import troncoImg from '../../assets/tronco.png';
               <span class="link-label">Actividad 11 :</span> El cuento en capas
             </a>
             <a href="#" class="activity-link">
-              <span class="link-label">Misión Especial 4 :</span> El gran álbum de mi viaje
+              <span class="link-label">Misión Especial 4 :</span> El gran álbum de
+              mi viaje
             </a>
           </div>
         </div>
-
       </div>
     </section>
+    <ModalDescarga />
   </main>
 
   <!-- Footer Institucional -->
@@ -145,54 +178,58 @@ import troncoImg from '../../assets/tronco.png';
     margin-bottom: 60px;
     gap: 40px;
   }
-  
-  .hero-content { 
-    max-width: 650px; 
+
+  .hero-content {
+    max-width: 650px;
     text-align: left;
     z-index: 2;
   }
-  
-  .season-badge { 
-    font-size: 1.15rem; 
-    color: #b5b5b5; 
+
+  .season-badge {
+    font-size: 1.15rem;
+    color: #b5b5b5;
     font-style: italic;
-    display: block; 
+    display: block;
     margin-bottom: 12px;
     font-weight: 500;
   }
-  
-  .main-title { 
-    font-size: 2.8rem; 
-    font-weight: 700; 
-    color: #f07f3e; 
-    line-height: 1.2; 
-    margin: 0 0 25px 0; 
+
+  .main-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #f07f3e;
+    line-height: 1.2;
+    margin: 0 0 25px 0;
   }
-  
-  .hero-description { 
-    color: #333; 
-    font-size: 1.05rem; 
-    line-height: 1.6; 
-    margin-bottom: 40px; 
+
+  .hero-description {
+    color: #333;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
     font-weight: 400;
   }
 
-  .btn-back { 
-    background: linear-gradient(to bottom, #f39237, #ee7623); 
-    color: white; 
-    padding: 12px 35px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
+  .btn-back {
+    background: linear-gradient(to bottom, #f39237, #ee7623);
+    color: white;
+    padding: 12px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
     font-size: 0.95rem;
-    display: inline-block; 
-    box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    box-shadow:
+      0 5px 0px #cf6517,
+      0 8px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.1s ease;
   }
 
   .btn-back:hover {
     transform: translateY(2px);
-    box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow:
+      0 3px 0px #cf6517,
+      0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
   .hero-image-container {
@@ -201,10 +238,10 @@ import troncoImg from '../../assets/tronco.png';
     justify-content: flex-end;
     z-index: 1;
   }
-  
-  .hero-character { 
-    width: 440px; 
-    height: auto; 
+
+  .hero-character {
+    width: 440px;
+    height: auto;
     object-fit: contain;
   }
 
@@ -240,10 +277,10 @@ import troncoImg from '../../assets/tronco.png';
   .preview-card-box {
     background: #ffffff;
     width: 100%;
-    max-width: 320px; 
-    height: 320px;    
-    border-radius: 28px; 
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07); 
+    max-width: 320px;
+    height: 320px;
+    border-radius: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
     border: 1px solid #f2f2f2;
     overflow: hidden;
     margin-bottom: 25px;
@@ -260,7 +297,7 @@ import troncoImg from '../../assets/tronco.png';
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; 
+    padding: 20px;
     box-sizing: border-box;
   }
 
@@ -268,7 +305,7 @@ import troncoImg from '../../assets/tronco.png';
   .sheet-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
   }
 
   .btn-download {
@@ -336,7 +373,7 @@ import troncoImg from '../../assets/tronco.png';
   .data-card {
     background: #ffffff;
     border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     border: 1px solid #f6f6f6;
     overflow: hidden;
   }

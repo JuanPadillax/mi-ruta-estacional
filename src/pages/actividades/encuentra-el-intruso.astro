@@ -1,73 +1,112 @@
 ---
 // src/pages/actividades/encuentra-el-intruso.astro
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import ModalDescarga from "../../components/ModalDescarga.astro";
 
 // Importación de las ilustraciones de los zorros
-import zorroLupaImg from '../../assets/zorroconlupa.png';
+import zorroLupaImg from "../../assets/zorroconlupa.png";
 
 // Importación de los assets para las láminas de actividades
-import linea1Img from '../../assets/linea1.png';
-import linea2Img from '../../assets/linea2.png';
-import linea3Img from '../../assets/linea3.png';
+import linea1Img from "../../assets/linea1.png";
+import linea2Img from "../../assets/linea2.png";
+import linea3Img from "../../assets/linea3.png";
 ---
 
-<Layout title="¿Cómo funciona la actividad 'Encuentra al intruso'? - Zorro Culpeo">
+<Layout
+  title="¿Cómo funciona la actividad 'Encuentra al intruso'? - Zorro Culpeo"
+>
   <main class="detalle-actividad-page">
-    
     <!-- Hero Section Detalle -->
     <section class="hero-detalle">
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
         <h1 class="main-title">
-          ¿Cómo funciona la actividad<br>"Encuentra al intruso"?
+          ¿Cómo funciona la actividad<br />"Encuentra al intruso"?
         </h1>
         <p class="hero-description">
-          Esta experiencia pedagógica trabaja la atención selectiva, la discriminación visual avanzada y la categorización cognitiva. El objetivo es que el párvulo identifique de forma autónoma qué elemento rompe el patrón lógico o geográfico de cada fila. Se sugiere a la educadora o familia fomentar el lenguaje pidiéndole al niño o niña que explique brevemente el porqué de su elección.
+          Esta experiencia pedagógica trabaja la atención selectiva, la
+          discriminación visual avanzada y la categorización cognitiva. El
+          objetivo es que el párvulo identifique de forma autónoma qué elemento
+          rompe el patrón lógico o geográfico de cada fila. Se sugiere a la
+          educadora o familia fomentar el lenguaje pidiéndole al niño o niña que
+          explique brevemente el porqué de su elección.
         </p>
         <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
       </div>
-      
+
       <div class="hero-image-container">
-        <Image src={zorroLupaImg} alt="Zorro Culpeo con Lupa" class="hero-character" />
+        <Image
+          src={zorroLupaImg}
+          alt="Zorro Culpeo con Lupa"
+          class="hero-character"
+        />
       </div>
     </section>
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
-      
       <!-- Panel Izquierdo: Cuadrícula de Fichas Descargables con Tamaño Controlado Fijo -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
-          
           <!-- Lámina 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={linea1Img} alt="Previsualización Lámina 1" class="sheet-image" />
+                <Image
+                  src={linea1Img}
+                  alt="Previsualización Lámina 1"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Atrapa al impostor del otoño!1.png"
+              data-pdf="Atrapa al impostor del otoño!1.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 2 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={linea2Img} alt="Previsualización Lámina 2" class="sheet-image" />
+                <Image
+                  src={linea2Img}
+                  alt="Previsualización Lámina 2"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Atrapa al impostor del otoño!2.png"
+              data-pdf="Atrapa al impostor del otoño1.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 3 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={linea3Img} alt="Previsualización Lámina 3" class="sheet-image" />
+                <Image
+                  src={linea3Img}
+                  alt="Previsualización Lámina 3"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Atrapa al impostor del otoño!3.png"
+              data-pdf="Atrapa al impostor del otoño2.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Icono final del signo más (+) -->
@@ -76,13 +115,11 @@ import linea3Img from '../../assets/linea3.png';
               <span>+</span>
             </div>
           </div>
-
         </div>
       </div>
 
       <!-- Panel Derecho: Datos y Otras Actividades -->
       <div class="info-panels-container">
-        
         <!-- Bloque de Datos -->
         <div class="data-card">
           <div class="card-header-banner bg-orange">Datos:</div>
@@ -101,7 +138,9 @@ import linea3Img from '../../assets/linea3.png';
             </div>
             <div class="data-item">
               <span class="icon">🗺️</span>
-              <p><strong>Área:</strong> Atención Selectiva y Categorización Lógica</p>
+              <p>
+                <strong>Área:</strong> Atención Selectiva y Categorización Lógica
+              </p>
             </div>
           </div>
         </div>
@@ -121,9 +160,9 @@ import linea3Img from '../../assets/linea3.png';
             </a>
           </div>
         </div>
-
       </div>
     </section>
+    <ModalDescarga />
   </main>
 
   <!-- Footer Institucional -->
@@ -152,54 +191,58 @@ import linea3Img from '../../assets/linea3.png';
     margin-bottom: 60px;
     gap: 40px;
   }
-  
-  .hero-content { 
-    max-width: 650px; 
+
+  .hero-content {
+    max-width: 650px;
     text-align: left;
     z-index: 2;
   }
-  
-  .season-badge { 
-    font-size: 1.15rem; 
-    color: #b5b5b5; 
+
+  .season-badge {
+    font-size: 1.15rem;
+    color: #b5b5b5;
     font-style: italic;
-    display: block; 
+    display: block;
     margin-bottom: 12px;
     font-weight: 500;
   }
-  
-  .main-title { 
-    font-size: 2.8rem; 
-    font-weight: 700; 
-    color: #f07f3e; 
-    line-height: 1.2; 
-    margin: 0 0 25px 0; 
+
+  .main-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #f07f3e;
+    line-height: 1.2;
+    margin: 0 0 25px 0;
   }
-  
-  .hero-description { 
-    color: #333; 
-    font-size: 1.05rem; 
-    line-height: 1.6; 
-    margin-bottom: 40px; 
+
+  .hero-description {
+    color: #333;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
     font-weight: 400;
   }
 
-  .btn-back { 
-    background: linear-gradient(to bottom, #f39237, #ee7623); 
-    color: white; 
-    padding: 12px 35px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
+  .btn-back {
+    background: linear-gradient(to bottom, #f39237, #ee7623);
+    color: white;
+    padding: 12px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
     font-size: 0.95rem;
-    display: inline-block; 
-    box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    box-shadow:
+      0 5px 0px #cf6517,
+      0 8px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.1s ease;
   }
 
   .btn-back:hover {
     transform: translateY(2px);
-    box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow:
+      0 3px 0px #cf6517,
+      0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
   .hero-image-container {
@@ -208,10 +251,10 @@ import linea3Img from '../../assets/linea3.png';
     justify-content: flex-end;
     z-index: 1;
   }
-  
-  .hero-character { 
-    width: 440px; 
-    height: auto; 
+
+  .hero-character {
+    width: 440px;
+    height: auto;
     object-fit: contain;
   }
 
@@ -247,10 +290,10 @@ import linea3Img from '../../assets/linea3.png';
   .preview-card-box {
     background: #ffffff;
     width: 100%;
-    max-width: 320px; 
-    height: 320px;    
-    border-radius: 28px; 
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07); 
+    max-width: 320px;
+    height: 320px;
+    border-radius: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
     border: 1px solid #f2f2f2;
     overflow: hidden;
     margin-bottom: 25px;
@@ -267,7 +310,7 @@ import linea3Img from '../../assets/linea3.png';
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px; 
+    padding: 30px;
     box-sizing: border-box;
   }
 
@@ -275,7 +318,7 @@ import linea3Img from '../../assets/linea3.png';
   .sheet-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
   }
 
   .btn-download {
@@ -343,7 +386,7 @@ import linea3Img from '../../assets/linea3.png';
   .data-card {
     background: #ffffff;
     border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     border: 1px solid #f6f6f6;
     overflow: hidden;
   }

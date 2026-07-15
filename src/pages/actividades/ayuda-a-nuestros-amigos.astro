@@ -2,6 +2,8 @@
 // src/pages/actividades/ayuda-a-nuestros-amigos.astro
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
+import ModalDescarga from '../../components/ModalDescarga.astro';
+
 
 // Importación oficial usando el asset del zorro triste
 import zorroTristeImg from '../../assets/triste.png'; 
@@ -43,7 +45,9 @@ import lab3Img from '../../assets/lab 3.png';
                 <Image src={lab1Img} alt="Previsualización Lámina 1" class="sheet-image" />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button class="btn-download" data-png="Ayuda a nuestros amigos!1.png" data-pdf="Ayuda a nuestros amigos!1.pdf">
+              Descargar
+            </button>
           </div>
 
           <div class="download-panel">
@@ -52,7 +56,9 @@ import lab3Img from '../../assets/lab 3.png';
                 <Image src={lab2Img} alt="Previsualización Lámina 2" class="sheet-image" />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button class="btn-download" data-png="Ayuda a nuestros amigos!2.png" data-pdf="Ayuda a nuestros amigos!2.pdf">
+              Descargar
+            </button>
           </div>
 
           <div class="download-panel">
@@ -61,7 +67,9 @@ import lab3Img from '../../assets/lab 3.png';
                 <Image src={lab3Img} alt="Previsualización Lámina 3" class="sheet-image" />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button class="btn-download" data-png="Ayuda a nuestros amigos!3.png" data-pdf="Ayuda a nuestros amigos!3.pdf">
+              Descargar
+            </button>
           </div>
 
           <div class="separator-icon">
@@ -114,6 +122,7 @@ import lab3Img from '../../assets/lab 3.png';
 
       </div>
     </section>
+    <ModalDescarga />
   </main>
 
   <footer class="site-footer">

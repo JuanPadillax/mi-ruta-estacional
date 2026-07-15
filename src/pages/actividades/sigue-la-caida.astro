@@ -1,73 +1,110 @@
 ---
 // src/pages/actividades/sigue-la-caida.astro
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import ModalDescarga from "../../components/ModalDescarga.astro";
 
 // Importación oficial usando el asset del zorro con las manos arriba
-import zorroManosArribaImg from '../../assets/manos arriba.png'; 
+import zorroManosArribaImg from "../../assets/manos arriba.png";
 
 // Importación de los assets específicos para las láminas de trazos
-import trazo1Img from '../../assets/trazo.png';
-import trazo2Img from '../../assets/trazo2.png';
-import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según tu lista de assets
+import trazo1Img from "../../assets/trazo.png";
+import trazo2Img from "../../assets/trazo2.png";
+import trazo3Img from "../../assets/trazo3.png"; // Corregido el nombre según tu lista de assets
 ---
 
 <Layout title="¿Cómo funciona la actividad '¡Sigue la caída!'? - Zorro Culpeo">
   <main class="detalle-actividad-page">
-    
     <!-- Hero Section Detalle -->
     <section class="hero-detalle">
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
         <h1 class="main-title">
-          ¿Cómo funciona la actividad<br>"¡Sigue la caída!"?
+          ¿Cómo funciona la actividad<br />"¡Sigue la caída!"?
         </h1>
         <p class="hero-description">
-          Esta experiencia de trazos y grafías ejercita la disociación de la muñeca, la presión del lápiz y el control visomotriz. Al seguir las líneas curvas continuas segmentadas, el párvulo simula la trayectoria y el vaivén de las hojas al caer con el viento otoñal. Invite al niño o niña a completar el camino utilizando lápices de cera o plumones gruesos de colores estacionales.
+          Esta experiencia de trazos y grafías ejercita la disociación de la
+          muñeca, la presión del lápiz y el control visomotriz. Al seguir las
+          líneas curvas continuas segmentadas, el párvulo simula la trayectoria
+          y el vaivén de las hojas al caer con el viento otoñal. Invite al niño
+          o niña a completar el camino utilizando lápices de cera o plumones
+          gruesos de colores estacionales.
         </p>
         <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
       </div>
-      
+
       <div class="hero-image-container">
-        <Image src={zorroManosArribaImg} alt="Zorro Culpeo con Manos Arriba" class="hero-character" />
+        <Image
+          src={zorroManosArribaImg}
+          alt="Zorro Culpeo con Manos Arriba"
+          class="hero-character"
+        />
       </div>
     </section>
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
-      
       <!-- Panel Izquierdo: Cuadrícula de Fichas Descargables con Tamaño Controlado Fijo -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
-          
           <!-- Lámina 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={trazo1Img} alt="Previsualización Lámina 1" class="sheet-image" />
+                <Image
+                  src={trazo1Img}
+                  alt="Previsualización Lámina 1"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Sigue la caída1.png"
+              data-pdf="Sigue la caída1.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 2 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={trazo2Img} alt="Previsualización Lámina 2" class="sheet-image" />
+                <Image
+                  src={trazo2Img}
+                  alt="Previsualización Lámina 2"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Sigue la caída2.png"
+              data-pdf="Sigue la caída2.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 3 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={trazo3Img} alt="Previsualización Lámina 3" class="sheet-image" />
+                <Image
+                  src={trazo3Img}
+                  alt="Previsualización Lámina 3"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Sigue la caída3.png"
+              data-pdf="Sigue la caída3.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Icono final del signo más (+) -->
@@ -76,13 +113,11 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
               <span>+</span>
             </div>
           </div>
-
         </div>
       </div>
 
       <!-- Panel Derecho: Datos y Otras Actividades -->
       <div class="info-panels-container">
-        
         <!-- Bloque de Datos -->
         <div class="data-card">
           <div class="card-header-banner bg-orange">Datos:</div>
@@ -101,7 +136,9 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
             </div>
             <div class="data-item">
               <span class="icon">🗺️</span>
-              <p><strong>Área:</strong> Coordinación Óculo-Manual y Preescritura</p>
+              <p>
+                <strong>Área:</strong> Coordinación Óculo-Manual y Preescritura
+              </p>
             </div>
           </div>
         </div>
@@ -114,16 +151,17 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
               <span class="link-label">Actividad 7 :</span> ¡Abriga al árbol!
             </a>
             <a href="#" class="activity-link">
-              <span class="link-label">Misión Especial 2 :</span> Expedición a los árboles
+              <span class="link-label">Misión Especial 2 :</span> Expedición a los
+              árboles
             </a>
             <a href="#" class="activity-link">
               <span class="link-label">Actividad 10 :</span> ¡Pillemos al zorrito!
             </a>
           </div>
         </div>
-
       </div>
     </section>
+    <ModalDescarga />
   </main>
 
   <!-- Footer Institucional -->
@@ -152,54 +190,58 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
     margin-bottom: 60px;
     gap: 40px;
   }
-  
-  .hero-content { 
-    max-width: 650px; 
+
+  .hero-content {
+    max-width: 650px;
     text-align: left;
     z-index: 2;
   }
-  
-  .season-badge { 
-    font-size: 1.15rem; 
-    color: #b5b5b5; 
+
+  .season-badge {
+    font-size: 1.15rem;
+    color: #b5b5b5;
     font-style: italic;
-    display: block; 
+    display: block;
     margin-bottom: 12px;
     font-weight: 500;
   }
-  
-  .main-title { 
-    font-size: 2.8rem; 
-    font-weight: 700; 
-    color: #f07f3e; 
-    line-height: 1.2; 
-    margin: 0 0 25px 0; 
+
+  .main-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #f07f3e;
+    line-height: 1.2;
+    margin: 0 0 25px 0;
   }
-  
-  .hero-description { 
-    color: #333; 
-    font-size: 1.05rem; 
-    line-height: 1.6; 
-    margin-bottom: 40px; 
+
+  .hero-description {
+    color: #333;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
     font-weight: 400;
   }
 
-  .btn-back { 
-    background: linear-gradient(to bottom, #f39237, #ee7623); 
-    color: white; 
-    padding: 12px 35px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
+  .btn-back {
+    background: linear-gradient(to bottom, #f39237, #ee7623);
+    color: white;
+    padding: 12px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
     font-size: 0.95rem;
-    display: inline-block; 
-    box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    box-shadow:
+      0 5px 0px #cf6517,
+      0 8px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.1s ease;
   }
 
   .btn-back:hover {
     transform: translateY(2px);
-    box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow:
+      0 3px 0px #cf6517,
+      0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
   .hero-image-container {
@@ -208,10 +250,10 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
     justify-content: flex-end;
     z-index: 1;
   }
-  
-  .hero-character { 
-    width: 440px; 
-    height: auto; 
+
+  .hero-character {
+    width: 440px;
+    height: auto;
     object-fit: contain;
   }
 
@@ -247,10 +289,10 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
   .preview-card-box {
     background: #ffffff;
     width: 100%;
-    max-width: 320px; 
-    height: 320px;    
-    border-radius: 28px; 
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07); 
+    max-width: 320px;
+    height: 320px;
+    border-radius: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
     border: 1px solid #f2f2f2;
     overflow: hidden;
     margin-bottom: 25px;
@@ -267,7 +309,7 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px; 
+    padding: 30px;
     box-sizing: border-box;
   }
 
@@ -275,7 +317,7 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
   .sheet-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
   }
 
   .btn-download {
@@ -343,7 +385,7 @@ import trazo3Img from '../../assets/trazo3.png'; // Corregido el nombre según t
   .data-card {
     background: #ffffff;
     border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     border: 1px solid #f6f6f6;
     overflow: hidden;
   }

@@ -1,73 +1,110 @@
 ---
 // src/pages/actividades/sombras-magicas.astro
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import ModalDescarga from "../../components/ModalDescarga.astro";
 
 // Importación oficial usando el asset "dudoso.png"
-import zorroPreguntaImg from '../../assets/dudoso.png'; 
+import zorroPreguntaImg from "../../assets/dudoso.png";
 
 // Corregido: Importación de tus nuevos assets para las láminas de siluetas
-import silueta1Img from '../../assets/silueta1.png';
-import silueta2Img from '../../assets/silueta2.png';
-import silueta3Img from '../../assets/silueta3.png';
+import silueta1Img from "../../assets/silueta1.png";
+import silueta2Img from "../../assets/silueta2.png";
+import silueta3Img from "../../assets/silueta3.png";
 ---
 
 <Layout title="¿Cómo funciona la actividad 'Sombras mágicas'? - Zorro Culpeo">
   <main class="detalle-actividad-page">
-    
     <!-- Hero Section Detalle -->
     <section class="hero-detalle">
       <div class="hero-content">
         <span class="season-badge">Estación de Otoño</span>
         <h1 class="main-title">
-          ¿Cómo funciona la actividad<br>"Sombras mágicas"?
+          ¿Cómo funciona la actividad<br />"Sombras mágicas"?
         </h1>
         <p class="hero-description">
-          Esta actividad fortalece la asociación cognitiva, la percepción espacial y el control del trazo. Al conectar el objeto con su silueta correspondiente, el párvulo ejercita la abstracción visual y la coordinación óculo-manual necesaria para la preescritura. Se recomienda motivar al niño a trazar las líneas utilizando lápices de distintos colores otoñales.
+          Esta actividad fortalece la asociación cognitiva, la percepción
+          espacial y el control del trazo. Al conectar el objeto con su silueta
+          correspondiente, el párvulo ejercita la abstracción visual y la
+          coordinación óculo-manual necesaria para la preescritura. Se
+          recomienda motivar al niño a trazar las líneas utilizando lápices de
+          distintos colores otoñales.
         </p>
         <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
       </div>
-      
+
       <div class="hero-image-container">
-        <Image src={zorroPreguntaImg} alt="Zorro Culpeo con Signo de Pregunta" class="hero-character" />
+        <Image
+          src={zorroPreguntaImg}
+          alt="Zorro Culpeo con Signo de Pregunta"
+          class="hero-character"
+        />
       </div>
     </section>
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
-      
       <!-- Panel Izquierdo: Cuadrícula de Fichas Descargables con Tamaño Controlado Fijo -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
-          
           <!-- Lámina 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={silueta1Img} alt="Previsualización Lámina 1" class="sheet-image" />
+                <Image
+                  src={silueta1Img}
+                  alt="Previsualización Lámina 1"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Sombras magicas1.png"
+              data-pdf="Sombras magicas1.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 2 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={silueta2Img} alt="Previsualización Lámina 2" class="sheet-image" />
+                <Image
+                  src={silueta2Img}
+                  alt="Previsualización Lámina 2"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Sombras magicas2.png"
+              data-pdf="Sombras magicas2.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Lámina 3 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <Image src={silueta3Img} alt="Previsualización Lámina 3" class="sheet-image" />
+                <Image
+                  src={silueta3Img}
+                  alt="Previsualización Lámina 3"
+                  class="sheet-image"
+                />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button
+              class="btn-download"
+              data-png="Sombras magicas3.png"
+              data-pdf="Sombras magicas3.pdf"
+            >
+              Descargar
+            </button>
           </div>
 
           <!-- Icono final del signo más (+) -->
@@ -76,13 +113,11 @@ import silueta3Img from '../../assets/silueta3.png';
               <span>+</span>
             </div>
           </div>
-
         </div>
       </div>
 
       <!-- Panel Derecho: Datos y Otras Actividades -->
       <div class="info-panels-container">
-        
         <!-- Bloque de Datos -->
         <div class="data-card">
           <div class="card-header-banner bg-orange">Datos:</div>
@@ -101,7 +136,9 @@ import silueta3Img from '../../assets/silueta3.png';
             </div>
             <div class="data-item">
               <span class="icon">🗺️</span>
-              <p><strong>Área:</strong> Percepción Espacial y Coordinación Óculo-Manual</p>
+              <p>
+                <strong>Área:</strong> Percepción Espacial y Coordinación Óculo-Manual
+              </p>
             </div>
           </div>
         </div>
@@ -121,9 +158,9 @@ import silueta3Img from '../../assets/silueta3.png';
             </a>
           </div>
         </div>
-
       </div>
     </section>
+    <ModalDescarga />
   </main>
 
   <!-- Footer Institucional -->
@@ -152,54 +189,58 @@ import silueta3Img from '../../assets/silueta3.png';
     margin-bottom: 60px;
     gap: 40px;
   }
-  
-  .hero-content { 
-    max-width: 650px; 
+
+  .hero-content {
+    max-width: 650px;
     text-align: left;
     z-index: 2;
   }
-  
-  .season-badge { 
-    font-size: 1.15rem; 
-    color: #b5b5b5; 
+
+  .season-badge {
+    font-size: 1.15rem;
+    color: #b5b5b5;
     font-style: italic;
-    display: block; 
+    display: block;
     margin-bottom: 12px;
     font-weight: 500;
   }
-  
-  .main-title { 
-    font-size: 2.8rem; 
-    font-weight: 700; 
-    color: #f07f3e; 
-    line-height: 1.2; 
-    margin: 0 0 25px 0; 
+
+  .main-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #f07f3e;
+    line-height: 1.2;
+    margin: 0 0 25px 0;
   }
-  
-  .hero-description { 
-    color: #333; 
-    font-size: 1.05rem; 
-    line-height: 1.6; 
-    margin-bottom: 40px; 
+
+  .hero-description {
+    color: #333;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
     font-weight: 400;
   }
 
-  .btn-back { 
-    background: linear-gradient(to bottom, #f39237, #ee7623); 
-    color: white; 
-    padding: 12px 35px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
+  .btn-back {
+    background: linear-gradient(to bottom, #f39237, #ee7623);
+    color: white;
+    padding: 12px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
     font-size: 0.95rem;
-    display: inline-block; 
-    box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    box-shadow:
+      0 5px 0px #cf6517,
+      0 8px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.1s ease;
   }
 
   .btn-back:hover {
     transform: translateY(2px);
-    box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow:
+      0 3px 0px #cf6517,
+      0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
   .hero-image-container {
@@ -208,10 +249,10 @@ import silueta3Img from '../../assets/silueta3.png';
     justify-content: flex-end;
     z-index: 1;
   }
-  
-  .hero-character { 
-    width: 440px; 
-    height: auto; 
+
+  .hero-character {
+    width: 440px;
+    height: auto;
     object-fit: contain;
   }
 
@@ -247,10 +288,10 @@ import silueta3Img from '../../assets/silueta3.png';
   .preview-card-box {
     background: #ffffff;
     width: 100%;
-    max-width: 320px; 
-    height: 320px;    
-    border-radius: 28px; 
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07); 
+    max-width: 320px;
+    height: 320px;
+    border-radius: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
     border: 1px solid #f2f2f2;
     overflow: hidden;
     margin-bottom: 25px;
@@ -267,7 +308,7 @@ import silueta3Img from '../../assets/silueta3.png';
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px; 
+    padding: 30px;
     box-sizing: border-box;
   }
 
@@ -275,7 +316,7 @@ import silueta3Img from '../../assets/silueta3.png';
   .sheet-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
   }
 
   .btn-download {
@@ -343,7 +384,7 @@ import silueta3Img from '../../assets/silueta3.png';
   .data-card {
     background: #ffffff;
     border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     border: 1px solid #f6f6f6;
     overflow: hidden;
   }

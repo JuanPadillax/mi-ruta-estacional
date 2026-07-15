@@ -1,91 +1,67 @@
 ---
 // src/pages/registro.astro
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import marcaWebLogo from '../assets/marcaweb.png';
-import ninoImg from '../assets/niño.png';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import marcaWebLogo from "../assets/marcaweb.png";
+import ninoImg from "../assets/niño.png";
 ---
 
-<Layout title="Registrate - Mi Ruta Estacional">
+<Layout title="Regístrate - Mi Ruta Estacional">
   <main class="login-page">
-    
-    <!-- Contenedor de contenido centralizado (Ajustado para el formulario doble) -->
+    <!-- Contenedor centralizado -->
     <div class="login-main-container">
-      
-      <!-- Columna Izquierda: Tarjeta de Registro (Bloqueada para que no se achique) -->
+      <!-- Columna Izquierda: Tarjeta de Registro -->
       <div class="login-card-wrapper">
         <div class="login-card">
-          
           <!-- Logo y Cabecera de la Tarjeta -->
           <div class="card-header">
-            <Image 
-              src={marcaWebLogo} 
-              alt="Mi Ruta Estacional Logo" 
+            <Image
+              src={marcaWebLogo}
+              alt="Mi Ruta Estacional Logo"
               class="card-logo"
             />
             <h2 class="card-title">Regístrate</h2>
             <p class="card-subtitle">
-              Crea tu cuenta para comenzar a planificar y descargar todo el material de tu ruta estacional.
+              Crea tu cuenta para comenzar a planificar y descargar todo el
+              material de tu ruta estacional.
             </p>
+          </div>
+
+          <!-- Pestañas para Selección de Rol (Mantiene el diseño de marca) -->
+          <div class="role-selector">
+            <button type="button" class="role-tab active" data-role="educadora"
+              >Educadora</button
+            >
+            <button type="button" class="role-tab" data-role="familia"
+              >Familia (Padre/Apoderado)</button
+            >
           </div>
 
           <!-- Formulario de Registro en Dos Columnas -->
           <form id="registerForm" class="login-form">
-            
-            <!-- Fila Especial: Rol "Educadora" (Ocupa el ancho completo) -->
-            <div class="input-group full-width">
-              <span class="input-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </span>
-              <input 
-                type="text" 
-                id="role" 
-                value="Educadora" 
-                readonly
-                class="login-input readonly-input"
-              />
-              <span class="info-icon" title="Tu cuenta se registrará bajo el rol de Educadora">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="16" x2="12" y2="12"></line>
-                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-              </span>
-            </div>
+            <!-- Campo oculto para almacenar el rol seleccionado -->
+            <input type="hidden" id="role" value="educadora" />
 
             <!-- Contenedor Grid para Dos Columnas -->
             <div class="form-grid">
-              
               <!-- Columna Izquierda -->
               <div class="grid-column">
                 <div class="input-group">
-                  <input 
-                    type="text" 
-                    id="fullName" 
-                    required 
-                    placeholder="Nombre completo *" 
+                  <input
+                    type="text"
+                    id="fullName"
+                    required
+                    placeholder="Nombre completo *"
                     class="login-input"
                   />
                 </div>
 
                 <div class="input-group">
-                  <input 
-                    type="text" 
-                    id="childName" 
-                    placeholder="Nombre del Párvulo (Opcional)" 
-                    class="login-input"
-                  />
-                </div>
-
-                <div class="input-group">
-                  <input 
-                    type="email" 
-                    id="email" 
-                    required 
-                    placeholder="Correo electrónico *" 
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    placeholder="Correo electrónico *"
                     class="login-input"
                   />
                 </div>
@@ -93,82 +69,101 @@ import ninoImg from '../assets/niño.png';
 
               <!-- Columna Derecha -->
               <div class="grid-column">
-                <div class="input-group">
-                  <input 
-                    type="text" 
-                    id="institution" 
-                    required 
-                    placeholder="Institución o Escuela *" 
-                    class="login-input"
-                  />
+                <!-- Inputs Condicionales para Educadora -->
+                <div id="educadoraFields" class="conditional-fields">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      id="schoolCode"
+                      placeholder="Código de tu Escuela *"
+                      class="login-input"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      id="educationLevel"
+                      placeholder="Nivel educativo *"
+                      class="login-input"
+                    />
+                  </div>
+                </div>
+
+                <!-- Inputs Condicionales para Familia -->
+                <div id="familiaFields" class="conditional-fields hidden">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      id="studentCode"
+                      placeholder="Código de Vinculación del Párvulo *"
+                      class="login-input"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      id="relationship"
+                      placeholder="Parentesco (Ej: Madre, Padre, Tutor) *"
+                      class="login-input"
+                    />
+                  </div>
                 </div>
 
                 <div class="input-group">
-                  <input 
-                    type="text" 
-                    id="educationLevel" 
-                    required 
-                    placeholder="Nivel educativo *" 
-                    class="login-input"
-                  />
-                </div>
-
-                <div class="input-group">
-                  <input 
-                    type="email" 
-                    id="confirmEmail" 
-                    required 
-                    placeholder="Confirmar correo electrónico *" 
+                  <input
+                    type="email"
+                    id="confirmEmail"
+                    required
+                    placeholder="Confirmar correo electrónico *"
                     class="login-input"
                   />
                 </div>
               </div>
-
             </div>
 
             <!-- Fila: Contraseña (Ancho completo) -->
             <div class="input-group full-width">
-              <input 
-                type="password" 
-                id="password" 
-                required 
-                placeholder="Contraseña *" 
+              <input
+                type="password"
+                id="password"
+                required
+                placeholder="Contraseña *"
                 class="login-input"
               />
             </div>
 
             <!-- Botón Registrarse -->
-            <button type="submit" class="btn-submit">
-              Regístrate
-            </button>
+            <button type="submit" class="btn-submit"> Regístrate </button>
           </form>
 
           <!-- Enlaces de navegación interna -->
           <div class="card-navigation">
             <p class="register-hint">
-              ¿Ya tienes una cuenta? <a href="/login" class="link-blue">Inicia sesión aquí.</a>
+              ¿Ya tienes una cuenta? <a href="/login" class="link-blue"
+                >Inicia sesión aquí.</a
+              >
             </p>
           </div>
-
         </div>
       </div>
 
-      <!-- Columna Derecha: Ilustración del Párvulo (Mismo tamaño gigante) -->
+      <!-- Columna Derecha: Ilustración del Párvulo -->
       <div class="login-image-wrapper">
-        <Image 
-          src={ninoImg} 
-          alt="Niño interactuando con el libro de Mi Ruta Estacional" 
+        <Image
+          src={ninoImg}
+          alt="Niño interactuando con el libro de Mi Ruta Estacional"
           class="login-illustration"
           loading="eager"
         />
       </div>
-
     </div>
 
     <!-- Footer de la página -->
     <footer class="login-footer">
       <div class="footer-container">
-        <span class="footer-copy">© 2026 Mi Ruta Estacional. Todos los derechos reservados.</span>
+        <span class="footer-copy"
+          >© 2026 Mi Ruta Estacional. Todos los derechos reservados.</span
+        >
         <div class="footer-links">
           <a href="#">Soporte Educadoras</a>
           <span class="divider">|</span>
@@ -176,42 +171,206 @@ import ninoImg from '../assets/niño.png';
         </div>
       </div>
     </footer>
-
   </main>
 </Layout>
 
 <script>
-  import { auth } from '../lib/firebase';
-  import { createUserWithEmailAndPassword } from 'firebase/auth';
+  import { auth } from "../lib/firebase";
+  import { createUserWithEmailAndPassword } from "firebase/auth";
+  // Importamos Firestore para guardar la información
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    collection,
+    query,
+    where,
+    getDocs,
+    updateDoc,
+  } from "firebase/firestore";
 
-  const registerForm = document.getElementById('registerForm');
+  const db = getFirestore();
+  const registerForm = document.getElementById("registerForm");
+  const roleTabs = document.querySelectorAll(".role-tab");
+  const roleInput = document.getElementById("role") as HTMLInputElement;
 
+  const educadoraFields = document.getElementById("educadoraFields");
+  const familiaFields = document.getElementById("familiaFields");
+
+  // Lógica interactiva para alternar roles
+  roleTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      roleTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const selectedRole = tab.getAttribute("data-role") || "educadora";
+      roleInput.value = selectedRole;
+
+      if (selectedRole === "educadora") {
+        educadoraFields?.classList.remove("hidden");
+        familiaFields?.classList.add("hidden");
+
+        // Hacemos obligatorios los inputs correspondientes
+        (document.getElementById("schoolCode") as HTMLInputElement).required =
+          true;
+        (
+          document.getElementById("educationLevel") as HTMLInputElement
+        ).required = true;
+        (document.getElementById("studentCode") as HTMLInputElement).required =
+          false;
+        (document.getElementById("relationship") as HTMLInputElement).required =
+          false;
+      } else {
+        educadoraFields?.classList.add("hidden");
+        familiaFields?.classList.remove("hidden");
+
+        (document.getElementById("schoolCode") as HTMLInputElement).required =
+          false;
+        (
+          document.getElementById("educationLevel") as HTMLInputElement
+        ).required = false;
+        (document.getElementById("studentCode") as HTMLInputElement).required =
+          true;
+        (document.getElementById("relationship") as HTMLInputElement).required =
+          true;
+      }
+    });
+  });
+
+  // Asegurar requerimientos al iniciar
+  if (roleInput.value === "educadora") {
+    (document.getElementById("schoolCode") as HTMLInputElement).required = true;
+    (document.getElementById("educationLevel") as HTMLInputElement).required =
+      true;
+  }
+
+  // Lógica de Registro Dinámico
   if (registerForm) {
-    registerForm.addEventListener('submit', async (e) => {
+    registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      const email = (document.getElementById('email') as HTMLInputElement).value;
-      const confirmEmail = (document.getElementById('confirmEmail') as HTMLInputElement).value;
-      const password = (document.getElementById('password') as HTMLInputElement).value;
+
+      const role = roleInput.value;
+      const fullName = (document.getElementById("fullName") as HTMLInputElement)
+        .value;
+      const email = (document.getElementById("email") as HTMLInputElement)
+        .value;
+      const confirmEmail = (
+        document.getElementById("confirmEmail") as HTMLInputElement
+      ).value;
+      const password = (document.getElementById("password") as HTMLInputElement)
+        .value;
 
       if (email !== confirmEmail) {
-        alert('Los correos electrónicos ingresados no coinciden.');
+        alert("Los correos electrónicos ingresados no coinciden.");
         return;
       }
 
       try {
-        // Registro básico con Firebase Auth
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert('Cuenta creada exitosamente.');
-        window.location.href = '/'; 
-      } catch (error: any) {
-        console.error("Error al registrar usuario:", error.code);
-        if (error.code === 'auth/email-already-in-use') {
-          alert('Este correo electrónico ya se encuentra registrado.');
-        } else if (error.code === 'auth/weak-password') {
-          alert('La contraseña es muy débil. Intenta con al menos 6 caracteres.');
+        let escuelaId = "";
+        let alumnoDocRef = null;
+
+        // --- VALIDACIONES CON FIRESTORE ---
+
+        if (role === "educadora") {
+          const schoolCode = (
+            document.getElementById("schoolCode") as HTMLInputElement
+          ).value.trim();
+
+          // Buscar si el código de escuela existe
+          const q = query(
+            collection(db, "escuelas"),
+            where("codigoAcceso", "==", schoolCode),
+          );
+          const querySnapshot = await getDocs(q);
+
+          if (querySnapshot.empty) {
+            alert("El código de escuela ingresado no es válido.");
+            return;
+          }
+
+          // Tomar el ID de la primera escuela que coincida
+          escuelaId = querySnapshot.docs[0].id;
+        } else if (role === "familia") {
+          const studentCode = (
+            document.getElementById("studentCode") as HTMLInputElement
+          ).value
+            .trim()
+            .toUpperCase();
+
+          // Buscar si el código de vinculación del alumno existe
+          const q = query(
+            collection(db, "alumnos"),
+            where("codigoVinculacion", "==", studentCode),
+          );
+          const querySnapshot = await getDocs(q);
+
+          if (querySnapshot.empty) {
+            alert(
+              "El código de vinculación del párvulo no es válido. Solicítalo a tu educadora.",
+            );
+            return;
+          }
+
+          // Guardamos referencia de la ficha del alumno para actualizarla después
+          alumnoDocRef = querySnapshot.docs[0].ref;
+          escuelaId = querySnapshot.docs[0].data().escuelaId;
+        }
+
+        // --- CREACIÓN DE CUENTA EN AUTH ---
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        const uid = userCredential.user.uid;
+
+        // --- GUARDADO DE DATOS EN FIRESTORE ---
+        const userProfile: any = {
+          nombre: fullName,
+          email: email,
+          rol: role,
+          escuelaId: escuelaId,
+          estado: "activo",
+          fechaRegistro: new Date().toISOString(),
+        };
+
+        if (role === "educadora") {
+          userProfile.nivelEducativo = (
+            document.getElementById("educationLevel") as HTMLInputElement
+          ).value;
+        } else if (role === "familia") {
+          userProfile.parentesco = (
+            document.getElementById("relationship") as HTMLInputElement
+          ).value;
+          userProfile.alumnoId = alumnoDocRef?.id || "";
+        }
+
+        // Crear documento del usuario
+        await setDoc(doc(db, "usuarios", uid), userProfile);
+
+        // Si es familia, asociar el UID del apoderado a la ficha de su hijo
+        if (role === "familia" && alumnoDocRef) {
+          await updateDoc(alumnoDocRef, {
+            padreAsociadoId: uid,
+          });
+        }
+
+        alert("Cuenta creada exitosamente en la plataforma.");
+
+        // Redirección dinámica según el rol
+        if (role === "educadora") {
+          window.location.href = "/mi-perfil-pedagogico";
         } else {
-          alert('Ocurrió un problema al crear tu cuenta.');
+          window.location.href = "/mi-perfil-familiar";
+        }
+      } catch (error: any) {
+        console.error("Error al registrar usuario:", error);
+        if (error.code === "auth/email-already-in-use") {
+          alert("Este correo electrónico ya se encuentra registrado.");
+        } else if (error.code === "auth/weak-password") {
+          alert("La contraseña es muy débil. Debe tener mínimo 6 caracteres.");
+        } else {
+          alert("Ocurrió un problema en el servidor al crear tu cuenta.");
         }
       }
     });
@@ -222,7 +381,7 @@ import ninoImg from '../assets/niño.png';
   /* --- Estructura y Fondo de la Página --- */
   .login-page {
     min-height: calc(100vh - 80px);
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -235,26 +394,25 @@ import ninoImg from '../assets/niño.png';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1440px; 
+    max-width: 1440px;
     width: 100%;
     padding: 40px 5%;
     margin: auto 0;
-    gap: 60px; 
+    gap: 60px;
   }
 
-  /* --- Tarjeta del Registro (Bloqueada en ancho óptimo para 2 columnas) --- */
+  /* --- Tarjeta del Registro (Espacio perfecto a 2 columnas) --- */
   .login-card-wrapper {
-    /* flex-basis sube a 650px para dar espacio perfecto a los inputs paralelos */
-    flex: 0 0 650px; 
+    flex: 0 0 650px;
     display: flex;
     justify-content: center;
-    z-index: 5; 
+    z-index: 5;
   }
 
   .login-card {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 40px;
-    padding: 55px 50px;
+    padding: 45px 50px;
     width: 100%;
     box-shadow: 0 12px 50px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(0, 0, 0, 0.015);
@@ -265,7 +423,7 @@ import ninoImg from '../assets/niño.png';
 
   .card-header {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -294,6 +452,36 @@ import ninoImg from '../assets/niño.png';
     margin: 0;
   }
 
+  /* Selector de Rol interactivo */
+  .role-selector {
+    display: flex;
+    background-color: #f1f5f9;
+    border-radius: 12px;
+    padding: 6px;
+    width: 100%;
+    margin-bottom: 25px;
+    gap: 5px;
+  }
+
+  .role-tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #64748b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .role-tab.active {
+    background-color: #ffffff;
+    color: #7191ca;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
   /* --- Formulario y Diseño de Columnas (Grid) --- */
   .login-form {
     width: 100%;
@@ -305,20 +493,20 @@ import ninoImg from '../assets/niño.png';
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px; /* Separación horizontal entre columnas */
+    gap: 30px;
     width: 100%;
   }
 
   .grid-column {
     display: flex;
     flex-direction: column;
-    gap: 25px; /* Separación vertical interna */
+    gap: 25px;
   }
 
   /* Estructura del input con borde inferior */
   .input-group {
     position: relative;
-    border-bottom: 2px solid #E2E8F0;
+    border-bottom: 2px solid #e2e8f0;
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -333,35 +521,14 @@ import ninoImg from '../assets/niño.png';
     grid-column: span 2;
   }
 
-  /* Estilos específicos para el campo estático de Rol (Educadora) */
-  .input-icon {
-    color: #FCA311;
+  .conditional-fields {
     display: flex;
-    align-items: center;
-    margin-right: 14px;
+    flex-direction: column;
+    gap: 25px;
   }
 
-  .input-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .info-icon {
-    color: #CBD5E1;
-    display: flex;
-    align-items: center;
-    cursor: help;
-  }
-
-  .info-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .readonly-input {
-    color: var(--color-primary-blue, #7191ca) !important;
-    font-weight: 600;
-    cursor: default;
+  .conditional-fields.hidden {
+    display: none;
   }
 
   /* Inputs limpios */
@@ -376,13 +543,13 @@ import ninoImg from '../assets/niño.png';
   }
 
   .login-input::placeholder {
-    color: #CBD5E1;
+    color: #cbd5e1;
   }
 
   /* --- Botón del Formulario --- */
   .btn-submit {
     background-color: var(--color-primary-blue, #7191ca);
-    color: #FFFFFF;
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     padding: 15px;
@@ -391,7 +558,9 @@ import ninoImg from '../assets/niño.png';
     cursor: pointer;
     width: 100%;
     margin-top: 15px;
-    transition: opacity 0.2s, transform 0.1s;
+    transition:
+      opacity 0.2s,
+      transform 0.1s;
     box-shadow: 0 4px 14px rgba(118, 152, 208, 0.3);
   }
 
@@ -403,15 +572,15 @@ import ninoImg from '../assets/niño.png';
     transform: scale(0.99);
   }
 
-  /* --- Navegación Secundaria de la Tarjeta --- */
+  /* --- Navegación Secundaria --- */
   .card-navigation {
-    margin-top: 30px;
+    margin-top: 25px;
     text-align: center;
   }
 
   .register-hint {
     font-size: 0.85rem;
-    color: #94A3B8;
+    color: #94a3b8;
     margin: 0;
   }
 
@@ -425,13 +594,13 @@ import ninoImg from '../assets/niño.png';
     text-decoration: underline;
   }
 
-  /* --- Columna de Ilustración Flexible (Igual que en login) --- */
+  /* --- Ilustración Flexible --- */
   .login-image-wrapper {
-    flex: 1; 
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 800px; 
+    max-width: 800px;
     position: relative;
     z-index: 1;
   }
@@ -440,15 +609,15 @@ import ninoImg from '../assets/niño.png';
     width: 100%;
     height: auto;
     object-fit: contain;
-    transform: scale(1.4) translateX(20px); 
+    transform: scale(1.4) translateX(20px);
     transform-origin: center;
   }
 
   /* --- Footer --- */
   .login-footer {
     width: 100%;
-    background-color: #FFFFFF;
-    border-top: 1px solid #E2E8F0;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
     padding: 24px 5%;
   }
 
@@ -463,7 +632,7 @@ import ninoImg from '../assets/niño.png';
 
   .footer-copy {
     font-size: 0.75rem;
-    color: #94A3B8;
+    color: #94a3b8;
   }
 
   .footer-links {
@@ -474,7 +643,7 @@ import ninoImg from '../assets/niño.png';
 
   .footer-links a {
     font-size: 0.75rem;
-    color: #94A3B8;
+    color: #94a3b8;
     text-decoration: none;
     transition: color 0.2s;
   }
@@ -485,7 +654,7 @@ import ninoImg from '../assets/niño.png';
 
   .divider {
     font-size: 0.75rem;
-    color: #E2E8F0;
+    color: #e2e8f0;
   }
 
   /* --- Adaptabilidad Móvil --- */
@@ -494,7 +663,7 @@ import ninoImg from '../assets/niño.png';
       gap: 40px;
     }
     .login-card-wrapper {
-      flex: 0 0 580px; /* Ajuste sutil para pantallas intermedias */
+      flex: 0 0 580px;
     }
     .login-illustration {
       transform: scale(1.2) translateX(0);
@@ -503,7 +672,7 @@ import ninoImg from '../assets/niño.png';
 
   @media (max-width: 1024px) {
     .form-grid {
-      grid-template-columns: 1fr; /* Colapsa las 2 columnas a 1 sola si la pantalla se reduce de ancho */
+      grid-template-columns: 1fr;
       gap: 25px;
     }
     .full-width {
@@ -526,7 +695,7 @@ import ninoImg from '../assets/niño.png';
     }
 
     .login-card-wrapper {
-      flex: 1 1 auto; 
+      flex: 1 1 auto;
       width: 100%;
       max-width: 600px;
     }
