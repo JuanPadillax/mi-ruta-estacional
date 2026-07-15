@@ -31,7 +31,6 @@ import modalCoipo from '../assets/modal-coipo.png';
       <Image src={culpeoImg} alt="Zorro Culpeo" class="animal-img" />
       <h3 class="animal-name text-orange">Zorro Culpeo</h3>
       <span class="animal-role">Tomo Otoño</span>
-      <a href="/actividades/culpeo" class="btn-animal bg-orange">Actividades</a>
     </div>
 
     <div class="animal-card" data-id="chungungo">
@@ -39,7 +38,6 @@ import modalCoipo from '../assets/modal-coipo.png';
       <Image src={chungungoImg} alt="Chungungo" class="animal-img" />
       <h3 class="animal-name text-blue">Chungungo</h3>
       <span class="animal-role">Tomo Invierno</span>
-      <button class="btn-animal bg-blue">Actividades</button>
     </div>
 
     <div class="animal-card" data-id="vizcacha">
@@ -47,7 +45,6 @@ import modalCoipo from '../assets/modal-coipo.png';
       <Image src={vizcachaImg} alt="Vizcacha" class="animal-img" />
       <h3 class="animal-name text-green">Vizcacha</h3>
       <span class="animal-role">Tomo Primavera</span>
-      <button class="btn-animal bg-green">Actividades</button>
     </div>
 
     <div class="animal-card" data-id="coipo">
@@ -55,7 +52,6 @@ import modalCoipo from '../assets/modal-coipo.png';
       <Image src={coipoImg} alt="Coipo" class="animal-img" />
       <h3 class="animal-name text-yellow">Coipo</h3>
       <span class="animal-role">Tomo Verano</span>
-      <button class="btn-animal bg-yellow">Actividades</button>
     </div>
   </div>
 </section>
@@ -136,13 +132,6 @@ import modalCoipo from '../assets/modal-coipo.png';
   .animal-name { font-size: 1.8rem; font-weight: 800; margin: 0 0 5px 0; }
   .animal-role { color: var(--color-text-light); font-size: 1.1rem; margin-bottom: 15px; font-weight: 600; }
   
-  .btn-animal { 
-    width: 200px; padding: 12px 0; font-size: 1.1rem; font-weight: 700;
-    border-radius: 30px; border: none; cursor: pointer;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-decoration: none; display: inline-block;
-    color: white; /* <--- Cambiado a blanco */
-  }
-
   /* Modal Styles */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; }
   .modal-wrapper { position: relative; max-width: 850px; width: 90%; display: flex; justify-content: center; align-items: center; }
@@ -151,6 +140,5 @@ import modalCoipo from '../assets/modal-coipo.png';
   .close-btn:hover { transform: scale(1.1); }
   
   .text-orange { color: var(--color-primary-orange); } .text-blue { color: var(--color-primary-blue); } .text-green { color: var(--color-primary-green); } .text-yellow { color: var(--color-primary-yellow); }
-  .bg-orange { background-color: var(--color-primary-orange); } .bg-blue { background-color: var(--color-primary-blue); } .bg-green { background-color: var(--color-primary-green); } .bg-yellow { background-color: var(--color-primary-yellow); }
   .border-orange { border-color: var(--color-primary-orange); } .border-blue { border-color: var(--color-primary-blue); } .border-green { border-color: var(--color-primary-green); } .border-yellow { border-color: var(--color-primary-yellow); }
 </style>
