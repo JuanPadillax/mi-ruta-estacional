@@ -44,7 +44,7 @@ import modalCoipo from '../assets/modal-coipo.png';
 
     <div class="animal-card" data-id="vizcacha">
       <button class="icon-plus border-green text-green">+</button>
-      <Image src={vizcachaImg} alt="Vizcacha de la Sierra" class="animal-img" />
+      <Image src={vizcachaImg} alt="Vizcacha" class="animal-img" />
       <h3 class="animal-name text-green">Vizcacha</h3>
       <span class="animal-role">Tomo Primavera</span>
       <button class="btn-animal bg-green">Actividades</button>
@@ -99,84 +99,58 @@ import modalCoipo from '../assets/modal-coipo.png';
 </script>
 
 <style>
-  /* Fondo oscuro del modal */
-  .modal-overlay { 
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.6); display: none; justify-content: center; 
-    align-items: center; z-index: 1000; 
-  }
-  
-  /* Contenedor de la ilustración */
-  .modal-wrapper {
-    position: relative;
-    max-width: 850px; 
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* La imagen cargada hereda todo el diseño */
-  .modal-graphic { 
-    width: 100%; 
-    height: auto; 
-    object-fit: contain;
-  }
-  
-  /* Botón de cerrar flotante redondo */
-  .close-btn { 
-    position: absolute; 
-    top: 25px; 
-    right: 25px; 
-    border: none; 
-    background: rgba(255, 255, 255, 0.9); 
-    font-size: 2rem; 
-    cursor: pointer; 
-    color: #333; 
-    width: 45px; 
-    height: 45px; 
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: transform 0.2s ease;
-    z-index: 1010;
-  }
-  .close-btn:hover { transform: scale(1.1); }
-  
-  /* Estilos Archive Grid */
-  .archive-section { padding: 80px 5% 120px; max-width: 1200px; margin: 0 auto; text-align: center; }
+  .archive-section { padding: 80px 5% 120px; max-width: 1400px; margin: 0 auto; text-align: center; }
   .section-header { margin-bottom: 60px; }
   .subtitle { color: var(--color-text-light); font-size: 0.85rem; font-style: italic; }
   .title { color: var(--color-primary-blue); font-size: 2.2rem; margin: 10px 0 15px 0; font-weight: 800; }
   .description { max-width: 600px; margin: 0 auto; color: var(--color-text-dark); font-weight: 600; line-height: 1.5; }
-  .animals-grid { display: flex; flex-direction: row; justify-content: center; gap: 40px; flex-wrap: nowrap; }
-  .animal-card { display: flex; flex-direction: column; align-items: center; position: relative; width: 240px; flex-shrink: 0; padding: 20px; background: #fff; border-radius: 20px; }
-  .icon-plus { position: absolute; top: 15px; left: 15px; width: 32px; height: 32px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem; background: white; z-index: 2; cursor: pointer; }
-  .border-orange { border-color: var(--color-primary-orange); } .border-blue { border-color: var(--color-primary-blue); } .border-green { border-color: var(--color-primary-green); } .border-yellow { border-color: var(--color-primary-yellow); }
-  .animal-img { width: 100%; max-width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px; }
-  .animal-name { font-size: 1.3rem; font-weight: 800; margin: 0 0 5px 0; }
-  .animal-role { color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 20px; font-weight: 600; }
-  
-  /* Estilos unificados para botones y enlaces de tarjetas */
-  .btn-animal { 
-    display: inline-block;
-    box-sizing: border-box;
-    text-decoration: none;
-    text-align: center;
-    width: 100%; 
-    max-width: 160px;
-    color: white; 
-    padding: 10px 0; 
-    font-size: 1rem; 
-    font-weight: 700;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+
+  .animals-grid { 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    gap: 40px; 
+    flex-wrap: nowrap; 
   }
+  
+  .animal-card { 
+    display: flex; flex-direction: column; align-items: center; 
+    position: relative; width: 300px; flex-shrink: 0; 
+    background: transparent; box-shadow: none;
+  }
+  
+  .animal-img { 
+    width: 300px !important; 
+    height: 300px !important; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+  }
+
+  .icon-plus { 
+    position: absolute; top: 0; left: 40px; width: 50px; height: 50px; 
+    border-radius: 50%; border: 4px solid; display: flex; align-items: center; 
+    justify-content: center; font-weight: bold; font-size: 2rem; 
+    background: white; z-index: 2; cursor: pointer; 
+  }
+
+  .animal-name { font-size: 1.8rem; font-weight: 800; margin: 0 0 5px 0; }
+  .animal-role { color: var(--color-text-light); font-size: 1.1rem; margin-bottom: 15px; font-weight: 600; }
+  
+  .btn-animal { 
+    width: 200px; padding: 12px 0; font-size: 1.1rem; font-weight: 700;
+    border-radius: 30px; border: none; cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-decoration: none; display: inline-block;
+    color: white; /* <--- Cambiado a blanco */
+  }
+
+  /* Modal Styles */
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; }
+  .modal-wrapper { position: relative; max-width: 850px; width: 90%; display: flex; justify-content: center; align-items: center; }
+  .modal-graphic { width: 100%; height: auto; object-fit: contain; }
+  .close-btn { position: absolute; top: 25px; right: 25px; border: none; background: rgba(255, 255, 255, 0.9); font-size: 2rem; cursor: pointer; color: #333; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1010; }
+  .close-btn:hover { transform: scale(1.1); }
   
   .text-orange { color: var(--color-primary-orange); } .text-blue { color: var(--color-primary-blue); } .text-green { color: var(--color-primary-green); } .text-yellow { color: var(--color-primary-yellow); }
   .bg-orange { background-color: var(--color-primary-orange); } .bg-blue { background-color: var(--color-primary-blue); } .bg-green { background-color: var(--color-primary-green); } .bg-yellow { background-color: var(--color-primary-yellow); }
+  .border-orange { border-color: var(--color-primary-orange); } .border-blue { border-color: var(--color-primary-blue); } .border-green { border-color: var(--color-primary-green); } .border-yellow { border-color: var(--color-primary-yellow); }
 </style>
