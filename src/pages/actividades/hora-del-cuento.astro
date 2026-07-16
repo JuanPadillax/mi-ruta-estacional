@@ -4,9 +4,13 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import ModalDescarga from '../../components/ModalDescarga.astro';
 
-
 // Importación oficial usando el asset del zorro "Zorro celebrando.png"
 import zorroCelebrandoImg from '../../assets/Zorro celebrando.png'; 
+
+// Importación de las imágenes de previsualización para el cuento
+import cuento1Img from '../../assets/Hora del cuento1.png';
+import cuento2Img from '../../assets/Hora del cuento2.png';
+import cuento3Img from '../../assets/Hora del cuento3.png';
 ---
 
 <Layout title="¿Cómo funciona la actividad 'Hora del cuento'? - Zorro Culpeo">
@@ -30,21 +34,59 @@ import zorroCelebrandoImg from '../../assets/Zorro celebrando.png';
       </div>
     </section>
 
-    <!-- Área de Descarga (1 Recuadro + Signo Más) y Paneles Informativos -->
+    <!-- Área de Descarga (3 Recuadros + Signo Más) y Paneles Informativos -->
     <section class="workspace-section">
       
-      <!-- Panel Izquierdo: Configuración limpia de 1 único bloque de previsualización al lado del signo más (+) -->
+      <!-- Panel Izquierdo: Configuración de cuadrícula con las 3 previsualizaciones y el signo más (+) -->
       <div class="download-grid-container">
-        <div class="worksheets-layout single-layout">
+        <div class="worksheets-layout">
           
-          <!-- Bloque de Descarga -->
+          <!-- Bloque de Descarga 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <!-- Aquí puedes añadir la lámina del cuento si la tienes, ej: <Image src={cuentoImg} alt="Lámina Cuento" class="sheet-image" /> -->
+                <Image src={cuento1Img} alt="Hora del cuento 1" class="sheet-image" />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button 
+              class="btn-download"
+              data-png="Hora del cuento1.png"
+              data-pdf="Hora del cuento1.pdf"
+            >
+              Descargar 1
+            </button>
+          </div>
+
+          <!-- Bloque de Descarga 2 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={cuento2Img} alt="Hora del cuento 2" class="sheet-image" />
+              </div>
+            </div>
+            <button 
+              class="btn-download"
+              data-png="Hora del cuento2.png"
+              data-pdf="Hora del cuento2.pdf"
+            >
+              Descargar 2
+            </button>
+          </div>
+
+          <!-- Bloque de Descarga 3 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={cuento3Img} alt="Hora del cuento 3" class="sheet-image" />
+              </div>
+            </div>
+            <button 
+              class="btn-download"
+              data-png="Hora del cuento3.png"
+              data-pdf="Hora del cuento3.pdf"
+            >
+              Descargar 3
+            </button>
           </div>
 
           <!-- Icono lateral con el signo más (+) -->

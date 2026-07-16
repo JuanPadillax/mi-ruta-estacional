@@ -4,14 +4,13 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import ModalDescarga from '../../components/ModalDescarga.astro';
 
-
 // Importación oficial usando el asset del zorro triste
 import zorroTristeImg from '../../assets/triste.png'; 
 
-// Importación de los assets específicos para las láminas de laberintos
-import lab1Img from '../../assets/lab 1.png';
-import lab2Img from '../../assets/lab 2.png';
-import lab3Img from '../../assets/lab 3.png';
+// Importación oficial de los assets específicos para las láminas de laberintos actualizadas
+import lab1Img from '../../assets/Ayuda a nuestros amigos!1.png';
+import lab2Img from '../../assets/Ayuda a nuestros amigos!2.png';
+import lab3Img from '../../assets/Ayuda a nuestros amigos!3.png';
 ---
 
 <Layout title="¿Cómo funciona la actividad '¡Ayuda a nuestros amigos!'? - Zorro Culpeo">
@@ -39,6 +38,7 @@ import lab3Img from '../../assets/lab 3.png';
       <div class="download-grid-container">
         <div class="worksheets-layout">
           
+          <!-- Lámina 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
@@ -46,10 +46,11 @@ import lab3Img from '../../assets/lab 3.png';
               </div>
             </div>
             <button class="btn-download" data-png="Ayuda a nuestros amigos!1.png" data-pdf="Ayuda a nuestros amigos!1.pdf">
-              Descargar
+              Descargar 1
             </button>
           </div>
 
+          <!-- Lámina 2 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
@@ -57,10 +58,11 @@ import lab3Img from '../../assets/lab 3.png';
               </div>
             </div>
             <button class="btn-download" data-png="Ayuda a nuestros amigos!2.png" data-pdf="Ayuda a nuestros amigos!2.pdf">
-              Descargar
+              Descargar 2
             </button>
           </div>
 
+          <!-- Lámina 3 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
@@ -68,7 +70,7 @@ import lab3Img from '../../assets/lab 3.png';
               </div>
             </div>
             <button class="btn-download" data-png="Ayuda a nuestros amigos!3.png" data-pdf="Ayuda a nuestros amigos!3.pdf">
-              Descargar
+              Descargar 3
             </button>
           </div>
 

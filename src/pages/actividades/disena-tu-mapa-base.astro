@@ -4,9 +4,13 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import ModalDescarga from '../../components/ModalDescarga.astro';
 
-
 // Importación oficial usando el asset del zorro "Zorro celebrando.png"
 import zorroCelebrandoImg from '../../assets/Zorro celebrando.png'; 
+
+// Importación de las imágenes de previsualización para el mapa base
+import escenario1Img from '../../assets/diseñando escenarios1.png';
+import escenario2Img from '../../assets/diseñando escenarios2.png';
+import escenario3Img from '../../assets/diseñando escenarios3.png';
 ---
 
 <Layout title="¿Cómo funciona '¡Diseña tu mapa base!'? - Zorro Culpeo">
@@ -30,24 +34,62 @@ import zorroCelebrandoImg from '../../assets/Zorro celebrando.png';
       </div>
     </section>
 
-    <!-- Área de Descarga (1 Recuadro + Signo Más) y Paneles Informativos -->
+    <!-- Área de Descarga (3 Recuadros + Signo Más) y Paneles Informativos -->
     <section class="workspace-section">
       
-      <!-- Panel Izquierdo: Configuración limpia de 1 único bloque de previsualización al lado del signo más (+) -->
+      <!-- Panel Izquierdo: Cuadrícula con 3 bloques de previsualización y el signo más (+) -->
       <div class="download-grid-container">
-        <div class="worksheets-layout single-layout">
+        <div class="worksheets-layout">
           
-          <!-- Bloque de Descarga -->
+          <!-- Bloque de Descarga 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <!-- Aquí puedes añadir la imagen del mapa base si la tienes en assets, ej: <Image src={mapaBaseImg} alt="Mapa Base" class="sheet-image" /> -->
+                <Image src={escenario1Img} alt="Diseñando Escenarios 1" class="sheet-image" />
               </div>
             </div>
-            <button class="btn-download">Descargar</button>
+            <button 
+              class="btn-download"
+              data-png="diseñando escenarios1.png"
+              data-pdf="diseñando escenarios1.pdf"
+            >
+              Descargar 1
+            </button>
           </div>
 
-          <!-- Icono lateral con el signo más (+) -->
+          <!-- Bloque de Descarga 2 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={escenario2Img} alt="Diseñando Escenarios 2" class="sheet-image" />
+              </div>
+            </div>
+            <button 
+              class="btn-download"
+              data-png="diseñando escenarios2.png"
+              data-pdf="diseñando escenarios2.pdf"
+            >
+              Descargar 2
+            </button>
+          </div>
+
+          <!-- Bloque de Descarga 3 -->
+          <div class="download-panel">
+            <div class="preview-card-box">
+              <div class="placeholder-preview">
+                <Image src={escenario3Img} alt="Diseñando Escenarios 3" class="sheet-image" />
+              </div>
+            </div>
+            <button 
+              class="btn-download"
+              data-png="diseñando escenarios3.png"
+              data-pdf="diseñando escenarios3.pdf"
+            >
+              Descargar 3
+            </button>
+          </div>
+
+          <!-- Icono lateral con el signo más (+) alineado al final de la cuadrícula -->
           <div class="separator-icon">
             <div class="plus-circle">
               <span>+</span>

@@ -5,8 +5,8 @@ import { Image } from "astro:assets";
 import culpeoImg from "../../assets/culpeo.png";
 import ModalDescarga from "../../components/ModalDescarga.astro";
 
-// Si tienes una imagen específica de preview de la ficha, la puedes importar aquí
-// import previewFicha from '../../assets/preview-ficha.png';
+// Importación de la imagen de la actividad "Crea a tu compañero reciclando"
+import previewFicha from "../../assets/Crea a tu compalero reciclando.png";
 ---
 
 <Layout title="¡Crea a tu compañero! - Zorro Culpeo">
@@ -41,8 +41,8 @@ import ModalDescarga from "../../components/ModalDescarga.astro";
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
-                <!-- Aquí puedes añadir la etiqueta <Image /> cuando tengas el asset de la ficha -->
-                <!-- <Image src={previewFicha} alt="Previsualización Ficha" class="sheet-image" /> -->
+                <!-- Se activó y cargó la imagen del compañero aquí -->
+                <Image src={previewFicha} alt="Previsualización Ficha" class="sheet-image" />
               </div>
             </div>
             <button

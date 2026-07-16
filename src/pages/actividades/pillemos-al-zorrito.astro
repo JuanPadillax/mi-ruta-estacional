@@ -7,9 +7,9 @@ import ModalDescarga from "../../components/ModalDescarga.astro";
 // Importación oficial usando el asset del zorro "picaro.png"
 import zorroPicaroImg from "../../assets/picaro.png";
 
-// Importación de las láminas para esconder al zorrito
-import cuevaImg from "../../assets/cueva.png";
-import troncoImg from "../../assets/tronco.png";
+// Importación oficial de los assets para esconder al zorrito actualizadas
+import pillemos1Img from "../../assets/Pillemos al zorrito1.png";
+import pillemos2Img from "../../assets/Pillemos al zorrito2.png";
 ---
 
 <Layout
@@ -46,16 +46,16 @@ import troncoImg from "../../assets/tronco.png";
 
     <!-- Área de Descarga y Paneles Informativos -->
     <section class="workspace-section">
-      <!-- Panel Izquierdo: Cuadrícula simétrica con 2 Láminas arriba y 2 Signos Más abajo -->
+      <!-- Panel Izquierdo: Configuración limpia para las 2 láminas y el signo más (+) -->
       <div class="download-grid-container">
         <div class="worksheets-layout">
-          <!-- Lámina 1: Cueva -->
+          <!-- Lámina 1: Pillemos al zorrito 1 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
                 <Image
-                  src={cuevaImg}
-                  alt="Previsualización Lámina Cueva"
+                  src={pillemos1Img}
+                  alt="Previsualización Lámina Escondite 1"
                   class="sheet-image"
                 />
               </div>
@@ -65,17 +65,17 @@ import troncoImg from "../../assets/tronco.png";
               data-png="Pillemos al zorrito1.png"
               data-pdf="Pillemos al zorrito1.pdf"
             >
-              Descargar
+              Descargar 1
             </button>
           </div>
 
-          <!-- Lámina 2: Tronco -->
+          <!-- Lámina 2: Pillemos al zorrito 2 -->
           <div class="download-panel">
             <div class="preview-card-box">
               <div class="placeholder-preview">
                 <Image
-                  src={troncoImg}
-                  alt="Previsualización Lámina Tronco"
+                  src={pillemos2Img}
+                  alt="Previsualización Lámina Escondite 2"
                   class="sheet-image"
                 />
               </div>
@@ -85,18 +85,11 @@ import troncoImg from "../../assets/tronco.png";
               data-png="Pillemos al zorrito2.png"
               data-pdf="Pillemos al zorrito2.pdf"
             >
-              Descargar
+              Descargar 2
             </button>
           </div>
 
-          <!-- Signo Más Izquierdo -->
-          <div class="separator-icon">
-            <div class="plus-circle">
-              <span>+</span>
-            </div>
-          </div>
-
-          <!-- Signo Más Derecho -->
+          <!-- Signo Más lateral integrado en armonía -->
           <div class="separator-icon">
             <div class="plus-circle">
               <span>+</span>
@@ -118,7 +111,7 @@ import troncoImg from "../../assets/tronco.png";
             <div class="data-item">
               <span class="icon">📄</span>
               <p>
-                <strong>Fichas Incluidas:</strong> 3 Láminas de Búsqueda y Atención
+                <strong>Fichas Incluidas:</strong> 2 Láminas de Búsqueda y Atención
               </p>
             </div>
             <div class="data-item">
@@ -333,7 +326,7 @@ import troncoImg from "../../assets/tronco.png";
     align-items: center;
     width: 100%;
     max-width: 320px;
-    height: 180px; /* Reducido para que la sección de los más no quede excesivamente alta */
+    height: 320px;
   }
 
   .plus-circle {
