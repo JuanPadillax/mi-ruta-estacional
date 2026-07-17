@@ -2,12 +2,20 @@
 // src/pages/actividades/culpeo.astro
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import culpeoImg from '../../assets/culpeo.png';
 import ModalDescarga from '../../components/ModalDescarga.astro';
 
-
-// Importamos la imagen de la estrella desde tu carpeta de assets
+// Importamos las imágenes del zorro desde la carpeta assets
+import culpeoImg from '../../assets/culpeo.png';
 import estrellaImg from '../../assets/estrella.png';
+import comiendoImg from '../../assets/comiendo.png';
+import celebrandoImg from '../../assets/Zorro celebrando.png';
+import lupaImg from '../../assets/zorroconlupa.png';
+import dudosoImg from '../../assets/dudoso.png';
+import sentadoImg from '../../assets/sentado.png';
+import bufandaImg from '../../assets/bufanda.png';
+import manosArribaImg from '../../assets/manos arriba.png';
+import tristeImg from '../../assets/triste.png';
+import picaroImg from '../../assets/picaro.png';
 ---
 
 <Layout title="Estación de Otoño - Zorro Culpeo">
@@ -38,7 +46,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={culpeoImg} alt="Crea a tu compañero" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Crea a tu compañero!</h3>
@@ -51,7 +59,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={comiendoImg} alt="Mi plato favorito" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Mi plato favorito!</h3>
@@ -67,7 +75,7 @@ import estrellaImg from '../../assets/estrella.png';
             </div>
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={celebrandoImg} alt="Diseña tu mapa base" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-yellow-title">¡Diseña tu mapa base!</h3>
@@ -90,7 +98,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={lupaImg} alt="Encuentra al intruso" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Encuentra al intruso!</h3>
@@ -103,7 +111,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={dudosoImg} alt="Sombras mágicas" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Sombras mágicas!</h3>
@@ -116,7 +124,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={sentadoImg} alt="Conteo de tesoros" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Conteo de tesoros!</h3>
@@ -139,7 +147,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={bufandaImg} alt="Abriga al árbol" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Abriga al árbol!</h3>
@@ -152,7 +160,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={manosArribaImg} alt="Sigue la caída" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Sigue la caída!</h3>
@@ -168,7 +176,7 @@ import estrellaImg from '../../assets/estrella.png';
             </div>
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={celebrandoImg} alt="Expedición a los árboles" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-yellow-title">Expedición a los árboles</h3>
@@ -191,7 +199,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={tristeImg} alt="Ayuda a nuestros amigos" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Ayuda a nuestros amigos!</h3>
@@ -205,7 +213,7 @@ import estrellaImg from '../../assets/estrella.png';
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={picaroImg} alt="Pillemos al zorrito" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-orange-title">¡Pillemos al zorrito!</h3>
@@ -222,7 +230,7 @@ import estrellaImg from '../../assets/estrella.png';
             </div>
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder"></div>
+                <Image src={celebrandoImg} alt="Hora del cuento" class="card-img" />
               </div>
               <div class="card-info">
                 <h3 class="text-yellow-title">Hora del cuento</h3>
@@ -253,6 +261,15 @@ import estrellaImg from '../../assets/estrella.png';
     padding: 60px 5% 0 5%;
   }
 
+  /* --- AJUSTE EXCELENTE: MÁS GRANDE Y CON MÁXIMO COBERTURA SIN RECORTE --- */
+  .card-img {
+    width: 108%;
+    height: 108%;
+    object-fit: contain;
+    display: block;
+    margin: 8px auto 0 auto;
+  }
+
   /* --- HERO EN ESCRITORIO ORIGINAL --- */
   .hero-section {
     display: flex;
@@ -280,7 +297,6 @@ import estrellaImg from '../../assets/estrella.png';
     font-weight: 500;
   }
   
-  /* Arreglo estricto para las 2 líneas */
   .main-title { 
     font-size: 2.8rem; 
     font-weight: 700; 
@@ -318,7 +334,6 @@ import estrellaImg from '../../assets/estrella.png';
     box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
-  /* Posicionamiento absoluto original para el zorro a la derecha */
   .hero-image-container {
     position: absolute;
     right: -40px;
@@ -377,12 +392,10 @@ import estrellaImg from '../../assets/estrella.png';
     width: 100%;
     height: 200px;
     overflow: hidden;
-  }
-  
-  .card-image-placeholder {
-    width: 100%; 
-    height: 100%; 
-    background: #d4d4d4; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px; /* Brinda un respiro superior estético */
   }
 
   .card-info {
@@ -407,7 +420,6 @@ import estrellaImg from '../../assets/estrella.png';
     font-weight: 400;
   }
 
-  /* Base común de diseño para botones y enlaces de tipo botón */
   .btn-view, .link-btn-style {
     border: none;
     padding: 11px 0;
@@ -439,7 +451,6 @@ import estrellaImg from '../../assets/estrella.png';
     box-shadow: 0 4px 0px #dca51a;
   }
 
-  /* Ajustes para el contenedor de la estrella */
   .star-badge {
     position: absolute;
     top: -40px;     
@@ -457,7 +468,6 @@ import estrellaImg from '../../assets/estrella.png';
     filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.15));
   }
 
-  /* --- ESTILOS DEL SITE FOOTER --- */
   .site-footer {
     background-color: #f39237;
     color: white;
@@ -481,10 +491,6 @@ import estrellaImg from '../../assets/estrella.png';
     align-items: center;
     font-size: 0.85rem;
   }
-
-  /* ==========================================================================
-     MEDIA QUERIES
-     ========================================================================= */
 
   @media (max-width: 1100px) {
     .main-title { font-size: 2.4rem; }

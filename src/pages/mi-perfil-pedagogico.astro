@@ -3,15 +3,22 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
-// Importación de las imágenes de la fauna nativa
+// Importación de las imágenes de la fauna nativa y complementos
 import culpeoImg from '../assets/culpeo.png';
 import chungungoImg from '../assets/chungungo.png';
 import vizcachaImg from '../assets/Vizcacha.png';
 import coipoImg from '../assets/coipo.png';
+import comiendoImg from '../assets/comiendo.png';
+import bufandaImg from '../assets/bufanda.png';
+import lupaImg from '../assets/zorroconlupa.png';
+
+// Nuevas importaciones de iconos de banners e imágenes específicas solicitadas
+import guardarIcon from '../assets/guardar.png';
+import flechaIcon from '../assets/Flecha.png';
+import origamiImg from '../assets/Crea a tu compalero reciclando2.png';
 ---
 
 <Layout title="Mi Perfil Pedagógico - Mi Ruta Estacional">
-  <!-- Layout con un flujo estático natural para que todo suba y baje con el scroll -->
   <div class="page-container">
     <main class="perfil-page">
       
@@ -26,7 +33,6 @@ import coipoImg from '../assets/coipo.png';
         </div>
         
         <div class="header-right">
-          <!-- Tarjeta de perfil plana y transparente sin bordes ni sombras -->
           <div class="profile-card" id="profileCard" style="display: none;">
             <div class="avatar-circle" id="userAvatar"></div>
             <div class="profile-info">
@@ -34,7 +40,6 @@ import coipoImg from '../assets/coipo.png';
               <p class="info-relation" id="userRelation">Educadora de Párvulos</p>
               <p class="info-level" id="userLevel">Nivel Medio Mayor</p>
               
-              <!-- Botón "Alumnos" integrado directamente debajo de la información -->
               <a href="/listado-alumnos" class="btn-students-list">
                 Alumnos
               </a>
@@ -50,35 +55,42 @@ import coipoImg from '../assets/coipo.png';
         </div>
 
         <div class="tomos-grid">
+          <!-- Tomo 1: Zorro Culpeo (Otoño / Naranja) -->
           <div class="tomo-card">
             <div class="tomo-img-wrapper">
               <Image src={culpeoImg} alt="Zorro Culpeo" class="tomo-img" />
             </div>
-            <h4 class="tomo-name">Zorro Culpeo</h4>
+            <h4 class="tomo-name text-orange">Zorro Culpeo</h4>
             <span class="tomo-season">Tomo Otoño</span>
             <a href="/actividades/culpeo" class="btn-tomo bg-orange-btn">Actividades</a>
           </div>
+
+          <!-- Tomo 2: Chungungo (Invierno / Azul) -->
           <div class="tomo-card">
             <div class="tomo-img-wrapper">
               <Image src={chungungoImg} alt="Chungungo" class="tomo-img" />
             </div>
-            <h4 class="tomo-name">Chungungo</h4>
+            <h4 class="tomo-name text-blue">Chungungo</h4>
             <span class="tomo-season">Tomo Invierno</span>
             <a href="/actividades" class="btn-tomo bg-blue-btn">Actividades</a>
           </div>
+
+          <!-- Tomo 3: Vizcacha de la Sierra (Primavera / Verde) -->
           <div class="tomo-card">
             <div class="tomo-img-wrapper">
               <Image src={vizcachaImg} alt="Vizcacha de la Sierra" class="tomo-img" />
             </div>
-            <h4 class="tomo-name">Vizcacha de la Sierra</h4>
+            <h4 class="tomo-name text-green">Vizcacha de la Sierra</h4>
             <span class="tomo-season">Tomo Primavera</span>
             <a href="/actividades" class="btn-tomo bg-green-btn">Actividades</a>
           </div>
+
+          <!-- Tomo 4: Coipo (Verano / Amarillo) -->
           <div class="tomo-card">
             <div class="tomo-img-wrapper">
               <Image src={coipoImg} alt="Coipo" class="tomo-img" />
             </div>
-            <h4 class="tomo-name">Coipo</h4>
+            <h4 class="tomo-name text-yellow">Coipo</h4>
             <span class="tomo-season">Tomo Verano</span>
             <a href="/actividades/" class="btn-tomo bg-yellow-btn">Actividades</a>
           </div>
@@ -89,7 +101,9 @@ import coipoImg from '../assets/coipo.png';
       <section class="perfil-section">
         <div class="section-banner-blue">
           <div class="banner-content">
-            <span class="bookmark-icon">🔖</span>
+            <div class="banner-icon-wrapper">
+              <Image src={guardarIcon} alt="Icono Guardar" class="banner-custom-icon" />
+            </div>
             <div class="banner-text">
               <h3>Mis Actividades Guardadas</h3>
               <p>1 guardadas</p>
@@ -98,18 +112,18 @@ import coipoImg from '../assets/coipo.png';
         </div>
 
         <div class="saved-activities-container">
-          <!-- Tarjeta de Actividad Guardada -->
+          <!-- Tarjeta de Actividad Guardada: ¡Abriga al árbol! -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder kids-craft-bg"></div>
+                <Image src={bufandaImg} alt="¡Abriga al árbol!" class="activity-card-img" />
               </div>
               <div class="card-info">
-                <h3 class="text-orange-title">¡Sigue la caída!</h3>
-                <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+                <h3 class="text-orange-title">¡Abriga al árbol!</h3>
+                <p>Experiencia de expresión artística libre mediante dactilopintura. Fortalece la musculatura de la mano y los dedos, clave para la preescritura.</p>
               </div>
             </div>
-            <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+            <a href="/actividades/abriga-al-arbol" class="btn-view bg-orange-btn">Ver</a>
             
             <div class="date-input-container">
               <label for="completionDate" class="date-label">Fecha de realización:</label>
@@ -128,7 +142,9 @@ import coipoImg from '../assets/coipo.png';
       <section class="perfil-section">
         <div class="section-banner-blue">
           <div class="banner-content">
-            <span class="upload-icon">⬆</span>
+            <div class="banner-icon-wrapper">
+              <Image src={flechaIcon} alt="Icono Flecha" class="banner-custom-icon" />
+            </div>
             <div class="banner-text">
               <h3>Mis Aportes a la Comunidad</h3>
               <p>1 actividad subida</p>
@@ -137,14 +153,14 @@ import coipoImg from '../assets/coipo.png';
         </div>
 
         <div class="saved-activities-container">
-          <!-- Tarjeta de Actividad Aportada -->
+          <!-- Tarjeta de Actividad Aportada: ¡Crea a tu zorro de origami! -->
           <div class="activity-card-wrapper">
             <div class="activity-card">
               <div class="card-image-wrapper">
-                <div class="card-image-placeholder kids-craft-bg"></div>
+                <Image src={origamiImg} alt="¡Crea a tu zorro de origami!" class="activity-card-img" />
               </div>
               <div class="card-info">
-                <h3 class="text-orange-title">¡Sigue la caída!</h3>
+                <h3 class="text-orange-title">¡Crea a tu zorro de origami!</h3>
                 <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
               </div>
             </div>
@@ -173,7 +189,6 @@ import coipoImg from '../assets/coipo.png';
 
         <!-- Carrusel / Slider de Exploración -->
         <div class="carousel-container">
-          <!-- Flecha Izquierda -->
           <button class="carousel-arrow left-arrow" aria-label="Anterior">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -181,50 +196,49 @@ import coipoImg from '../assets/coipo.png';
           </button>
 
           <div class="carousel-grid">
-            <!-- Tarjeta 1 -->
+            <!-- Tarjeta 1: ¡Mi plato favorito! -->
             <div class="activity-card-wrapper">
               <div class="activity-card">
                 <div class="card-image-wrapper">
-                  <div class="card-image-placeholder kids-craft-bg"></div>
+                  <Image src={comiendoImg} alt="¡Mi plato favorito!" class="activity-card-img" />
                 </div>
                 <div class="card-info">
-                  <h3 class="text-orange-title">¡Sigue la caída!</h3>
-                  <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+                  <h3 class="text-orange-title">¡Mi plato favorito!</h3>
+                  <p>Actividad lúdica centrada en reconocer los cambios estacionales en la alimentación diaria y expresar preferencias individuales.</p>
                 </div>
               </div>
-              <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+              <a href="/actividades/mi-plato-favorito" class="btn-view bg-orange-btn">Ver</a>
             </div>
 
-            <!-- Tarjeta 2 -->
+            <!-- Tarjeta 2: ¡Encuentra al intruso! -->
             <div class="activity-card-wrapper">
               <div class="activity-card">
                 <div class="card-image-wrapper">
-                  <div class="card-image-placeholder kids-craft-bg"></div>
+                  <Image src={lupaImg} alt="¡Encuentra al intruso!" class="activity-card-img" />
                 </div>
                 <div class="card-info">
-                  <h3 class="text-orange-title">¡Sigue la caída!</h3>
-                  <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+                  <h3 class="text-orange-title">¡Encuentra al intruso!</h3>
+                  <p>Actividad de atención selectiva y categorización. El párvulo debe identificar de forma autónoma qué elemento rompe el patrón lógico.</p>
                 </div>
               </div>
-              <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+              <a href="/actividades/encuentra-el-intruso" class="btn-view bg-orange-btn">Ver</a>
             </div>
 
-            <!-- Tarjeta 3 -->
+            <!-- Tarjeta 3: ¡Crea a tu compañero! -->
             <div class="activity-card-wrapper">
               <div class="activity-card">
                 <div class="card-image-wrapper">
-                  <div class="card-image-placeholder"></div>
+                  <Image src={culpeoImg} alt="¡Crea a tu compañero!" class="activity-card-img" />
                 </div>
                 <div class="card-info">
-                  <h3 class="text-orange-title">¡Sigue la caída!</h3>
-                  <p>Ejercita la disociación de la muñeca y el control del trazo mediante el seguimiento de líneas curvas continuas que simulan la trayectoria de las hojas.</p>
+                  <h3 class="text-orange-title">¡Crea a tu compañero!</h3>
+                  <p>Ficha para recortar y armar tu propio Zorrito Culpeo. Promueve el sentido de pertenencia, la identidad y la motricidad fina.</p>
                 </div>
               </div>
-              <a href="/actividades/sigue-la-caida" class="btn-view bg-orange-btn">Ver</a>
+              <a href="/actividades/crea-tu-companero" class="btn-view bg-orange-btn">Ver</a>
             </div>
           </div>
 
-          <!-- Flecha Derecha -->
           <button class="carousel-arrow right-arrow" aria-label="Siguiente">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -297,7 +311,6 @@ import coipoImg from '../assets/coipo.png';
     }
   });
 
-  // Persistir la fecha de realización de actividades guardadas
   const dateInput = document.getElementById('completionDate') as HTMLInputElement;
   if (dateInput) {
     const savedDate = localStorage.getItem('pedagogicoCompletionDate');
@@ -310,7 +323,6 @@ import coipoImg from '../assets/coipo.png';
     });
   }
 
-  // Persistir la fecha de subida de aportes comunitarios
   const uploadInput = document.getElementById('uploadDate') as HTMLInputElement;
   if (uploadInput) {
     const savedUploadDate = localStorage.getItem('pedagogicoUploadDate');
@@ -330,8 +342,8 @@ import coipoImg from '../assets/coipo.png';
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin-top: 55px;    /* Aumentado a 55px para dar mucho más espacio arriba con el banner */
-    margin-bottom: 20px; /* Vuelto al espacio original y compacto abajo */
+    margin-top: 55px;
+    margin-bottom: 20px;
   }
   .tomo-card {
     display: flex;
@@ -344,7 +356,7 @@ import coipoImg from '../assets/coipo.png';
     border: 1px solid #f2f2f2;
   }
   .tomo-img-wrapper {
-    width: 140px; /* Imagen grande y destacada */
+    width: 140px;
     height: 140px; 
     margin-bottom: 15px;
     background: transparent;
@@ -358,7 +370,19 @@ import coipoImg from '../assets/coipo.png';
     height: 100%;
     object-fit: contain;
   }
-  .tomo-name { font-weight: 800; color: #4A4A4A; margin: 0; }
+  
+  .tomo-name { 
+    font-weight: 800; 
+    margin: 0; 
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .text-orange { color: #f07f3e !important; }
+  .text-blue { color: #7695c5 !important; }
+  .text-green { color: #88af69 !important; }
+  .text-yellow { color: #DBB443 !important; }
+
   .tomo-season { font-size: 0.85rem; color: #9B9B9B; margin-bottom: 15px; font-style: italic; }
   
   .btn-tomo {
@@ -480,7 +504,6 @@ import coipoImg from '../assets/coipo.png';
     flex-shrink: 0;
   }
 
-  /* Contenedor de información */
   .profile-info {
     display: flex;
     flex-direction: column;
@@ -508,7 +531,6 @@ import coipoImg from '../assets/coipo.png';
     margin-top: 2px;
   }
 
-  /* Estilo del Botón de Alumnos proporcional */
   .btn-students-list {
     border: none;
     padding: 8px 0;
@@ -555,6 +577,21 @@ import coipoImg from '../assets/coipo.png';
     gap: 15px;
   }
 
+  /* Contenedores para las imágenes personalizadas de los banners */
+  .banner-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-custom-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   .banner-content h3 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -565,10 +602,6 @@ import coipoImg from '../assets/coipo.png';
     margin: 3px 0 0 0;
     font-size: 1.1rem;
     opacity: 0.9;
-  }
-
-  .bookmark-icon, .upload-icon {
-    font-size: 1.8rem;
   }
 
   /* --- CONTENEDORES DE TARJETAS --- */
@@ -603,20 +636,20 @@ import coipoImg from '../assets/coipo.png';
 
   .card-image-wrapper {
     width: 100%;
-    height: 180px;
+    height: 200px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
   }
 
-  .card-image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #e2e8f0;
-  }
-
-  .kids-craft-bg {
-    background-image: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80');
-    background-size: cover;
-    background-position: center;
+  .activity-card-img {
+    width: 108%;
+    height: 108%;
+    object-fit: contain;
+    display: block;
+    margin: 8px auto 0 auto;
   }
 
   .card-info {
@@ -641,7 +674,6 @@ import coipoImg from '../assets/coipo.png';
     margin: 0;
   }
 
-  /* Botones estilo UI original */
   .btn-view {
     border: none;
     padding: 11px 0;
@@ -664,11 +696,6 @@ import coipoImg from '../assets/coipo.png';
 
   .btn-view:hover {
     transform: scale(1.05);
-  }
-
-  .bg-orange-btn {
-    background-color: #f07f3e;
-    box-shadow: 0 4px 0px #cf6517;
   }
 
   /* --- FECHAS INTERACTIVAS --- */
