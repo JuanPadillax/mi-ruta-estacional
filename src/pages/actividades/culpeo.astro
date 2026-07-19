@@ -16,6 +16,9 @@ import bufandaImg from '../../assets/bufanda.png';
 import manosArribaImg from '../../assets/manos arriba.png';
 import tristeImg from '../../assets/triste.png';
 import picaroImg from '../../assets/picaro.png';
+
+// Nueva imagen para la sección de la Bitácora
+import zorroconlibroImg from '../../assets/zorroconlibro.png';
 ---
 
 <Layout title="Estación de Otoño - Zorro Culpeo">
@@ -34,6 +37,28 @@ import picaroImg from '../../assets/picaro.png';
       
       <div class="hero-image-container">
         <Image src={culpeoImg} alt="Zorro Culpeo en tamaño grande" class="hero-character" />
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Creando nuestra Bitácora -->
+    <section class="categories-wrapper">
+      <div class="category-block">
+        <div class="category-banner bg-yellow-banner">Creando nuestra Bitácora</div>
+        
+        <div class="bitacora-card-container">
+          <div class="bitacora-card">
+            <div class="bitacora-img-side">
+              <Image src={zorroconlibroImg} alt="Zorro con libro" class="bitacora-character" />
+            </div>
+            <div class="bitacora-info-side">
+              <h3 class="bitacora-title-yellow">Mi Bitácora Acordeón</h3>
+              <p class="bitacora-text">
+                Guía y material imprimible para armar el portafolio en volumen de la ruta estacional. Es el eje central del proyecto donde los párvulos registran de forma concreta, táctil y artística sus exploraciones sobre la naturaleza. Incluye pautas de plegado y plantillas.
+              </p>
+              <a href="/actividades/crear-bitacora" class="btn-bitacora-link bg-yellow-btn">Crear Bitácora</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -209,7 +234,6 @@ import picaroImg from '../../assets/picaro.png';
             <a href="/actividades/ayuda-a-nuestros-amigos" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
-          <!-- Tarjeta 2: ¡Pillemos al zorrito! (CORREGIDA CON ENLACE ACTIVO) -->
           <div class="activity-card-container">
             <div class="activity-card">
               <div class="card-image-wrapper">
@@ -220,7 +244,6 @@ import picaroImg from '../../assets/picaro.png';
                 <p>Actividad lúdica de búsqueda y percepción visual adaptada al entorno natural del bosque nativo chileno.</p>
               </div>
             </div>
-            <!-- Cambiado de <button> a <a> apuntando a la nueva página -->
             <a href="/actividades/pillemos-al-zorrito" class="btn-view bg-orange-btn link-btn-style">Ver</a>
           </div>
 
@@ -261,7 +284,7 @@ import picaroImg from '../../assets/picaro.png';
     padding: 60px 5% 0 5%;
   }
 
-  /* --- AJUSTE EXCELENTE: MÁS GRANDE Y CON MÁXIMO COBERTURA SIN RECORTE --- */
+  /* --- AJUSTE DE IMÁGENES DE TARJETAS --- */
   .card-img {
     width: 108%;
     height: 108%;
@@ -277,7 +300,7 @@ import picaroImg from '../../assets/picaro.png';
     justify-content: space-between;
     min-height: 450px;
     position: relative;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     gap: 20px;
   }
   
@@ -348,7 +371,93 @@ import picaroImg from '../../assets/picaro.png';
     object-fit: contain;
   }
 
-  /* --- SECCIÓN DE TARJETAS --- */
+  /* --- SECCIÓN DE LA BITÁCORA --- */
+  .bitacora-card-container {
+    width: 100%;
+    margin: 40px auto 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bitacora-card {
+    background: white;
+    border-radius: 35px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+    border: 1px solid #f2f2f2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 850px;
+    padding: 30px 40px;
+    gap: 40px;
+  }
+
+  .bitacora-img-side {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bitacora-character {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .bitacora-info-side {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Título de la Bitácora ahora en el amarillo estacional exacto */
+  .bitacora-title-yellow {
+    color: #fcd054 !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+  }
+
+  .bitacora-text {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+  }
+
+  /* BOTÓN TOTALMENTE CORREGIDO PARA EVITAR SOBREESCRITURA DE ENLACE AZUL NATIVO */
+  .btn-bitacora-link {
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 150px !important;
+    padding: 11px 0 !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    line-height: 1.2 !important;
+    box-sizing: border-box !important;
+    transition: transform 0.1s ease !important;
+    
+    /* Forzado de colores institucionales de botón amarillo */
+    background-color: #fcd054 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 0px #dca51a !important;
+  }
+
+  .btn-bitacora-link:hover {
+    transform: scale(1.05) !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  /* --- SECCIÓN DE BANNERS HOMOLOGADOS --- */
   .category-block { margin-top: 40px; margin-bottom: 40px; }
   
   .category-banner {
@@ -360,6 +469,11 @@ import picaroImg from '../../assets/picaro.png';
     font-size: 1.15rem; 
     text-align: center; 
     margin-bottom: 50px;
+  }
+
+  /* Forzado estricto del color de fondo amarillo para el banner de la bitácora */
+  .bg-yellow-banner {
+    background: #fcd054 !important;
   }
   
   .cards-grid {
@@ -395,7 +509,7 @@ import picaroImg from '../../assets/picaro.png';
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px; /* Brinda un respiro superior estético */
+    padding-top: 10px;
   }
 
   .card-info {
@@ -446,6 +560,7 @@ import picaroImg from '../../assets/picaro.png';
     background-color: #f07f3e;
     box-shadow: 0 4px 0px #cf6517;
   }
+  
   .bg-yellow-btn {
     background-color: #fcd054;
     box-shadow: 0 4px 0px #dca51a;
@@ -514,6 +629,18 @@ import picaroImg from '../../assets/picaro.png';
     }
 
     .hero-character { width: 100%; }
+    
+    .bitacora-card {
+      flex-direction: column;
+      padding: 30px 20px;
+      gap: 20px;
+      text-align: center;
+    }
+    .bitacora-img-side, .bitacora-info-side {
+      width: 100%;
+      align-items: center;
+    }
+
     .cards-grid { flex-direction: column; align-items: center; gap: 50px; }
     .activity-card-container { width: 100%; max-width: 420px; }
     .activity-card { min-height: auto; }

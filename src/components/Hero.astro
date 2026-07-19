@@ -2,36 +2,111 @@
 // src/components/Hero.astro
 import { Image } from "astro:assets";
 import ninoImg from "../assets/niño.png";
+
+// Importación de las imágenes del carrusel superior
+import carrusel1 from "../assets/carrusel1.png";
+import carrusel2 from "../assets/carrusel2.png";
+import carrusel3 from "../assets/carrusel3.png";
+import carrusel4 from "../assets/carrusel4.png";
 ---
 
-<section class="hero">
-  <div class="hero-content">
-    <span class="subtitle">Sistema Modular de Aprendizaje</span>
-    <h1 class="title">Una ruta diseñada para<br />aprender jugando.</h1>
-    <p class="description">
-      Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio
-      digital diseñado para potenciar el desarrollo integral mediante dinámicas
-      y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico
-      de nuestra fauna nativa.
-    </p>
+<div class="hero-container">
+  <!-- Carrusel de Fauna Nativa (Superior - Edge-to-Edge Completo) -->
+  <section class="carousel-section">
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Anterior">
+        &#10094;
+      </button>
+      
+      <div class="carousel-track-container">
+        <ul class="carousel-track" id="carouselTrack">
+          <li class="carousel-slide active">
+            <Image src={carrusel1} alt="Zorro Culpeo - Estación de Otoño" class="carousel-img" />
+          </li>
+          <li class="carousel-slide">
+            <Image src={carrusel2} alt="Fauna Nativa 2" class="carousel-img" />
+          </li>
+          <li class="carousel-slide">
+            <Image src={carrusel3} alt="Fauna Nativa 3" class="carousel-img" />
+          </li>
+          <li class="carousel-slide">
+            <Image src={carrusel4} alt="Fauna Nativa 4" class="carousel-img" />
+          </li>
+        </ul>
+      </div>
 
-    <!-- Contenedor Dinámico con Estilo del Mockup -->
-    <div id="heroActionContainer" class="button-container">
-      <a href="/login" class="btn btn-primary">Inicia Sesión</a>
-      <a href="/registro" class="btn btn-secondary">Regístrate</a>
+      <button class="carousel-btn next-btn" id="nextBtn" aria-label="Siguiente">
+        &#10095;
+      </button>
     </div>
-  </div>
+  </section>
 
-  <div class="hero-image-wrapper">
-    <Image src={ninoImg} alt="Niño aprendiendo con libro" class="hero-img" />
-  </div>
-</section>
+  <!-- Contenido Principal del Hero (Inferior - TOTALMENTE INTACTO) -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="subtitle">Sistema Modular de Aprendizaje</span>
+      <h1 class="title">Una ruta diseñada para<br />aprender jugando.</h1>
+      <p class="description">
+        Bienvenidos a la plataforma oficial de "Mi Ruta Estacional". Un espacio
+        digital diseñado para potenciar el desarrollo integral mediante dinámicas
+        y experiencias didácticas, múltiples, prácticas y un acompañamiento lúdico
+        de nuestra fauna nativa.
+      </p>
+
+      <div id="heroActionContainer" class="button-container">
+        <a href="/login" class="btn btn-primary">Inicia Sesión</a>
+        <a href="/registro" class="btn btn-secondary">Regístrate</a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrapper">
+      <Image src={ninoImg} alt="Niño aprendiendo con libro" class="hero-img" />
+    </div>
+  </section>
+</div>
 
 <script>
   import { auth } from "../lib/firebase";
   import { onAuthStateChanged } from "firebase/auth";
   import { getFirestore, doc, getDoc } from "firebase/firestore";
 
+  // --- Lógica del Carrusel ---
+  const track = document.getElementById("carouselTrack");
+  const slides = track ? Array.from(track.children) : [];
+  const nextButton = document.getElementById("nextBtn");
+  const prevButton = document.getElementById("prevBtn");
+  let currentSlideIndex = 0;
+
+  function updateCarousel(index) {
+    if (!slides || !slides[index]) return; 
+    
+    slides.forEach((slide) => {
+      if (slide) slide.classList.remove("active");
+    });
+    
+    slides[index].classList.add("active");
+  }
+
+  nextButton?.addEventListener("click", () => {
+    if (!slides.length) return;
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+    updateCarousel(currentSlideIndex);
+  });
+
+  prevButton?.addEventListener("click", () => {
+    if (!slides.length) return;
+    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+    updateCarousel(currentSlideIndex);
+  });
+
+  setInterval(() => {
+    if (slides.length > 0) {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      updateCarousel(currentSlideIndex);
+    }
+  }, 6000);
+
+  // --- Lógica de Autenticación de Firebase ---
   const db = getFirestore();
   const heroContainer = document.getElementById("heroActionContainer");
 
@@ -67,6 +142,105 @@ import ninoImg from "../assets/niño.png";
 </script>
 
 <style>
+  .hero-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- Carrusel Superior - Ajustado hacia arriba --- */
+  .carousel-section {
+    width: 100%;
+    background-color: transparent;
+    padding-top: 0px; 
+    margin-top: -40px; /* Empuja el carrusel hacia arriba para pegarse al menú superior */
+    display: flex;
+    justify-content: center;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    width: 100%; 
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .carousel-track-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carousel-slide.active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .carousel-img {
+    width: 100%;       
+    height: auto;      
+    aspect-ratio: 2.2 / 1; 
+    object-fit: cover;  /* Cubre todo el ancho para no dejar bordes */
+    object-position: center;
+    border-radius: 0px;
+    display: block;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e28743;
+    font-size: 1.3rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+
+  .carousel-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    background-color: #ffffff;
+  }
+
+  .prev-btn { left: 2%; }
+  .next-btn { right: 2%; }
+
+  /* --- SECCIÓN INFERIOR PROTEGIDA (Sin ningún cambio de tamaño) --- */
   .hero {
     display: flex;
     align-items: center;
@@ -114,20 +288,17 @@ import ninoImg from "../assets/niño.png";
     gap: 20px;
   }
 
-  /* --- Botones Oficiales del Mockup --- */
   .btn {
     display: inline-block;
     text-align: center;
-    text-decoration: none !important; /* Eliminación estricta de subrayado */
+    text-decoration: none !important; 
     text-decoration-line: none !important;
     padding: 16px 40px;
-    border-radius: 30px; /* Bordes ovalados perfectos */
+    border-radius: 30px; 
     font-weight: 700;
     font-size: 1.05rem;
     cursor: pointer;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
   .btn:hover {
@@ -159,7 +330,7 @@ import ninoImg from "../assets/niño.png";
     max-width: 600px;
     height: auto;
     object-fit: contain;
-    transform: scale(1.4);
+    transform: scale(1.4); 
   }
 
   @media (max-width: 1024px) {
@@ -178,5 +349,12 @@ import ninoImg from "../assets/niño.png";
     .button-container {
       justify-content: center;
     }
+    .carousel-btn {
+      width: 38px;
+      height: 38px;
+      font-size: 0.95rem;
+    }
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
   }
 </style>

@@ -1,0 +1,388 @@
+---
+// src/pages/actividades/crear-bitacora.astro
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Importamos la imagen del hero principal
+import zorroconlibroImg from '../../assets/zorroconlibro.png';
+
+// Importaciones de los elementos secuenciales del paso a paso
+import paso1Img from '../../assets/ELEMENTOS DE LA BITACORA-39.png';
+import paso2Img from '../../assets/ELEMENTOS DE LA BITACORA-40.png';
+import paso3Img from '../../assets/ELEMENTOS DE LA BITACORA-41.png';
+import paso4Img from '../../assets/ELEMENTOS DE LA BITACORA-42.png';
+import paso5Img from '../../assets/ELEMENTOS DE LA BITACORA-43.png';
+---
+
+<Layout title="¿Cómo armar tu Bitácora Acordeón? - Mi Ruta Estacional">
+  <main class="tutorial-page">
+    
+    <!-- Hero Section: Diseño adaptado e intocable para escritorio -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <span class="season-badge">Estación de Otoño</span>
+        <h1 class="main-title">¿Cómo armar tu Bitácora<br>Acordeón?</h1>
+        <p class="hero-description">
+          Sigue este tutorial detallado para confeccionar el soporte físico del portafolio. Desde la base de las tapas hasta el ensamblaje final, las fichas de actividades se van uniendo e integrando de forma progresiva a medida que se realizan, creando una estructura en volumen que crece con sus aprendizajes.
+        </p>
+        <a href="/actividades/culpeo" class="btn-back">Volver a Actividades</a>
+      </div>
+      
+      <div class="hero-image-container">
+        <Image src={zorroconlibroImg} alt="Zorro Culpeo sosteniendo su bitácora" class="hero-character" />
+      </div>
+    </section>
+
+    <!-- Grilla del Tutorial: Fila Superior (Pasos 1 al 3) -->
+    <section class="steps-container grid-three">
+      
+      <!-- Paso 1 -->
+      <div class="step-card-wrapper">
+        <div class="step-number">1</div>
+        <div class="step-card">
+          <div class="step-image-wrapper">
+            <Image src={paso1Img} alt="Preparar las tapas" class="step-img" />
+          </div>
+          <div class="step-info">
+            <h3 class="step-title">Preparar las Tapas</h3>
+            <p class="step-description">
+              Corta dos bloques de cartón piedra reciclado. Aplica una base lisa de papel kraft o blanco para dejarlas listas como el soporte firme que protegerá el portafolio.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="step-card-wrapper">
+        <div class="step-number">2</div>
+        <div class="step-card">
+          <div class="step-image-wrapper">
+            <Image src={paso2Img} alt="Diseño de cubierta" class="step-img" />
+          </div>
+          <div class="step-info">
+            <h3 class="step-title">Diseño de Cubierta</h3>
+            <p class="step-description">
+              Utiliza las plantillas estacionales para que los párvulos dibujen y personalicen sus diseños de portada y contraportada, conectando con la temática del año.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="step-card-wrapper">
+        <div class="step-number">3</div>
+        <div class="step-card">
+          <div class="step-image-wrapper">
+            <Image src={paso3Img} alt="Unir hojas impresas" class="step-img" />
+          </div>
+          <div class="step-info">
+            <h3 class="step-title">Unir Hojas Impresas</h3>
+            <p class="step-description">
+              A medida que realicen cada actividad, imprime la ficha correspondiente y une su extremo lateral a la anterior con pegamento. ¡La bitácora crecerá de forma progresiva!
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Grilla del Tutorial: Fila Inferior Centrada (Pasos 4 y 5) -->
+    <section class="steps-container grid-two">
+      
+      <!-- Paso 4 -->
+      <div class="step-card-wrapper">
+        <div class="step-number">4</div>
+        <div class="step-card">
+          <div class="step-image-wrapper">
+            <Image src={paso4Img} alt="Plegar en acordeón" class="step-img" />
+          </div>
+          <div class="step-info">
+            <h3 class="step-title">Plegar en Acordeón</h3>
+            <p class="step-description">
+              Con cada nueva ficha que vayas agregando al proyecto, realiza los pliegues alternados (hacia adelante y hacia atrás) para mantener la estructura limpia en zigzag.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 5 -->
+      <div class="step-card-wrapper">
+        <div class="step-number">5</div>
+        <div class="step-card">
+          <div class="step-image-wrapper">
+            <Image src={paso5Img} alt="El ensamblaje final" class="step-img" />
+          </div>
+          <div class="step-info">
+            <h3 class="step-title">El Ensamblaje Final</h3>
+            <p class="step-description">
+              Al completar el ciclo de experiencias, fija la primera y la última página del acordeón acumulado a las tapas de cartón. ¡Tu bitácora de otoño estará terminada!
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer homologado al de culpeo.astro con ancho completo nativo -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 Mi Ruta Estacional. Todos los derechos reservados.</p>
+      <p class="footer-links">Soporte Educadoras | Términos de Uso</p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .tutorial-page {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 5% 0 5%;
+    box-sizing: border-box;
+  }
+
+  /* --- HERO SECTION ORIGINAL DE ESCRITORIO --- */
+  .hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 450px;
+    position: relative;
+    margin-bottom: 60px;
+    gap: 20px;
+  }
+  
+  .hero-content { 
+    max-width: 700px; 
+    text-align: left;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .season-badge { 
+    font-size: 1.15rem; 
+    color: #b5b5b5; 
+    font-style: italic;
+    display: block; 
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  
+  .main-title { 
+    font-size: 2.8rem; 
+    font-weight: 700; 
+    color: #f07f3e; 
+    line-height: 1.2; 
+    margin: 0 0 25px 0; 
+  }
+  
+  .hero-description { 
+    color: #333; 
+    font-size: 1.1rem; 
+    line-height: 1.6; 
+    margin-bottom: 40px; 
+    font-weight: 400;
+    max-width: 580px;
+  }
+
+  .btn-back { 
+    background: linear-gradient(to bottom, #f39237, #ee7623); 
+    color: white; 
+    padding: 12px 35px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.95rem;
+    display: inline-block; 
+    box-shadow: 0 5px 0px #cf6517, 0 8px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.1s ease;
+  }
+  
+  .btn-back:hover {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0px #cf6517, 0 5px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-image-container {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .hero-character { 
+    width: 480px; 
+    height: auto; 
+    object-fit: contain;
+  }
+
+  /* --- ESTRUCTURA DE PASOS Y CORRECCIÓN DE ALTURA --- */
+  .steps-container {
+    display: grid;
+    gap: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .grid-three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-two {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;
+  }
+
+  .step-card-wrapper {
+    position: relative;
+    padding-top: 15px; /* Respiro para que el círculo flotante no se corte */
+    width: 100%;
+  }
+
+  /* Tarjeta Blanca con Bordes Suaves según Mockup */
+  .step-card {
+    background: #ffffff;
+    border-radius: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f2f2f2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px; /* Homologación perfecta de altura */
+    width: 100%;
+  }
+
+  /* Contenedor de ilustración con el característico fondo color pastel */
+  .step-image-wrapper {
+    width: 100%;
+    height: 220px;
+    background-color: #ffebd9; /* Fondo color crema/naranja pastel del mockup */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .step-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+  }
+
+  .step-info {
+    padding: 25px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .step-title {
+    font-size: 1.3rem;
+    color: #f07f3e;
+    margin: 0 0 12px 0;
+    font-weight: 700;
+  }
+
+  .step-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* Números Flotantes Circulares Naranjos */
+  .step-number {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    color: #f39237;
+    border: 2px solid #fcd054; /* Borde amarillo suave característico */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  /* --- FOOTER TOTALMENTE INTEGRADO ANCHO COMPLETO --- */
+  .site-footer {
+    background-color: #f39237;
+    color: white;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 22px 0;
+    box-sizing: border-box;
+  }
+
+  .footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  .footer-links {
+    margin: 0;
+  }
+
+  /* --- RESPONSIVIDAD INTEGRAL --- */
+  @media (max-width: 1100px) {
+    .main-title { font-size: 2.4rem; }
+    .hero-character { width: 400px; }
+    .grid-three { gap: 20px; }
+  }
+
+  @media (max-width: 850px) {
+    .tutorial-page { padding: 40px 6% 0 6%; }
+    .hero-section { flex-direction: column; text-align: center; gap: 35px; min-height: auto; }
+    .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .main-title { font-size: 2.2rem; }
+    
+    .hero-image-container {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      margin: 0 auto;
+      max-width: 320px;
+    }
+
+    .hero-character { width: 100%; }
+    
+    .grid-three, .grid-two { 
+      grid-template-columns: 100%; 
+      max-width: 420px; 
+      margin: 0 auto 40px auto;
+      gap: 40px;
+    }
+
+    .step-card { min-height: auto; }
+    .step-number { left: 10px; }
+    
+    .footer-content {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+</style>
